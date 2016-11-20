@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" v="2.6.4" sm="false" xs="false" id="_14787303345571" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TipoDeUsuarioPK" abs="false" class="TipoDeUsuario" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478730455961">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Emprestimo" id="_147881290550312">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Reversa" id="_147881290606313">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarDevolucoes" id="_147881290866625">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="ConsultaAacervo" id="_147881290651014">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CadastrarNovoUsuario" id="_147881290670215">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CadastrarCategoria" id="_147881290693616">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CadastrarGenero" id="_147881290709117">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CadastrarItem" id="_147881290734118">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerarRelatorio" id="_147881290752819">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarTodosUsuarios" id="_147881290770520">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarAssociados" id="_147881290790521">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarTiposDeUsuario" id="_147881290808822">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarModeloDeEmail" id="_147881290828723">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarFinancas" id="_147881290845324">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarAutoresDeConteudo" id="_147881290883826">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="GerenciarEditoras" id="_147881434290259">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_14787304607452">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="TipoDeUsuario.findAll">
+            <jpa:query>Select e from TipoDeUsuario e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByEmprestimo">
+            <jpa:query>Select t from TipoDeUsuario t where t.Emprestimo=:Emprestimo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByReversa">
+            <jpa:query>Select t from TipoDeUsuario t where t.Reversa=:Reversa</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByConsultaAacervo">
+            <jpa:query>Select t from TipoDeUsuario t where t.ConsultaAacervo=:ConsultaAacervo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByCadastrarNovoUsuario">
+            <jpa:query>Select t from TipoDeUsuario t where t.CadastrarNovoUsuario=:CadastrarNovoUsuario</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByCadastrarCategoria">
+            <jpa:query>Select t from TipoDeUsuario t where t.CadastrarCategoria=:CadastrarCategoria</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByCadastrarGenero">
+            <jpa:query>Select t from TipoDeUsuario t where t.CadastrarGenero=:CadastrarGenero</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByCadastrarItem">
+            <jpa:query>Select t from TipoDeUsuario t where t.CadastrarItem=:CadastrarItem</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerarRelatorio">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerarRelatorio=:GerarRelatorio</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarTodosUsuarios">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarTodosUsuarios=:GerenciarTodosUsuarios</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarAssociados">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarAssociados=:GerenciarAssociados</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarTiposDeUsuario">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarTiposDeUsuario=:GerenciarTiposDeUsuario</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarModeloDeEmail">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarModeloDeEmail=:GerenciarModeloDeEmail</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarFinancas">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarFinancas=:GerenciarFinancas</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarDevolucoes">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarDevolucoes=:GerenciarDevolucoes</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarAutoresDeConteudo">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarAutoresDeConteudo=:GerenciarAutoresDeConteudo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByAttribute15">
+            <jpa:query>Select t from TipoDeUsuario t where t.attribute15=:attribute15</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByAttribute16">
+            <jpa:query>Select t from TipoDeUsuario t where t.attribute16=:attribute16</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByAttribute17">
+            <jpa:query>Select t from TipoDeUsuario t where t.attribute17=:attribute17</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="TipoDeUsuario.findByGerenciarEditorases">
+            <jpa:query>Select t from TipoDeUsuario t where t.GerenciarEditorases=:GerenciarEditorases</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="UsuarioPK" abs="false" class="Usuario" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478730475045">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Nome" id="_147873057580310">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CPF" id="_147873057691512">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="MatricuaEducacional" id="_147873060131314">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Senha" id="_147873076921925"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478730506075" visibile="true" name="telefone" id="_147873073040823"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478730534432" visibile="true" name="endereco" id="_147873073692624"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478730834139" visibile="true" name="email" id="_147873087282934"/>
+            <jpa:one-to-one own="true" primaryKey="false" connected-entity-id="_1478730455961" visibile="true" name="tipoDeUsuario" id="_147873091014435"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_14787304750514">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Usuario.findAll">
+            <jpa:query>Select e from Usuario e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByNome">
+            <jpa:query>Select t from Usuario t where t.Nome=:Nome</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByEmail">
+            <jpa:query>Select t from Usuario t where t.Email=:Email</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByCPF">
+            <jpa:query>Select t from Usuario t where t.CPF=:CPF</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByRG">
+            <jpa:query>Select t from Usuario t where t.RG=:RG</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByMatricuaEducacional">
+            <jpa:query>Select t from Usuario t where t.MatricuaEducacional=:MatricuaEducacional</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findBySenha">
+            <jpa:query>Select u from Usuario u where u.Senha=:Senha</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="TelefonePK" abs="false" class="Telefone" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478730506075">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Telefone" id="_147873065312815"/>
+            <jpa:basic attribute-type="String" visibile="true" name="Tipo" id="_147873080606328"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_14787305061076">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Telefone.findAll">
+            <jpa:query>Select e from Telefone e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Telefone.findByTelefone">
+            <jpa:query>Select t from Telefone t where t.Telefone=:Telefone</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Telefone.findByTipo">
+            <jpa:query>Select t from Telefone t where t.Tipo=:Tipo</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="EnderecoPK" abs="false" class="Endereco" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478730534432">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Logadouro" id="_147873066192916">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Numero" id="_147873066246617">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CEP" id="_147873066307518">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Cidade" id="_147873066327719">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Estado" id="_147873066344920">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Pais" id="_147873069232621">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Complemento" id="_147873069290222">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Descricao_endereco" id="_147873081871729"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_14787305344538">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Endereco.findAll">
+            <jpa:query>Select e from Endereco e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByLogadouro">
+            <jpa:query>Select e from Endereco e where e.Logadouro=:Logadouro</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByNumero">
+            <jpa:query>Select e from Endereco e where e.Numero=:Numero</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByCEP">
+            <jpa:query>Select e from Endereco e where e.CEP=:CEP</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByCidade">
+            <jpa:query>Select e from Endereco e where e.Cidade=:Cidade</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByEstado">
+            <jpa:query>Select e from Endereco e where e.Estado=:Estado</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByPais">
+            <jpa:query>Select e from Endereco e where e.Pais=:Pais</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByComplemento">
+            <jpa:query>Select e from Endereco e where e.Complemento=:Complemento</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Endereco.findByDescricao_endereco">
+            <jpa:query>Select e from Endereco e where e.Descricao_endereco=:Descricao_endereco</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="EmailPK" abs="false" class="Email" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478730834139">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="email" id="_147873083947832">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147873083414230">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Email.findAll">
+            <jpa:query>Select e from Email e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Email.findByEmail">
+            <jpa:query>Select e from Email e where e.email=:email</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Email.findByAttribute1">
+            <jpa:query>Select e from Email e where e.attribute1=:attribute1</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="LivroPK" abs="false" class="Livro" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478730924499">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="ISBN" id="_147881404427350">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="AreaDeAtuacao" id="_147881404446551">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="LocalCidade" id="_147881548267889">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="LocalEstado" id="_147881404462552">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Edicao" id="_147881404480053">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Volume" id="_147881404497854">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Paginas" id="_147881404513955">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="DataDePublicacao" id="_147881404529956">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CidadeDePublicacao" id="_147881404547457">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="LivroDeConsultaApenasInterna" id="_147881404688458">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="EdiomaDaObra" id="_147881545981887">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="EdiomaDeTraducao" id="_147881547068088">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478814702095" visibile="true" name="editor" id="_147881566998394"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478814652890" visibile="true" name="autor" id="_147881578081295"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478814628987" visibile="true" name="categoria" id="_147942592867951"/>
+            <jpa:one-to-one own="true" primaryKey="false" connected-entity-id="_1478813889880" visibile="true" name="produtoradeconteudo" id="_147881447391067"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147873092451236">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Livro.findAll">
+            <jpa:query>Select e from Livro e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByISBN">
+            <jpa:query>Select l from Livro l where l.ISBN=:ISBN</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByAreaDeAtuacao">
+            <jpa:query>Select l from Livro l where l.AreaDeAtuacao=:AreaDeAtuacao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByLocalEstado">
+            <jpa:query>Select l from Livro l where l.LocalEstado=:LocalEstado</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByEdicao">
+            <jpa:query>Select l from Livro l where l.Edicao=:Edicao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByVolume">
+            <jpa:query>Select l from Livro l where l.Volume=:Volume</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByPaginas">
+            <jpa:query>Select l from Livro l where l.Paginas=:Paginas</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByDataDePublicacao">
+            <jpa:query>Select l from Livro l where l.DataDePublicacao=:DataDePublicacao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByCidadeDePublicacao">
+            <jpa:query>Select l from Livro l where l.CidadeDePublicacao=:CidadeDePublicacao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByLivroDeConsultaApenasInterna">
+            <jpa:query>Select l from Livro l where l.LivroDeConsultaApenasInterna=:LivroDeConsultaApenasInterna</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByEdiomaDaObra">
+            <jpa:query>Select l from Livro l where l.EdiomaDaObra=:EdiomaDaObra</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByEdiomaDeTraducao">
+            <jpa:query>Select l from Livro l where l.EdiomaDeTraducao=:EdiomaDeTraducao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Livro.findByLocalCidade">
+            <jpa:query>Select l from Livro l where l.LocalCidade=:LocalCidade</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ItemPK" abs="true" class="Item" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478813713491">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Titulo" id="_147881373380337">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Descricao" id="_147881373399438">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="DataDeCadastro" id="_147881373417339">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="DataDePublicacao" id="_147881373524540">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="ValorDoProduto" id="_147881377749741"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881371362235">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Item.findAll">
+            <jpa:query>Select e from Item e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Item.findByTitulo">
+            <jpa:query>Select p from Item p where p.Titulo=:Titulo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Item.findByDescricao">
+            <jpa:query>Select p from Item p where p.Descricao=:Descricao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Item.findByDataDeCadastro">
+            <jpa:query>Select p from Item p where p.DataDeCadastro=:DataDeCadastro</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Item.findByDataDePublicacao">
+            <jpa:query>Select p from Item p where p.DataDePublicacao=:DataDePublicacao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Item.findByValorDoProduto">
+            <jpa:query>Select p from Item p where p.ValorDoProduto=:ValorDoProduto</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ArtigoPK" abs="false" class="Artigo" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478813814366">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="ISSN" id="_147942576217841">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Titulo" id="_147942576233542">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478814628987" visibile="true" name="categoria" id="_147942582746146"/>
+            <jpa:many-to-many own="true" collection-type="java.util.List" connected-entity-id="_1478814652890" visibile="true" name="autors" id="_147942578190145"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881381437242">
+                <jpa:bv/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Artigo.findAll">
+            <jpa:query>Select e from Artigo e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Artigo.findByISSN">
+            <jpa:query>Select a from Artigo a where a.ISSN=:ISSN</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Artigo.findByTitulo">
+            <jpa:query>Select a from Artigo a where a.Titulo=:Titulo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Artigo.findByAttribute2">
+            <jpa:query>Select a from Artigo a where a.attribute2=:attribute2</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Artigo.findByAttribute3">
+            <jpa:query>Select a from Artigo a where a.attribute3=:attribute3</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="VideoPK" abs="false" class="Video" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478813849651">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Titulo" id="_147942419688131">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Local" id="_147942419739933">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Datadeproducao" id="_147942419769834">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Descricao" id="_147942419791235">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Duracao" id="_147942419807736">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="TituloOriginal" id="_147942600438252"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478813889880" visibile="true" name="produtoradeconteudo" id="_147942466295339"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478814628987" visibile="true" name="categoria" id="_147942590198049"/>
+            <jpa:one-to-many own="true" collection-type="java.util.List" connected-entity-id="_1478813713491" visibile="true" name="items" id="_147942585005047"/>
+            <jpa:many-to-many own="true" collection-type="java.util.List" connected-entity-id="_1478814652890" visibile="true" name="autors" id="_147942568242840"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881384965744">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Video.findAll">
+            <jpa:query>Select e from Video e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByTituloOriginal">
+            <jpa:query>Select v from Video v where v.TituloOriginal=:TituloOriginal</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByTitulo">
+            <jpa:query>Select v from Video v where v.Titulo=:Titulo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByProdutora*">
+            <jpa:query>Select v from Video v where v.Produtora*=:Produtora*</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByLocal">
+            <jpa:query>Select v from Video v where v.Local=:Local</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByDatadeproducao">
+            <jpa:query>Select v from Video v where v.Datadeproducao=:Datadeproducao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByDescricao">
+            <jpa:query>Select v from Video v where v.Descricao=:Descricao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByDuracao">
+            <jpa:query>Select v from Video v where v.Duracao=:Duracao</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Video.findByTituloOriginal">
+            <jpa:query>Select v from Video v where v.TituloOriginal=:TituloOriginal</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="RevistaPK" abs="false" class="Revista" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478813886028">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="ISSN" id="_147942404397625"/>
+            <jpa:basic attribute-type="String" visibile="true" name="Titulo" id="_147942407262726"/>
+            <jpa:basic attribute-type="String" visibile="true" name="Localdepub" id="_147942408857727"/>
+            <jpa:basic attribute-type="String" visibile="true" name="Datadepub" id="_147942413107429"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478813889880" visibile="true" name="produtoradeconteudo" id="_147942457570037"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478814628987" visibile="true" name="categoria" id="_147942591811150"/>
+            <jpa:many-to-many own="true" collection-type="java.util.List" connected-entity-id="_1478814702095" visibile="true" name="editors" id="_147942462413238"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881388603546">
+                <jpa:bv/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Revista.findAll">
+            <jpa:query>Select e from Revista e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Revista.findByISSN">
+            <jpa:query>Select r from Revista r where r.ISSN=:ISSN</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Revista.findByTitulo">
+            <jpa:query>Select r from Revista r where r.Titulo=:Titulo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Revista.findByLocaldepub">
+            <jpa:query>Select r from Revista r where r.Localdepub=:Localdepub</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Revista.findByProdutoradeconteudo*">
+            <jpa:query>Select r from Revista r where r.produtoradeconteudo*=:produtoradeconteudo*</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Revista.findByDatadepub">
+            <jpa:query>Select r from Revista r where r.Datadepub=:Datadepub</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProdutoradeconteudoPK" abs="false" class="Produtoradeconteudo" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478813889880">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="NomeDaEditora" id="_147881437060160">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="PaisEditora" id="_147881437076961">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="CNPJ" id="_147881437129764">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="DescricaoEditora" id="_147881437166565">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1478730534432" visibile="true" name="endereco" id="_147881445576766"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881388988648">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Produtoradeconteudo.findAll">
+            <jpa:query>Select e from Produtoradeconteudo e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByNomeDaEditora">
+            <jpa:query>Select e from Produtoradeconteudo e where e.NomeDaEditora=:NomeDaEditora</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByPaisEditora">
+            <jpa:query>Select e from Produtoradeconteudo e where e.PaisEditora=:PaisEditora</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByEstadoEditora">
+            <jpa:query>Select e from Produtoradeconteudo e where e.EstadoEditora=:EstadoEditora</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByCidadeEditora">
+            <jpa:query>Select e from Produtoradeconteudo e where e.CidadeEditora=:CidadeEditora</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByCNPJ">
+            <jpa:query>Select e from Produtoradeconteudo e where e.CNPJ=:CNPJ</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByDescricaoEditora">
+            <jpa:query>Select e from Produtoradeconteudo e where e.DescricaoEditora=:DescricaoEditora</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Produtoradeconteudo.findByAttribute">
+            <jpa:query>Select e from Produtoradeconteudo e where e.attribute=:attribute</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="CategoriaPK" abs="false" class="Categoria" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478814628987">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Titulo" id="_147881473604674">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Descricao" id="_147881473654475">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881462899968">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Categoria.findAll">
+            <jpa:query>Select e from Categoria e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Categoria.findByTitulo">
+            <jpa:query>Select c from Categoria c where c.Titulo=:Titulo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Categoria.findByDescricao">
+            <jpa:query>Select c from Categoria c where c.Descricao=:Descricao</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="AutorPK" abs="false" class="Autor" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478814652890">
+        <jpa:ts e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="Nome" id="_147881475162476">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Sobrenome" id="_147881475179977">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Nacionalidade" id="_147881475213679">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:one-to-one own="true" primaryKey="false" connected-entity-id="_1478730534432" visibile="true" name="endereco" id="_147881511322285"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881465290070">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Autor.findAll">
+            <jpa:query>Select e from Autor e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByNome">
+            <jpa:query>Select a from Autor a where a.Nome=:Nome</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findBySobrenome">
+            <jpa:query>Select a from Autor a where a.Sobrenome=:Sobrenome</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByCidade">
+            <jpa:query>Select a from Autor a where a.Cidade=:Cidade</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByNacionalidade">
+            <jpa:query>Select a from Autor a where a.Nacionalidade=:Nacionalidade</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByAttribute4">
+            <jpa:query>Select a from Autor a where a.attribute4=:attribute4</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByAttribute5">
+            <jpa:query>Select a from Autor a where a.attribute5=:attribute5</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByAttribute6">
+            <jpa:query>Select a from Autor a where a.attribute6=:attribute6</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Autor.findByAttribute7">
+            <jpa:query>Select a from Autor a where a.attribute7=:attribute7</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="EditorPK" abs="false" class="Editor" visibile="true" minimized="false" rootElement="_14787303345571" id="_1478814702095">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="TipoDeEditor" id="_147881557490290"/>
+            <jpa:basic attribute-type="String" visibile="true" name="Nome" id="_147881558907891">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="SonbreNome" id="_147881558927092">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="Nacionalidade" id="_147881564615993"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147881470210672">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Editor.findAll">
+            <jpa:query>Select e from Editor e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Editor.findByTipoDeEditor">
+            <jpa:query>Select e from Editor e where e.TipoDeEditor=:TipoDeEditor</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Editor.findByNome">
+            <jpa:query>Select e from Editor e where e.Nome=:Nome</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Editor.findBySonbreNome">
+            <jpa:query>Select e from Editor e where e.SonbreNome=:SonbreNome</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Editor.findByNacionalidade">
+            <jpa:query>Select e from Editor e where e.Nacionalidade=:Nacionalidade</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:snp e="true" loc="BEFORE_PACKAGE">/**
+ * This file was generated by the JPA Modeler
+ */</jpa:snp>
+    <jpa:diagram>
+        <plane elementRef="_14787303345571">
+            <shape elementRef="_1478730455961">
+                <Bounds x="404.0" y="455.0" width="216.0" height="407.0"/>
+            </shape>
+            <shape elementRef="_1478730475045">
+                <Bounds x="379.0" y="111.0" width="164.0" height="252.0"/>
+            </shape>
+            <shape elementRef="_1478730506075">
+                <Bounds x="123.0" y="167.0" width="145.0" height="113.0"/>
+            </shape>
+            <shape elementRef="_1478730534432">
+                <Bounds x="99.0" y="329.0" width="165.0" height="239.0"/>
+            </shape>
+            <shape elementRef="_1478730834139">
+                <Bounds x="49.0" y="623.0" width="128.0" height="92.0"/>
+            </shape>
+            <shape elementRef="_1478730924499">
+                <Bounds x="642.0" y="25.0" width="222.0" height="420.0"/>
+            </shape>
+            <shape elementRef="_1478813713491">
+                <Bounds x="1457.0" y="137.0" width="153.0" height="176.0"/>
+            </shape>
+            <shape elementRef="_1478813814366">
+                <Bounds x="1084.0" y="36.0" width="130.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_1478813849651">
+                <Bounds x="1270.0" y="36.0" width="175.0" height="294.0"/>
+            </shape>
+            <shape elementRef="_1478813886028">
+                <Bounds x="888.0" y="82.0" width="175.0" height="231.0"/>
+            </shape>
+            <shape elementRef="_1478813889880">
+                <Bounds x="789.0" y="472.0" width="220.0" height="189.0"/>
+            </shape>
+            <shape elementRef="_1478814628987">
+                <Bounds x="1063.0" y="726.0" width="151.0" height="113.0"/>
+            </shape>
+            <shape elementRef="_1478814652890">
+                <Bounds x="1250.0" y="709.0" width="130.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_1478814702095">
+                <Bounds x="1553.0" y="501.0" width="130.0" height="155.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
