@@ -1,29 +1,29 @@
-# README #
+# Bibliotek #
 
-This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+### O que se encontra neste repositório ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Nome do Projeto
+* Versão atual
+* Plataforma
 
-### How do I get set up? ###
+### Do que se trata ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Projeto de software
+* Gestão
+* Biblioteca
+* MySQL
+* JavaWeb
+* JSP
 
-### Contribution guidelines ###
+### Contribuição ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* Yangoff
+* JPaulo
+* DouglasA
 
-### Who do I talk to? ###
+### Contato ###
 
-* Repo owner or admin
-* Other community or team contact
+* 789joaopaulo@gmail.com
+* yangovip@gmail.com
+* douglasfblg@gmail.com
