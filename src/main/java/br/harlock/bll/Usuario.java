@@ -43,135 +43,156 @@ public class Usuario {
     private List<Emprestimo> emprestimoCollection1;
 
     public int getIdUsu() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idUsu;
     }
 
     public void setIdUsu(int idUsu) {
+        this.idUsu = idUsu;
     }
 
     public int getFkTipoUsu() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return fkTipoUsu;
     }
 
     public void setFkTipoUsu(int fkTipoUsu) {
+        this.fkTipoUsu = fkTipoUsu;
     }
 
     public String getNivelDeAcesso() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nivelDeAcesso;
     }
 
     public void setNivelDeAcesso(String nivelDeAcesso) {
+        this.nivelDeAcesso = nivelDeAcesso;
     }
 
     public String getNome() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nome;
     }
 
     public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return cpf;
     }
 
     public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return email;
     }
 
     public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNumeroResidencial() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return numeroResidencial;
     }
 
     public void setNumeroResidencial(String numeroResidencial) {
+        this.numeroResidencial = numeroResidencial;
     }
 
     public String getNumeroCelular() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return numeroCelular;
     }
 
     public void setNumeroCelular(String numeroCelular) {
+        this.numeroCelular = numeroCelular;
     }
 
     public String getNumeroComercial() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return numeroComercial;
     }
 
     public void setNumeroComercial(String numeroComercial) {
+        this.numeroComercial = numeroComercial;
     }
 
     public String getMatriculaEducacional() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return matriculaEducacional;
     }
 
     public void setMatriculaEducacional(String matriculaEducacional) {
+        this.matriculaEducacional = matriculaEducacional;
     }
 
     public String getSenha() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return senha;
     }
 
     public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getEnderecoLogadouro() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enderecoLogadouro;
     }
 
     public void setEnderecoLogadouro(String enderecoLogadouro) {
+        this.enderecoLogadouro = enderecoLogadouro;
     }
 
     public String getEnderecoCEP() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enderecoCEP;
     }
 
     public void setEnderecoCEP(String enderecoCEP) {
+        this.enderecoCEP = enderecoCEP;
     }
 
     public String getEnderecoCidade() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enderecoCidade;
     }
 
     public void setEnderecoCidade(String enderecoCidade) {
+        this.enderecoCidade = enderecoCidade;
     }
 
     public String getEnderecoEstado() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enderecoEstado;
     }
 
     public void setEnderecoEstado(String enderecoEstado) {
+        this.enderecoEstado = enderecoEstado;
     }
 
     public String getEnderecoPais() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enderecoPais;
     }
 
     public void setEnderecoPais(String enderecoPais) {
+        this.enderecoPais = enderecoPais;
     }
 
     public String getStatusDoUsuario() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return statusDoUsuario;
     }
 
     public void setStatusDoUsuario(String statusDoUsuario) {
+        this.statusDoUsuario = statusDoUsuario;
     }
 
     public List<Emprestimo> getEmprestimoCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return emprestimoCollection;
     }
 
     public void setEmprestimoCollection(List<Emprestimo> emprestimoCollection) {
+        this.emprestimoCollection = emprestimoCollection;
     }
 
     public List<Emprestimo> getEmprestimoCollection1() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return emprestimoCollection1;
     }
 
     public void setEmprestimoCollection1(List<Emprestimo> emprestimoCollection1) {
+        this.emprestimoCollection1 = emprestimoCollection1;
     }
+
+    
 }

@@ -13,37 +13,44 @@ public class TituloTEMAutor {
     private Titulo titulo;
 
     public int getTituloidTitulo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tituloidTitulo;
     }
 
     public void setTituloidTitulo(int tituloidTitulo) {
+        this.tituloidTitulo = tituloidTitulo;
     }
 
     public int getAutoridAutor() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return autoridAutor;
     }
 
     public void setAutoridAutor(int autoridAutor) {
+        this.autoridAutor = autoridAutor;
     }
 
     public String getTipoDeAutor() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tipoDeAutor;
     }
 
     public void setTipoDeAutor(String tipoDeAutor) {
+        this.tipoDeAutor = tipoDeAutor;
     }
 
     public Autor getAutor() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return autor;
     }
 
     public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 
     public Titulo getTitulo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return titulo;
     }
 
     public void setTitulo(Titulo titulo) {
+        this.titulo = titulo;
     }
+
+    
 }

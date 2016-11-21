@@ -46,142 +46,164 @@ public class Titulo {
     private List<TituloTEMAutor> tituloTEMAutorCollection;
 
     public int getIdTitu() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idTitu;
     }
 
     public void setIdTitu(int idTitu) {
+        this.idTitu = idTitu;
     }
 
     public int getFkProdutoraId() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return fkProdutoraId;
     }
 
     public void setFkProdutoraId(int fkProdutoraId) {
+        this.fkProdutoraId = fkProdutoraId;
     }
 
     public int getFkItemAcervo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return fkItemAcervo;
     }
 
     public void setFkItemAcervo(int fkItemAcervo) {
+        this.fkItemAcervo = fkItemAcervo;
     }
 
     public int getFkItemPdc() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return fkItemPdc;
     }
 
     public void setFkItemPdc(int fkItemPdc) {
+        this.fkItemPdc = fkItemPdc;
     }
 
     public String getIsbn() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isbn;
     }
 
     public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getIssn() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return issn;
     }
 
     public void setIssn(String issn) {
+        this.issn = issn;
     }
 
     public String getObra() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return obra;
     }
 
     public void setObra(String obra) {
+        this.obra = obra;
     }
 
     public String getDescricao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Date getDataDePublicacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return dataDePublicacao;
     }
 
     public void setDataDePublicacao(Date dataDePublicacao) {
+        this.dataDePublicacao = dataDePublicacao;
     }
 
     public String getCidadePublicacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return cidadePublicacao;
     }
 
     public void setCidadePublicacao(String cidadePublicacao) {
+        this.cidadePublicacao = cidadePublicacao;
     }
 
     public String getEstadoPublicacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return estadoPublicacao;
     }
 
     public void setEstadoPublicacao(String estadoPublicacao) {
+        this.estadoPublicacao = estadoPublicacao;
     }
 
     public String getEdicao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return edicao;
     }
 
     public void setEdicao(String edicao) {
+        this.edicao = edicao;
     }
 
     public String getIdioma() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idioma;
     }
 
     public void setIdioma(String idioma) {
+        this.idioma = idioma;
     }
 
     public String getTraducao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return traducao;
     }
 
     public void setTraducao(String traducao) {
+        this.traducao = traducao;
     }
 
     public String getCapa() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return capa;
     }
 
     public void setCapa(String capa) {
+        this.capa = capa;
     }
 
     public Categoriaitemacervo getCategoriaitemacervo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return categoriaitemacervo;
     }
 
     public void setCategoriaitemacervo(Categoriaitemacervo categoriaitemacervo) {
+        this.categoriaitemacervo = categoriaitemacervo;
     }
 
     public ProdutoraConteudo getProdutoraConteudo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return produtoraConteudo;
     }
 
     public void setProdutoraConteudo(ProdutoraConteudo produtoraConteudo) {
+        this.produtoraConteudo = produtoraConteudo;
     }
 
     public List<Exemplar> getExemplarCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return exemplarCollection;
     }
 
     public void setExemplarCollection(List<Exemplar> exemplarCollection) {
+        this.exemplarCollection = exemplarCollection;
     }
 
     public List<TitulohasEditor> getTitulohasEditorCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return titulohasEditorCollection;
     }
 
     public void setTitulohasEditorCollection(List<TitulohasEditor> titulohasEditorCollection) {
+        this.titulohasEditorCollection = titulohasEditorCollection;
     }
 
     public List<TituloTEMAutor> getTituloTEMAutorCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tituloTEMAutorCollection;
     }
 
     public void setTituloTEMAutorCollection(List<TituloTEMAutor> tituloTEMAutorCollection) {
+        this.tituloTEMAutorCollection = tituloTEMAutorCollection;
     }
+
+    
 }

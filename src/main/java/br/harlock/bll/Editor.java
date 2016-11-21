@@ -13,30 +13,36 @@ public class Editor {
     private List<TitulohasEditor> titulohasEditorCollection;
 
     public Integer getIdEditor() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idEditor;
     }
 
     public void setIdEditor(Integer idEditor) {
+        this.idEditor = idEditor;
     }
 
     public String getNome() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nome;
     }
 
     public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getNacionalidade() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nacionalidade;
     }
 
     public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
     }
 
     public List<TitulohasEditor> getTitulohasEditorCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return titulohasEditorCollection;
     }
 
     public void setTitulohasEditorCollection(List<TitulohasEditor> titulohasEditorCollection) {
+        this.titulohasEditorCollection = titulohasEditorCollection;
     }
+
+    
 }

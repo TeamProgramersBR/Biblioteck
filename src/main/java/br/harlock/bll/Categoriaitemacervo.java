@@ -13,30 +13,36 @@ public class Categoriaitemacervo {
     private List<Titulo> tituloCollection;
 
     public Integer getIdCat() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idCat;
     }
 
     public void setIdCat(Integer idCat) {
+        this.idCat = idCat;
     }
 
     public String getNomeCategoria() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nomeCategoria;
     }
 
     public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 
     public String getDescricao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public List<Titulo> getTituloCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tituloCollection;
     }
 
     public void setTituloCollection(List<Titulo> tituloCollection) {
+        this.tituloCollection = tituloCollection;
     }
+
+    
 }

@@ -15,37 +15,44 @@ public class Autor {
     private List<TituloTEMAutor> tituloTEMAutorCollection;
 
     public Integer getIdAutor() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idAutor;
     }
 
     public void setIdAutor(Integer idAutor) {
+        this.idAutor = idAutor;
     }
 
     public String getNome() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nome;
     }
 
     public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getNomeFantasia() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nomeFantasia;
     }
 
     public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public String getNacionalidade() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nacionalidade;
     }
 
     public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
     }
 
     public List<TituloTEMAutor> getTituloTEMAutorCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tituloTEMAutorCollection;
     }
 
     public void setTituloTEMAutorCollection(List<TituloTEMAutor> tituloTEMAutorCollection) {
+        this.tituloTEMAutorCollection = tituloTEMAutorCollection;
     }
+
+   
 }

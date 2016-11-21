@@ -15,37 +15,44 @@ public class ProdutoraConteudo {
     private List<Titulo> tituloCollection;
 
     public Integer getIdPdc() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idPdc;
     }
 
     public void setIdPdc(Integer idPdc) {
+        this.idPdc = idPdc;
     }
 
     public String getNomeProdutora() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nomeProdutora;
     }
 
     public void setNomeProdutora(String nomeProdutora) {
+        this.nomeProdutora = nomeProdutora;
     }
 
     public String getDescricao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getCnpj() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return cnpj;
     }
 
     public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public List<Titulo> getTituloCollection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return tituloCollection;
     }
 
     public void setTituloCollection(List<Titulo> tituloCollection) {
+        this.tituloCollection = tituloCollection;
     }
+
+    
 }

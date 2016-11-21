@@ -27,79 +27,92 @@ public class Emprestimo {
     private Usuario UsuarioDoSistema;
 
     public int getIdEmp() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idEmp;
     }
 
     public void setIdEmp(int idEmp) {
+        this.idEmp = idEmp;
     }
 
-    public int getFKFuncionario() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int getfKFuncionario() {
+        return fKFuncionario;
     }
 
-    public void setFKFuncionario(int fKFuncionario) {
+    public void setfKFuncionario(int fKFuncionario) {
+        this.fKFuncionario = fKFuncionario;
     }
 
     public int getFkUsu() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return fkUsu;
     }
 
     public void setFkUsu(int fkUsu) {
+        this.fkUsu = fkUsu;
     }
 
     public Date getDataEmprestimo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return dataEmprestimo;
     }
 
     public void setDataEmprestimo(Date dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
     }
 
     public Date getDataPrevDevolucao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return dataPrevDevolucao;
     }
 
     public void setDataPrevDevolucao(Date dataPrevDevolucao) {
+        this.dataPrevDevolucao = dataPrevDevolucao;
     }
 
     public Date getDataDevolucao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return dataDevolucao;
     }
 
     public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 
     public Long getValorMulta() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return valorMulta;
     }
 
     public void setValorMulta(Long valorMulta) {
+        this.valorMulta = valorMulta;
     }
 
     public String getSituacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return situacao;
     }
 
     public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public Boolean isReserva() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Boolean getReserva() {
+        return reserva;
     }
 
     public void setReserva(Boolean reserva) {
+        this.reserva = reserva;
     }
 
     public Usuario getFuncionario() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Funcionario;
     }
 
     public void setFuncionario(Usuario Funcionario) {
+        this.Funcionario = Funcionario;
     }
 
     public Usuario getUsuarioDoSistema() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return UsuarioDoSistema;
     }
 
     public void setUsuarioDoSistema(Usuario UsuarioDoSistema) {
+        this.UsuarioDoSistema = UsuarioDoSistema;
     }
+
+    
 }

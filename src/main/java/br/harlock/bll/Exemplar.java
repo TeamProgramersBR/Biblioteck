@@ -17,51 +17,60 @@ public class Exemplar {
     private Titulo titulo;
 
     public int getIdExe() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return idExe;
     }
 
     public void setIdExe(int idExe) {
+        this.idExe = idExe;
     }
 
     public int getFkTitulo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return fkTitulo;
     }
 
     public void setFkTitulo(int fkTitulo) {
+        this.fkTitulo = fkTitulo;
     }
 
     public String getIsbn() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isbn;
     }
 
     public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public Boolean isLiberadoParaEmprestimo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Boolean getLiberadoParaEmprestimo() {
+        return liberadoParaEmprestimo;
     }
 
     public void setLiberadoParaEmprestimo(Boolean liberadoParaEmprestimo) {
+        this.liberadoParaEmprestimo = liberadoParaEmprestimo;
     }
 
     public String getDuracao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return duracao;
     }
 
     public void setDuracao(String duracao) {
+        this.duracao = duracao;
     }
 
     public String getQuantidadePaginas() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return quantidadePaginas;
     }
 
     public void setQuantidadePaginas(String quantidadePaginas) {
+        this.quantidadePaginas = quantidadePaginas;
     }
 
     public Titulo getTitulo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return titulo;
     }
 
     public void setTitulo(Titulo titulo) {
+        this.titulo = titulo;
     }
+
+    
 }
