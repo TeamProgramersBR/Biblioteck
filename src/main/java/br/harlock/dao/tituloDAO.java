@@ -157,8 +157,10 @@ public class tituloDAO {
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
             ResultSet rs = ps.executeQuery("SELECT `ID_TITU`, `ISBN`, `ISSN`, `obra`, `Descricao`, `DataDePublicacao`, `CidadePublicacao`, `EstadoPublicacao`, `Edicao`, `Idioma`, `Traducao`, `Capa`, `FK_PRODUTORA_ID`, `FK_ITEM_PDC`, `Categoria_item_acervo_ID_CAT` FROM `titulo` WHERE `ID_TITU` = ? ");
+            
             ps.setString(1, ID_TITU);
-
+            rs.next();
+            
                 titulo.setIdTitu(rs.getInt("ID_TITU"));
                 titulo.setIsbn(rs.getString("ISBN"));
                 titulo.setIssn(rs.getString("ISSN"));

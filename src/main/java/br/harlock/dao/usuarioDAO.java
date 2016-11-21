@@ -166,7 +166,7 @@ public class usuarioDAO {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
             ResultSet rs = ps.executeQuery("SELECT `ID_USU`, `Nivel_De_Acesso`, `Nome`, `CPF`, `email`, `NumeroResidencial`, `NumeroCelular`, `NumeroComercial`, `MatriculaEducacional`, `Senha`, `endereco_Logadouro`, `endereco_CEP`, `endereco_Cidade`, `endereco_Estado`, `endereco_Pais`, `StatusDoUsuario`, `FK_TIPO_USU` FROM `usuario` WHERE `ID_USU` = ?");
             ps.setString(1, ID_USU);
-
+            rs.next();
             usuario.setIdUsu(rs.getInt("ID_USU"));
                 usuario.setNivelDeAcesso(rs.getString("Nivel_De_Acesso"));
                 usuario.setNome(rs.getString("Nome"));

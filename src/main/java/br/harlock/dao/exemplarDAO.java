@@ -111,7 +111,7 @@ public class exemplarDAO {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
                     ResultSet rs = ps.executeQuery("SELECT `ID_EXE`, `ISBN`, `LiberadoParaEmprestimo`, `Duracao`, `QuantidadePaginas`, `FK_TITULO` FROM `exemplar` WHERE `ISBN`= ?");
                                 ps.setString(1, ISBN);
-                                
+                                rs.next();
 				exemplar.setIdExe(rs.getInt("ID_EXE"));
                                 exemplar.setIsbn(rs.getString("ISBN"));
                                 exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));

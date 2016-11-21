@@ -105,7 +105,7 @@ public class produtoraDAO {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
             ResultSet rs = ps.executeQuery("SELECT `ID_PDC`, `Nome_Produtora`, `Descricao`, `CNPJ` FROM `produtoraconteudo` WHERE `ID_PDC` = ?");
             ps.setString(1, ID_PDC);
-
+            rs.next();
             produtora.setIdPdc(rs.getInt("ID_PDC"));
             produtora.setNomeProdutora(rs.getString("Nome_Produtora"));
             produtora.setDescricao(rs.getString("Descricao"));
