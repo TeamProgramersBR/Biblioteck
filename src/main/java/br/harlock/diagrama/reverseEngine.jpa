@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" v="1.5.4" sm="false" xs="false" id="_14796869049831" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="EmprestimoPK" abs="false" class="Emprestimo" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050472">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="dataEmprestimo" id="_147968690505813">
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="DataEmprestimo" unique="false" nullable="true" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="dataPrevDevolucao" id="_147968690505814">
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="DataPrevDevolucao" unique="false" nullable="true" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="dataDevolucao" id="_147968690505815">
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="DataDevolucao" unique="false" nullable="true" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Long" visibile="true" name="valorMulta" id="_147968690505816">
+                <jpa:column name="ValorMulta" unique="false" nullable="true" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="situacao" id="_147968690505817">
+                <jpa:column name="Situacao" unique="false" nullable="true" insertable="true" updatable="true" table="Emprestimo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Boolean" visibile="true" name="reserva" id="_147968690505818">
+                <jpa:column name="Reserva" unique="false" nullable="true" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050565" connected-attribute-id="_147968690505952" visibile="true" name="Funcionario" id="_147968690505821">
+                <jpa:join-column name="FK_Funcionario" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050565" connected-attribute-id="_147968690505953" visibile="true" name="UsuarioDoSistema" id="_147968690505822">
+                <jpa:join-column name="FK_USU" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="int" visibile="true" name="idEmp" id="_147968690505812">
+                <jpa:column name="ID_EMP" unique="false" nullable="false" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fKFuncionario" id="_147968690505819">
+                <jpa:column name="FK_Funcionario" unique="false" nullable="false" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fkUsu" id="_147968690505820">
+                <jpa:column name="FK_USU" unique="false" nullable="false" insertable="true" updatable="true" table="Emprestimo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Emprestimo"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="ExemplarPK" abs="false" class="Exemplar" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050563">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="isbn" id="_147968690505824">
+                <jpa:column name="ISBN" unique="false" nullable="true" insertable="true" updatable="true" table="Exemplar" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Boolean" visibile="true" name="liberadoParaEmprestimo" id="_147968690505825">
+                <jpa:column name="LiberadoParaEmprestimo" unique="false" nullable="true" insertable="true" updatable="true" table="Exemplar" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="duracao" id="_147968690505826">
+                <jpa:column name="Duracao" unique="false" nullable="true" insertable="true" updatable="true" table="Exemplar" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="quantidadePaginas" id="_147968690505827">
+                <jpa:column name="QuantidadePaginas" unique="false" nullable="true" insertable="true" updatable="true" table="Exemplar" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_147968690505610" connected-attribute-id="_147968690506087" visibile="true" name="titulo" id="_147968690505829">
+                <jpa:join-column name="FK_TITULO" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="int" visibile="true" name="idExe" id="_147968690505823">
+                <jpa:column name="ID_EXE" unique="false" nullable="false" insertable="true" updatable="true" table="Exemplar" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fkTitulo" id="_147968690505828">
+                <jpa:column name="FK_TITULO" unique="false" nullable="false" insertable="true" updatable="true" table="Exemplar" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Exemplar"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProdutoraConteudoPK" abs="false" class="ProdutoraConteudo" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050564">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nomeProdutora" id="_147968690505931">
+                <jpa:column name="Nome_Produtora" unique="false" nullable="true" insertable="true" updatable="true" table="ProdutoraConteudo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descricao" id="_147968690505932">
+                <jpa:column name="Descricao" unique="false" nullable="true" insertable="true" updatable="true" table="ProdutoraConteudo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="cnpj" id="_147968690505933">
+                <jpa:column name="CNPJ" unique="false" nullable="true" insertable="true" updatable="true" table="ProdutoraConteudo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_147968690505610" connected-attribute-id="_147968690506090" visibile="true" name="tituloCollection" id="_147968690505934"/>
+            <jpa:id attribute-type="Integer" visibile="true" name="idPdc" id="_147968690505930">
+                <jpa:column name="ID_PDC" unique="false" nullable="false" insertable="true" updatable="true" table="ProdutoraConteudo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="ProdutoraConteudo"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="UsuarioPK" abs="false" class="Usuario" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050565">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nivelDeAcesso" id="_147968690505936">
+                <jpa:column name="Nivel_De_Acesso" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="13" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nome" id="_147968690505937">
+                <jpa:column name="Nome" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="cpf" id="_147968690505938">
+                <jpa:column name="CPF" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="email" id="_147968690505939">
+                <jpa:column name="email" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="numeroResidencial" id="_147968690505940">
+                <jpa:column name="NumeroResidencial" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="numeroCelular" id="_147968690505941">
+                <jpa:column name="NumeroCelular" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="numeroComercial" id="_147968690505942">
+                <jpa:column name="NumeroComercial" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="matriculaEducacional" id="_147968690505943">
+                <jpa:column name="MatriculaEducacional" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="senha" id="_147968690505944">
+                <jpa:column name="Senha" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="enderecoLogadouro" id="_147968690505945">
+                <jpa:column name="endereco_Logadouro" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="enderecoCEP" id="_147968690505946">
+                <jpa:column name="endereco_CEP" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="enderecoCidade" id="_147968690505947">
+                <jpa:column name="endereco_Cidade" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="enderecoEstado" id="_147968690505948">
+                <jpa:column name="endereco_Estado" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="enderecoPais" id="_147968690505949">
+                <jpa:column name="endereco_Pais" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="statusDoUsuario" id="_147968690505950">
+                <jpa:column name="StatusDoUsuario" unique="false" nullable="true" insertable="true" updatable="true" table="Usuario" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050472" connected-attribute-id="_147968690505821" visibile="true" name="emprestimoCollection" id="_147968690505952"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050472" connected-attribute-id="_147968690505822" visibile="true" name="emprestimoCollection1" id="_147968690505953"/>
+            <jpa:id attribute-type="int" visibile="true" name="idUsu" id="_147968690505935">
+                <jpa:column name="ID_USU" unique="false" nullable="false" insertable="true" updatable="true" table="Usuario" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fkTipoUsu" id="_147968690505951">
+                <jpa:column name="FK_TIPO_USU" unique="false" nullable="false" insertable="true" updatable="true" table="Usuario" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Usuario">
+            <jpa:unique-constraint>
+                <jpa:column-name>NumeroCelular</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="CategoriaitemacervoPK" abs="false" class="Categoriaitemacervo" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050566">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nomeCategoria" id="_147968690505955">
+                <jpa:column name="NomeCategoria" unique="false" nullable="true" insertable="true" updatable="true" table="Categoria_item_acervo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descricao" id="_147968690505956">
+                <jpa:column name="Descricao" unique="false" nullable="true" insertable="true" updatable="true" table="Categoria_item_acervo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_147968690505610" connected-attribute-id="_147968690506089" visibile="true" name="tituloCollection" id="_147968690505957"/>
+            <jpa:id attribute-type="Integer" visibile="true" name="idCat" id="_147968690505954">
+                <jpa:column name="ID_CAT" unique="false" nullable="false" insertable="true" updatable="true" table="Categoria_item_acervo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Categoria_item_acervo"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="AutorPK" abs="false" class="Autor" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050567">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nome" id="_147968690505959">
+                <jpa:column name="Nome" unique="false" nullable="true" insertable="true" updatable="true" table="Autor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nomeFantasia" id="_147968690505960">
+                <jpa:column name="NomeFantasia" unique="false" nullable="true" insertable="true" updatable="true" table="Autor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nacionalidade" id="_147968690505961">
+                <jpa:column name="Nacionalidade" unique="false" nullable="true" insertable="true" updatable="true" table="Autor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_147968690505611" connected-attribute-id="_147968690506095" visibile="true" name="tituloTEMAutorCollection" id="_147968690505962"/>
+            <jpa:id attribute-type="Integer" visibile="true" name="idAutor" id="_147968690505958">
+                <jpa:column name="ID_AUTOR" unique="false" nullable="false" insertable="true" updatable="true" table="Autor" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Autor"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="TitulohasEditorPK" abs="false" class="TitulohasEditor" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050568">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="tipoDeEditor" id="_147968690506065">
+                <jpa:column name="TipoDeEditor" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo_has_Editor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050569" connected-attribute-id="_147968690506071" visibile="true" name="editor" id="_147968690506066">
+                <jpa:join-column name="Editor_ID_EDITOR" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_147968690505610" connected-attribute-id="_147968690506088" visibile="true" name="titulo" id="_147968690506067">
+                <jpa:join-column name="Titulo_ID_TITU" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="int" visibile="true" name="tituloIDTITU" id="_147968690506063">
+                <jpa:column name="Titulo_ID_TITU" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo_has_Editor" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="editorIDEDITOR" id="_147968690506064">
+                <jpa:column name="Editor_ID_EDITOR" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo_has_Editor" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Titulo_has_Editor"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="EditorPK" abs="false" class="Editor" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050569">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nome" id="_147968690506069">
+                <jpa:column name="Nome" unique="false" nullable="true" insertable="true" updatable="true" table="Editor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nacionalidade" id="_147968690506070">
+                <jpa:column name="Nacionalidade" unique="false" nullable="true" insertable="true" updatable="true" table="Editor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050568" connected-attribute-id="_147968690506066" visibile="true" name="titulohasEditorCollection" id="_147968690506071"/>
+            <jpa:id attribute-type="Integer" visibile="true" name="idEditor" id="_147968690506068">
+                <jpa:column name="ID_EDITOR" unique="false" nullable="false" insertable="true" updatable="true" table="Editor" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Editor"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="TituloPK" abs="false" class="Titulo" visibile="true" minimized="false" rootElement="_14796869049831" id="_147968690505610">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="isbn" id="_147968690506073">
+                <jpa:column name="ISBN" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="issn" id="_147968690506074">
+                <jpa:column name="ISSN" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="obra" id="_147968690506075">
+                <jpa:column name="obra" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descricao" id="_147968690506076">
+                <jpa:column name="Descricao" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="dataDePublicacao" id="_147968690506077">
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="DataDePublicacao" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="cidadePublicacao" id="_147968690506078">
+                <jpa:column name="CidadePublicacao" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="estadoPublicacao" id="_147968690506079">
+                <jpa:column name="EstadoPublicacao" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="edicao" id="_147968690506080">
+                <jpa:column name="Edicao" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="idioma" id="_147968690506081">
+                <jpa:column name="Idioma" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="traducao" id="_147968690506082">
+                <jpa:column name="Traducao" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="capa" id="_147968690506083">
+                <jpa:column name="Capa" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050566" connected-attribute-id="_147968690505957" visibile="true" name="categoriaitemacervo" id="_147968690506089">
+                <jpa:join-column name="FK_ITEM_ACERVO" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050564" connected-attribute-id="_147968690505934" visibile="true" name="produtoraConteudo" id="_147968690506090">
+                <jpa:join-column name="FK_ITEM_PDC" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050563" connected-attribute-id="_147968690505829" visibile="true" name="exemplarCollection" id="_147968690506087"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050568" connected-attribute-id="_147968690506067" visibile="true" name="titulohasEditorCollection" id="_147968690506088"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_147968690505611" connected-attribute-id="_147968690506096" visibile="true" name="tituloTEMAutorCollection" id="_147968690506091"/>
+            <jpa:id attribute-type="int" visibile="true" name="idTitu" id="_147968690506072">
+                <jpa:column name="ID_TITU" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fkProdutoraId" id="_147968690506084">
+                <jpa:column name="FK_PRODUTORA_ID" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fkItemAcervo" id="_147968690506085">
+                <jpa:column name="FK_ITEM_ACERVO" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="fkItemPdc" id="_147968690506086">
+                <jpa:column name="FK_ITEM_PDC" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Titulo"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="TituloTEMAutorPK" abs="false" class="TituloTEMAutor" visibile="true" minimized="false" rootElement="_14796869049831" id="_147968690505611">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="tipoDeAutor" id="_147968690506094">
+                <jpa:column name="TipoDeAutor" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo_TEM_Autor" length="45" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050567" connected-attribute-id="_147968690505962" visibile="true" name="autor" id="_147968690506095">
+                <jpa:join-column name="Autor_idAutor" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_147968690505610" connected-attribute-id="_147968690506091" visibile="true" name="titulo" id="_147968690506096">
+                <jpa:join-column name="Titulo_idTitulo" unique="false" nullable="true" insertable="false" updatable="false"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="int" visibile="true" name="tituloidTitulo" id="_147968690506092">
+                <jpa:column name="Titulo_idTitulo" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo_TEM_Autor" length="255" precision="0" scale="0"/>
+            </jpa:id>
+            <jpa:id attribute-type="int" visibile="true" name="autoridAutor" id="_147968690506093">
+                <jpa:column name="Autor_idAutor" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo_TEM_Autor" length="255" precision="0" scale="0"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Titulo_TEM_Autor"/>
+    </jpa:entity>
+    <jpa:diagram>
+        <plane elementRef="_14796869049831">
+            <shape elementRef="_14796869050472">
+                <Bounds x="1719.0" y="974.0" width="165.0" height="294.0"/>
+            </shape>
+            <shape elementRef="_14796869050563">
+                <Bounds x="32.0" y="974.0" width="189.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_14796869050564">
+                <Bounds x="614.0" y="974.0" width="207.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_14796869050565">
+                <Bounds x="1455.0" y="455.0" width="186.0" height="462.0"/>
+            </shape>
+            <shape elementRef="_14796869050566">
+                <Bounds x="32.0" y="234.0" width="215.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_14796869050567">
+                <Bounds x="1182.0" y="974.0" width="190.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_14796869050568">
+                <Bounds x="614.0" y="234.0" width="181.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_14796869050569">
+                <Bounds x="340.0" y="32.0" width="191.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_147968690505610">
+                <Bounds x="340.0" y="455.0" width="191.0" height="483.0"/>
+            </shape>
+            <shape elementRef="_147968690505611">
+                <Bounds x="915.0" y="455.0" width="182.0" height="168.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
