@@ -26,16 +26,16 @@ public class UsuarioDAOTest {
     
 
     /**
-     * Test of Inserir method, of class UsuarioDAO.
+     * 0, 1, "1", "root", "123456789", "ahadoro@hotmail", "32135465", "321321321", "265465465465", "5665654", "haleluja", "aaaaaaaaahahahaha", "789464513", "guiana", "do", "sul", "ativao"
      */
-    @Test
-    public void testInserir() {
-        System.out.println("Inserir");
-        Usuario usuario = new Usuario(0, 1, "1", "root", "123456789", "ahadoro@hotmail", "32135465", "321321321", "265465465465", "5665654", "haleluja", "aaaaaaaaahahahaha", "789464513", "guiana", "do", "sul", "ativao");
-        UsuarioDAO instance = new UsuarioDAO();
-        instance.Inserir(usuario);
-        
-    }
+//    @Test
+//    public void testInserir() {
+//        System.out.println("Inserir");
+//        Usuario usuario = new Usuario(0, 0, "1", "reginaldo", "9868758558", "ahadoro@hotmail", "39847298", "0694808255", "0238559850", "halelujah", "pegueiopiriquito", "ruasarau", "papapa", "papatibun", "butao", "cu", "ativao");
+//        UsuarioDAO instance = new UsuarioDAO();
+//        instance.Inserir(usuario);
+//        
+//    }
 
     /**
      * Test of Remover method, of class UsuarioDAO.
@@ -43,7 +43,7 @@ public class UsuarioDAOTest {
     @Test
     public void testRemover() {
         System.out.println("Remover");
-        Usuario usuario = null;
+        Usuario usuario = new Usuario(0, 0, "1", "reginaldo", "9868758558", "ahadoro@hotmail", "39847298", "0694808255", "0238559850", "halelujah", "pegueiopiriquito", "ruasarau", "papapa", "papatibun", "butao", "cu", "ativao");
         UsuarioDAO instance = new UsuarioDAO();
         instance.Remover(usuario);
         // TODO review the generated test code and remove the default call to fail.
