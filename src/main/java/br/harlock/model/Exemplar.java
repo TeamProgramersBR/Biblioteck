@@ -16,6 +16,20 @@ public class Exemplar {
 
     private Titulo titulo;
 
+    public Exemplar() {
+    }
+
+    public Exemplar(int idExe, int fkTitulo, String isbn, Boolean liberadoParaEmprestimo, String duracao, String quantidadePaginas) {
+        this.idExe = idExe;
+        this.fkTitulo = fkTitulo;
+        this.isbn = isbn;
+        this.liberadoParaEmprestimo = liberadoParaEmprestimo;
+        this.duracao = duracao;
+        this.quantidadePaginas = quantidadePaginas;
+    }
+
+    
+
     public int getIdExe() {
         return idExe;
     }

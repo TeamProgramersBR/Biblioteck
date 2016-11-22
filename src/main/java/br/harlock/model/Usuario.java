@@ -42,6 +42,31 @@ public class Usuario {
 
     private List<Emprestimo> emprestimoCollection1;
 
+    public Usuario() {
+    }
+
+    public Usuario(int idUsu, int fkTipoUsu, String nivelDeAcesso, String nome, String cpf, String email, String numeroResidencial, String numeroCelular, String numeroComercial, String matriculaEducacional, String senha, String enderecoLogadouro, String enderecoCEP, String enderecoCidade, String enderecoEstado, String enderecoPais, String statusDoUsuario) {
+        this.idUsu = idUsu;
+        this.fkTipoUsu = fkTipoUsu;
+        this.nivelDeAcesso = nivelDeAcesso;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.numeroResidencial = numeroResidencial;
+        this.numeroCelular = numeroCelular;
+        this.numeroComercial = numeroComercial;
+        this.matriculaEducacional = matriculaEducacional;
+        this.senha = senha;
+        this.enderecoLogadouro = enderecoLogadouro;
+        this.enderecoCEP = enderecoCEP;
+        this.enderecoCidade = enderecoCidade;
+        this.enderecoEstado = enderecoEstado;
+        this.enderecoPais = enderecoPais;
+        this.statusDoUsuario = statusDoUsuario;
+    }
+
+    
+
     public int getIdUsu() {
         return idUsu;
     }
