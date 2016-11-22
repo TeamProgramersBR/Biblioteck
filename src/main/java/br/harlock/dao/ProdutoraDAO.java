@@ -5,7 +5,7 @@
  */
 package br.harlock.dao;
 
-import br.harlock.bll.ProdutoraConteudo;
+import br.harlock.model.ProdutoraConteudo;
 import br.harlock.conn.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,11 +20,11 @@ import java.util.List;
  *
  * @author kai
  */
-public class produtoraDAO {
+public class ProdutoraDAO {
 
     Connection connection = null;
 
-    public produtoraDAO() {
+    public ProdutoraDAO() {
         connection = Conexao.getConexao();
     }
 

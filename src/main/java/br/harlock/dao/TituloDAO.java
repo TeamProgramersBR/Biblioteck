@@ -5,7 +5,7 @@
  */
 package br.harlock.dao;
 
-import br.harlock.bll.Titulo;
+import br.harlock.model.Titulo;
 import br.harlock.conn.Conexao;
 import java.sql.Connection;
 import java.sql.Date;
@@ -21,11 +21,11 @@ import java.util.List;
  *
  * @author kai
  */
-public class tituloDAO {
+public class TituloDAO {
 
     Connection connection = null;
 
-    public tituloDAO() {
+    public TituloDAO() {
         connection = Conexao.getConexao();
     }
 

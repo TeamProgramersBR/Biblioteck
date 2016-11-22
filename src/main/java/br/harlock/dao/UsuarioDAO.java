@@ -5,7 +5,7 @@
  */
 package br.harlock.dao;
 
-import br.harlock.bll.Usuario;
+import br.harlock.model.Usuario;
 import br.harlock.conn.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,11 +21,11 @@ import java.util.List;
  *
  * @author kai
  */
-public class usuarioDAO {
+public class UsuarioDAO {
 
     Connection connection = null;
 
-    public usuarioDAO() {
+    public UsuarioDAO() {
         connection = Conexao.getConexao();
     }
 

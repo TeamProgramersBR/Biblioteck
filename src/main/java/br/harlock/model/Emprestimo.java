@@ -1,4 +1,4 @@
-package br.harlock.bll;
+package br.harlock.model;
 
 import java.util.Date;
 

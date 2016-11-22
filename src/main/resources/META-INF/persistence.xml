@@ -7,16 +7,16 @@
     <class>dao.Revista</class>
     <class>dao.Produtoradeconteudo</class>
     <class>dao.Categoria</class>
-    <class>br.harlock.bll.Categoriaitemacervo</class>
-    <class>br.harlock.bll.TituloTEMAutor</class>
-    <class>br.harlock.bll.Editor</class>
-    <class>br.harlock.bll.Titulo</class>
-    <class>br.harlock.bll.Usuario</class>
-    <class>br.harlock.bll.Emprestimo</class>
-    <class>br.harlock.bll.Exemplar</class>
-    <class>br.harlock.bll.Autor</class>
-    <class>br.harlock.bll.TitulohasEditor</class>
-    <class>br.harlock.bll.ProdutoraConteudo</class>
+    <class>br.harlock.model.Emprestimo</class>
+    <class>br.harlock.model.Categoriaitemacervo</class>
+    <class>br.harlock.model.Editor</class>
+    <class>br.harlock.model.Exemplar</class>
+    <class>br.harlock.model.Usuario</class>
+    <class>br.harlock.model.Autor</class>
+    <class>br.harlock.model.TitulohasEditor</class>
+    <class>br.harlock.model.TituloTEMAutor</class>
+    <class>br.harlock.model.ProdutoraConteudo</class>
+    <class>br.harlock.model.Titulo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
