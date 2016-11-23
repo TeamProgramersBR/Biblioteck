@@ -32,7 +32,7 @@ public class TituloDAO {
     public void Inserir(Titulo titulo) {
         try {
             String sql;
-            sql = "INSERT INTO `titulo`(`ID_TITU`, `ISBN`, `ISSN`, `obra`, `Descricao`, `DataDePublicacao`, `CidadePublicacao`, `EstadoPublicacao`, `Edicao`, `Idioma`, `Traducao`, `Capa`, `FK_PRODUTORA_ID`, `FK_ITEM_PDC`, `Categoria_item_acervo_ID_CAT`)\n"
+            sql = "INSERT INTO titulo(ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_PRODUTORA_ID, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT)"
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -62,7 +62,7 @@ public class TituloDAO {
     public void Remover(Titulo titulo) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `titulo` WHERE `ID_TITU` = ?");
+                    .prepareStatement("DELETE FROM titulo WHERE ID_TITU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, titulo.getIdTitu());
             preparedStatement.executeUpdate();
@@ -76,26 +76,26 @@ public class TituloDAO {
     public void Update(Titulo titulo) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE\n"
-                            + "  `titulo`\n"
-                            + "SET\n"
-                            + "  `ID_TITU` = ?,\n"
-                            + "  `ISBN` = ?,\n"
-                            + "  `ISSN` = ?,\n"
-                            + "  `obra` = ?,\n"
-                            + "  `Descricao` = ?,\n"
-                            + "  `DataDePublicacao` = ?,\n"
-                            + "  `CidadePublicacao` = ?,\n"
-                            + "  `EstadoPublicacao` = ?,\n"
-                            + "  `Edicao` = ?,\n"
-                            + "  `Idioma` = ?,\n"
-                            + "  `Traducao` = ?,\n"
-                            + "  `Capa` = ?,\n"
-                            + "  `FK_PRODUTORA_ID` = ?,\n"
-                            + "  `FK_ITEM_PDC` = ?,\n"
-                            + "  `Categoria_item_acervo_ID_CAT` = ?\n"
-                            + "WHERE\n"
-                            + "   `ID_TITU` = ?");
+                    .prepareStatement("UPDATE"
+                            + "  titulo"
+                            + "SET"
+                            + "  ID_TITU = ?,"
+                            + "  ISBN = ?,"
+                            + "  ISSN = ?,"
+                            + "  obra = ?,"
+                            + "  Descricao = ?,"
+                            + "  DataDePublicacao = ?,"
+                            + "  CidadePublicacao = ?,"
+                            + "  EstadoPublicacao = ?,"
+                            + "  Edicao = ?,"
+                            + "  Idioma = ?,"
+                            + "  Traducao = ?,"
+                            + "  Capa = ?,"
+                            + "  FK_PRODUTORA_ID = ?,"
+                            + "  FK_ITEM_PDC = ?,"
+                            + "  Categoria_item_acervo_ID_CAT = ?"
+                            + "WHERE"
+                            + "   ID_TITU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, titulo.getIdTitu());
             preparedStatement.setString(2, titulo.getIsbn());
@@ -125,7 +125,7 @@ public class TituloDAO {
         List<Titulo> titulos = new ArrayList<Titulo>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM `titulo`");
+            ResultSet rs = statement.executeQuery("SELECT * FROM titulo");
             while (rs.next()) {
                 Titulo titulo = new Titulo();
                 titulo.setIdTitu(rs.getInt("ID_TITU"));
@@ -156,7 +156,7 @@ public class TituloDAO {
         Titulo titulo = new Titulo();
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT `ID_TITU`, `ISBN`, `ISSN`, `obra`, `Descricao`, `DataDePublicacao`, `CidadePublicacao`, `EstadoPublicacao`, `Edicao`, `Idioma`, `Traducao`, `Capa`, `FK_PRODUTORA_ID`, `FK_ITEM_PDC`, `Categoria_item_acervo_ID_CAT` FROM `titulo` WHERE `ID_TITU` = ? ");
+            ResultSet rs = ps.executeQuery("SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_PRODUTORA_ID, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT FROM titulo WHERE ID_TITU = ? ");
             
             ps.setString(1, ID_TITU);
             rs.next();

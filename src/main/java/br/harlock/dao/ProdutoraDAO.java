@@ -31,7 +31,7 @@ public class ProdutoraDAO {
     public void Inserir(ProdutoraConteudo produtora) {
         try {
             String sql;
-            sql = "INSERT INTO `produtoraconteudo`(`ID_PDC`, `Nome_Produtora`, `Descricao`, `CNPJ`)\n"
+            sql = "INSERT INTO produtoraconteudo(ID_PDC, Nome_Produtora, Descricao, CNPJ)"
                     + " VALUES (?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -50,7 +50,7 @@ public class ProdutoraDAO {
     public void Remover(ProdutoraConteudo produtora) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `produtoraconteudo` WHERE ID_PDC = ?");
+                    .prepareStatement("DELETE FROM produtoraconteudo WHERE ID_PDC = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, produtora.getIdPdc());
             preparedStatement.executeUpdate();
@@ -64,7 +64,7 @@ public class ProdutoraDAO {
     public void Update(ProdutoraConteudo produtora) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE `produtoraconteudo` SET `ID_PDC`=?,`Nome_Produtora`=?,`Descricao`=?,`CNPJ`=? WHERE `ID_PDC`=?");
+                    .prepareStatement("UPDATE produtoraconteudo SET ID_PDC=?,Nome_Produtora=?,Descricao=?,CNPJ=? WHERE ID_PDC=?");
             // Parameters start with 1
             preparedStatement.setInt(1, produtora.getIdPdc());
             preparedStatement.setString(2, produtora.getNomeProdutora());
@@ -83,7 +83,7 @@ public class ProdutoraDAO {
         List<ProdutoraConteudo> produtoras = new ArrayList<ProdutoraConteudo>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM `produtoraconteudo`");
+            ResultSet rs = statement.executeQuery("SELECT * FROM produtoraconteudo");
             while (rs.next()) {
                 ProdutoraConteudo produtora = new ProdutoraConteudo();
                 produtora.setIdPdc(rs.getInt("ID_PDC"));
@@ -103,7 +103,7 @@ public class ProdutoraDAO {
         ProdutoraConteudo produtora = new ProdutoraConteudo();
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT `ID_PDC`, `Nome_Produtora`, `Descricao`, `CNPJ` FROM `produtoraconteudo` WHERE `ID_PDC` = ?");
+            ResultSet rs = ps.executeQuery("SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = ?");
             ps.setString(1, ID_PDC);
             rs.next();
             produtora.setIdPdc(rs.getInt("ID_PDC"));

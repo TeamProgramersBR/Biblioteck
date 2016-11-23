@@ -32,7 +32,7 @@ public class UsuarioDAO {
     public void Inserir(Usuario usuario) {
         try {
             String sql;
-            sql = "INSERT INTO `usuario`(`ID_USU`, `Nivel_De_Acesso`, `Nome`, `CPF`, `email`, `NumeroResidencial`, `NumeroCelular`, `NumeroComercial`, `MatriculaEducacional`, `Senha`, `endereco_Logadouro`, `endereco_CEP`, `endereco_Cidade`, `endereco_Estado`, `endereco_Pais`, `StatusDoUsuario`, `FK_TIPO_USU`)\n"
+            sql = "INSERT INTO usuario(ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario, FK_TIPO_USU)"
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -64,7 +64,7 @@ public class UsuarioDAO {
     public void Remover(Usuario usuario) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `usuario` WHERE `ID_USU` = ?");
+                    .prepareStatement("DELETE FROM usuario WHERE ID_USU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, usuario.getIdUsu());
             preparedStatement.executeUpdate();
@@ -78,28 +78,28 @@ public class UsuarioDAO {
     public void Update(Usuario usuario) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE\n"
-                            + "  `usuario`\n"
-                            + "SET\n"
-                            + "  `ID_USU` = ?,\n"
-                            + "  `Nivel_De_Acesso` = ?,\n"
-                            + "  `Nome` = ?,\n"
-                            + "  `CPF` = ?,\n"
-                            + "  `email` = ?,\n"
-                            + "  `NumeroResidencial` = ?,\n"
-                            + "  `NumeroCelular` = ?,\n"
-                            + "  `NumeroComercial` = ?,\n"
-                            + "  `MatriculaEducacional` = ?,\n"
-                            + "  `Senha` = ?,\n"
-                            + "  `endereco_Logadouro` = ?,\n"
-                            + "  `endereco_CEP` = ?,\n"
-                            + "  `endereco_Cidade` = ?,\n"
-                            + "  `endereco_Estado` = ?,\n"
-                            + "  `endereco_Pais` = ?,\n"
-                            + "  `StatusDoUsuario` = ?,\n"
-                            + "  `FK_TIPO_USU` = ?\n"
-                            + "WHERE\n"
-                            + " `ID_USU` = ?");
+                    .prepareStatement("UPDATE"
+                            + "  usuario"
+                            + "SET"
+                            + "  ID_USU = ?,"
+                            + "  Nivel_De_Acesso = ?,"
+                            + "  Nome = ?,"
+                            + "  CPF = ?,"
+                            + "  email = ?,"
+                            + "  NumeroResidencial = ?,"
+                            + "  NumeroCelular = ?,"
+                            + "  NumeroComercial = ?,"
+                            + "  MatriculaEducacional = ?,"
+                            + "  Senha = ?,"
+                            + "  endereco_Logadouro = ?,"
+                            + "  endereco_CEP = ?,"
+                            + "  endereco_Cidade = ?,"
+                            + "  endereco_Estado = ?,"
+                            + "  endereco_Pais = ?,"
+                            + "  StatusDoUsuario = ?,"
+                            + "  FK_TIPO_USU = ?"
+                            + "WHERE"
+                            + " ID_USU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, usuario.getIdUsu());
             preparedStatement.setString(2, usuario.getNivelDeAcesso());
@@ -131,7 +131,7 @@ public class UsuarioDAO {
         List<Usuario> usuarios = new ArrayList<Usuario>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM `usuario`");
+            ResultSet rs = statement.executeQuery("SELECT * FROM usuario");
             while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsu(rs.getInt("ID_USU"));
@@ -164,7 +164,7 @@ public class UsuarioDAO {
         Usuario usuario = new Usuario();
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT `ID_USU`, `Nivel_De_Acesso`, `Nome`, `CPF`, `email`, `NumeroResidencial`, `NumeroCelular`, `NumeroComercial`, `MatriculaEducacional`, `Senha`, `endereco_Logadouro`, `endereco_CEP`, `endereco_Cidade`, `endereco_Estado`, `endereco_Pais`, `StatusDoUsuario`, `FK_TIPO_USU` FROM `usuario` WHERE `ID_USU` = ?");
+            ResultSet rs = ps.executeQuery("SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario, FK_TIPO_USU FROM usuario WHERE ID_USU = ?");
             ps.setString(1, ID_USU);
             rs.next();
             usuario.setIdUsu(rs.getInt("ID_USU"));

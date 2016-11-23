@@ -38,8 +38,9 @@ public class CategoriaDAO {
 
     public void Remover(Categoriaitemacervo categoria) throws SQLException {
         String sql;
-        sql = "";
+        sql = "DELETE FROM categoria_item_acervo WHERE ID_CAT = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, categoria.getIdCat());
         ps.executeUpdate();
     }
 
@@ -56,7 +57,7 @@ public class CategoriaDAO {
 
     public Categoriaitemacervo Pesquisar(Categoriaitemacervo categoria) throws SQLException {
         String sql;
-        sql = "SELECT ID_CAT, NomeCategoria,Descricao`"
+        sql = "SELECT ID_CAT, NomeCategoria,Descricao"
                 + "FROM categoria_item_acervo WHERE ID_CAT = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, categoria.getIdCat());
@@ -70,7 +71,7 @@ public class CategoriaDAO {
     public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException {
         List lista = new ArrayList();
         String sql;
-        sql = "SELECT ID_CAT, NomeCategoria,Descricao`"
+        sql = "SELECT ID_CAT, NomeCategoria,Descricao"
                 + "FROM categoria_item_acervo";
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs =  ps.executeQuery();

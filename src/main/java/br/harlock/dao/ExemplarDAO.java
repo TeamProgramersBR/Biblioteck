@@ -31,7 +31,7 @@ public class ExemplarDAO {
     public void Inserir(Exemplar exemplar) {
         try {
             String sql;
-            sql = "INSERT INTO `exemplar`(`ID_EXE`, `ISBN`, `LiberadoParaEmprestimo`, `Duracao`, `QuantidadePaginas`, `FK_TITULO`)\n"
+            sql = "INSERT INTO exemplar(ID_EXE, ISBN, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
                     + " VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -52,7 +52,7 @@ public class ExemplarDAO {
     public void Remover(Exemplar exemplar) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `exemplar` WHERE ID_EXE = ?");
+                    .prepareStatement("DELETE FROM exemplar WHERE ID_EXE = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, exemplar.getIdExe());
             preparedStatement.executeUpdate();
@@ -66,7 +66,7 @@ public class ExemplarDAO {
     public void Update(Exemplar exemplar) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE `exemplar` SET `ID_EXE`=?,`ISBN`=?,`LiberadoParaEmprestimo`=?,`Duracao`=?,`QuantidadePaginas`=?,`FK_TITULO`=? WHERE `ID_EXE`=?");
+                    .prepareStatement("UPDATE exemplar SET ID_EXE=?,ISBN=?,LiberadoParaEmprestimo=?,Duracao=?,QuantidadePaginas=?,FK_TITULO=? WHERE ID_EXE=?");
             // Parameters start with 1
             preparedStatement.setInt(1, exemplar.getIdExe());
             preparedStatement.setString(2, exemplar.getIsbn());
@@ -109,7 +109,7 @@ public class ExemplarDAO {
         Exemplar exemplar = new Exemplar();
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
-                    ResultSet rs = ps.executeQuery("SELECT `ID_EXE`, `ISBN`, `LiberadoParaEmprestimo`, `Duracao`, `QuantidadePaginas`, `FK_TITULO` FROM `exemplar` WHERE `ISBN`= ?");
+                    ResultSet rs = ps.executeQuery("SELECT ID_EXE, ISBN, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ISBN= ?");
                                 ps.setString(1, ISBN);
                                 rs.next();
 				exemplar.setIdExe(rs.getInt("ID_EXE"));
