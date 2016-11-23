@@ -163,6 +163,7 @@
         <jpa:table name="Categoria_item_acervo"/>
     </jpa:entity>
     <jpa:entity xre="false" compositePrimaryKeyClass="AutorPK" abs="false" class="Autor" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050567">
+        <jpa:ts e="true"/>
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="String" visibile="true" name="nome" id="_147968690505959">
                 <jpa:column name="Nome" unique="false" nullable="true" insertable="true" updatable="true" table="Autor" length="45" precision="0" scale="0"/>
@@ -179,41 +180,6 @@
             </jpa:id>
         </jpa:attributes>
         <jpa:table name="Autor"/>
-    </jpa:entity>
-    <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="TitulohasEditorPK" abs="false" class="TitulohasEditor" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050568">
-        <jpa:attributes>
-            <jpa:basic optional="true" attribute-type="String" visibile="true" name="tipoDeEditor" id="_147968690506065">
-                <jpa:column name="TipoDeEditor" unique="false" nullable="true" insertable="true" updatable="true" table="Titulo_has_Editor" length="45" precision="0" scale="0"/>
-            </jpa:basic>
-            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_14796869050569" connected-attribute-id="_147968690506071" visibile="true" name="editor" id="_147968690506066">
-                <jpa:join-column name="Editor_ID_EDITOR" unique="false" nullable="true" insertable="false" updatable="false"/>
-            </jpa:many-to-one>
-            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_147968690505610" connected-attribute-id="_147968690506088" visibile="true" name="titulo" id="_147968690506067">
-                <jpa:join-column name="Titulo_ID_TITU" unique="false" nullable="true" insertable="false" updatable="false"/>
-            </jpa:many-to-one>
-            <jpa:id attribute-type="int" visibile="true" name="tituloIDTITU" id="_147968690506063">
-                <jpa:column name="Titulo_ID_TITU" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo_has_Editor" length="255" precision="0" scale="0"/>
-            </jpa:id>
-            <jpa:id attribute-type="int" visibile="true" name="editorIDEDITOR" id="_147968690506064">
-                <jpa:column name="Editor_ID_EDITOR" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo_has_Editor" length="255" precision="0" scale="0"/>
-            </jpa:id>
-        </jpa:attributes>
-        <jpa:table name="Titulo_has_Editor"/>
-    </jpa:entity>
-    <jpa:entity xre="false" compositePrimaryKeyClass="EditorPK" abs="false" class="Editor" visibile="true" minimized="false" rootElement="_14796869049831" id="_14796869050569">
-        <jpa:attributes>
-            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nome" id="_147968690506069">
-                <jpa:column name="Nome" unique="false" nullable="true" insertable="true" updatable="true" table="Editor" length="45" precision="0" scale="0"/>
-            </jpa:basic>
-            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nacionalidade" id="_147968690506070">
-                <jpa:column name="Nacionalidade" unique="false" nullable="true" insertable="true" updatable="true" table="Editor" length="45" precision="0" scale="0"/>
-            </jpa:basic>
-            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050568" connected-attribute-id="_147968690506066" visibile="true" name="titulohasEditorCollection" id="_147968690506071"/>
-            <jpa:id attribute-type="Integer" visibile="true" name="idEditor" id="_147968690506068">
-                <jpa:column name="ID_EDITOR" unique="false" nullable="false" insertable="true" updatable="true" table="Editor" length="255" precision="0" scale="0"/>
-            </jpa:id>
-        </jpa:attributes>
-        <jpa:table name="Editor"/>
     </jpa:entity>
     <jpa:entity xre="false" compositePrimaryKeyType="IDCLASS" compositePrimaryKeyClass="TituloPK" abs="false" class="Titulo" visibile="true" minimized="false" rootElement="_14796869049831" id="_147968690505610">
         <jpa:attributes>
@@ -258,7 +224,6 @@
                 <jpa:join-column name="FK_ITEM_PDC" unique="false" nullable="true" insertable="false" updatable="false"/>
             </jpa:many-to-one>
             <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050563" connected-attribute-id="_147968690505829" visibile="true" name="exemplarCollection" id="_147968690506087"/>
-            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_14796869050568" connected-attribute-id="_147968690506067" visibile="true" name="titulohasEditorCollection" id="_147968690506088"/>
             <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_147968690505611" connected-attribute-id="_147968690506096" visibile="true" name="tituloTEMAutorCollection" id="_147968690506091"/>
             <jpa:id attribute-type="int" visibile="true" name="idTitu" id="_147968690506072">
                 <jpa:column name="ID_TITU" unique="false" nullable="false" insertable="true" updatable="true" table="Titulo" length="255" precision="0" scale="0"/>
@@ -298,34 +263,28 @@
     <jpa:diagram>
         <plane elementRef="_14796869049831">
             <shape elementRef="_14796869050472">
-                <Bounds x="1719.0" y="974.0" width="165.0" height="294.0"/>
+                <Bounds x="1719.0" y="974.0" width="179.0" height="276.0"/>
             </shape>
             <shape elementRef="_14796869050563">
-                <Bounds x="32.0" y="974.0" width="189.0" height="210.0"/>
+                <Bounds x="32.0" y="974.0" width="204.0" height="197.0"/>
             </shape>
             <shape elementRef="_14796869050564">
-                <Bounds x="614.0" y="974.0" width="207.0" height="168.0"/>
+                <Bounds x="614.0" y="974.0" width="237.0" height="158.0"/>
             </shape>
             <shape elementRef="_14796869050565">
-                <Bounds x="1455.0" y="455.0" width="186.0" height="462.0"/>
+                <Bounds x="1455.0" y="455.0" width="200.0" height="437.0"/>
             </shape>
             <shape elementRef="_14796869050566">
-                <Bounds x="32.0" y="234.0" width="215.0" height="147.0"/>
+                <Bounds x="32.0" y="234.0" width="244.0" height="138.0"/>
             </shape>
             <shape elementRef="_14796869050567">
-                <Bounds x="1182.0" y="974.0" width="190.0" height="168.0"/>
-            </shape>
-            <shape elementRef="_14796869050568">
-                <Bounds x="614.0" y="234.0" width="181.0" height="168.0"/>
-            </shape>
-            <shape elementRef="_14796869050569">
-                <Bounds x="340.0" y="32.0" width="191.0" height="147.0"/>
+                <Bounds x="706.0" y="696.0" width="209.0" height="158.0"/>
             </shape>
             <shape elementRef="_147968690505610">
-                <Bounds x="340.0" y="455.0" width="191.0" height="483.0"/>
+                <Bounds x="340.0" y="455.0" width="209.0" height="435.0"/>
             </shape>
             <shape elementRef="_147968690505611">
-                <Bounds x="915.0" y="455.0" width="182.0" height="168.0"/>
+                <Bounds x="915.0" y="455.0" width="203.0" height="157.0"/>
             </shape>
         </plane>
     </jpa:diagram>

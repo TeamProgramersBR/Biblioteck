@@ -8,6 +8,7 @@ package br.harlock.dao;
 import java.sql.Connection;
 import br.harlock.conn.Conexao;
 import br.harlock.model.Emprestimo;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,8 +27,35 @@ public class EmprestimoDAO {
 
     public void Inserir(Emprestimo emprestimo) throws SQLException {
         String sql;
-        sql = "";
+        sql = "INSERT INTO `emprestimo`"
+                + "("
+                + "`DataEmprestimo`,"
+                + "`DataPrevDevolucao`,"
+                + "`DataDevolucao`,"
+                + "`ValorMulta`,"
+                + "`Situacao`,"
+                + "`Reserva`,"
+                + "`FK_Funcionario`,"
+                + "`FK_USU`)"
+                + "VALUES"
+                + "("
+                + "?,"
+                + "?,"
+                + "?,"
+                + "?,"
+                + "?,"
+                + "?,"
+                + "?,"
+                + "?);";
         PreparedStatement ps = connection.prepareStatement(sql);
+        int i = 1 ;
+        ps.setDate(i, (Date) emprestimo.getDataEmprestimo());
+        ps.setDate(i, (Date) emprestimo.getDataDevolucao());
+        ps.setFloat(i, emprestimo.getValorMulta());
+        ps.setString(i, emprestimo.getSituacao());
+        ps.setBoolean(i, emprestimo.getReserva());
+        ps.setInt(i, emprestimo.getfKFuncionario());
+        ps.setInt(i, emprestimo.getFkUsu());
         ps.executeUpdate();
 
     }
