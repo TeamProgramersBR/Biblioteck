@@ -152,14 +152,22 @@ public class TituloDAO {
         return titulos.iterator();
     }
 
-    public Titulo Pesquisar(String ID_TITU) {
-        Titulo titulo = new Titulo();
+    public Titulo Pesquisar(Titulo titulo) {
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_PRODUTORA_ID, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT FROM titulo WHERE ID_TITU = ? ");
+            String sql = "";
             
-            ps.setString(1, ID_TITU);
+            if (titulo.getIdTitu() != 0) {
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_PRODUTORA_ID, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT FROM titulo WHERE ID_TITU = ? ";
+                ps.setInt(1, titulo.getIdTitu());
+            }else if (!titulo.getIdioma().equals(null)) {
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_PRODUTORA_ID, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT FROM titulo WHERE obra = ? ";
+                ps.setString(1, titulo.getObra());
+                
+            }
+            ResultSet rs = ps.executeQuery(sql);
             rs.next();
+           
             
                 titulo.setIdTitu(rs.getInt("ID_TITU"));
                 titulo.setIsbn(rs.getString("ISBN"));
