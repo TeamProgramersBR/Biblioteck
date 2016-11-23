@@ -6,8 +6,6 @@ public class Usuario {
 
     private int idUsu;
 
-    private int fkTipoUsu;
-
     private String nivelDeAcesso;
 
     private String nome;
@@ -47,7 +45,6 @@ public class Usuario {
 
     public Usuario(int idUsu, int fkTipoUsu, String nivelDeAcesso, String nome, String cpf, String email, String numeroResidencial, String numeroCelular, String numeroComercial, String matriculaEducacional, String senha, String enderecoLogadouro, String enderecoCEP, String enderecoCidade, String enderecoEstado, String enderecoPais, String statusDoUsuario) {
         this.idUsu = idUsu;
-        this.fkTipoUsu = fkTipoUsu;
         this.nivelDeAcesso = nivelDeAcesso;
         this.nome = nome;
         this.cpf = cpf;
@@ -73,14 +70,6 @@ public class Usuario {
 
     public void setIdUsu(int idUsu) {
         this.idUsu = idUsu;
-    }
-
-    public int getFkTipoUsu() {
-        return fkTipoUsu;
-    }
-
-    public void setFkTipoUsu(int fkTipoUsu) {
-        this.fkTipoUsu = fkTipoUsu;
     }
 
     public String getNivelDeAcesso() {

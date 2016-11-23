@@ -101,7 +101,7 @@ public class TituloDAOTest {
         String ID_TITU = "";
         TituloDAO instance = new TituloDAO();
         Titulo expResult = null;
-        Titulo result = instance.Pesquisar(ID_TITU);
+        Titulo result = instance.Pesquisar(expResult);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

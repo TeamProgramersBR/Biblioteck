@@ -32,7 +32,7 @@ public class UsuarioDAO {
     public void Inserir(Usuario usuario) {
         try {
             String sql;
-            sql = "INSERT INTO usuario(ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario, FK_TIPO_USU)"
+            sql = "INSERT INTO usuario(ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario)"
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -52,7 +52,6 @@ public class UsuarioDAO {
             ps.setString(14, usuario.getEnderecoEstado());
             ps.setString(15, usuario.getEnderecoPais());
             ps.setString(16, usuario.getStatusDoUsuario());
-            ps.setInt(17, usuario.getFkTipoUsu());
 
             ps.executeUpdate();
 
@@ -97,7 +96,6 @@ public class UsuarioDAO {
                             + "  endereco_Estado = ?,"
                             + "  endereco_Pais = ?,"
                             + "  StatusDoUsuario = ?,"
-                            + "  FK_TIPO_USU = ?"
                             + "WHERE"
                             + " ID_USU = ?");
             // Parameters start with 1
@@ -117,8 +115,7 @@ public class UsuarioDAO {
             preparedStatement.setString(14, usuario.getEnderecoEstado());
             preparedStatement.setString(15, usuario.getEnderecoPais());
             preparedStatement.setString(16, usuario.getStatusDoUsuario());
-            preparedStatement.setInt(17, usuario.getFkTipoUsu());
-            preparedStatement.setInt(18, usuario.getIdUsu());
+            preparedStatement.setInt(17, usuario.getIdUsu());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -150,7 +147,6 @@ public class UsuarioDAO {
                 usuario.setEnderecoEstado(rs.getString("endereco_Estado"));
                 usuario.setEnderecoPais(rs.getString("endereco_Pais"));
                 usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
-                usuario.setFkTipoUsu(rs.getInt("FK_TIPO_USU"));
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
@@ -164,7 +160,7 @@ public class UsuarioDAO {
         Usuario usuario = new Usuario();
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario, FK_TIPO_USU FROM usuario WHERE ID_USU = ?");
+            ResultSet rs = ps.executeQuery("SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?");
             ps.setString(1, ID_USU);
             rs.next();
             usuario.setIdUsu(rs.getInt("ID_USU"));
@@ -183,7 +179,6 @@ public class UsuarioDAO {
                 usuario.setEnderecoEstado(rs.getString("endereco_Estado"));
                 usuario.setEnderecoPais(rs.getString("endereco_Pais"));
                 usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
-                usuario.setFkTipoUsu(rs.getInt("FK_TIPO_USU"));
 
         } catch (Exception e) {
         }

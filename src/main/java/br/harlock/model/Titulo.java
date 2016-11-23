@@ -7,8 +7,6 @@ public class Titulo {
 
     private int idTitu;
 
-    private int fkProdutoraId;
-
     private int fkItemAcervo;
 
     private int fkItemPdc;
@@ -51,14 +49,6 @@ public class Titulo {
 
     public void setIdTitu(int idTitu) {
         this.idTitu = idTitu;
-    }
-
-    public int getFkProdutoraId() {
-        return fkProdutoraId;
-    }
-
-    public void setFkProdutoraId(int fkProdutoraId) {
-        this.fkProdutoraId = fkProdutoraId;
     }
 
     public int getFkItemAcervo() {
