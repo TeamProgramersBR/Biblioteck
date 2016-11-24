@@ -45,8 +45,8 @@ public class AutorDAO {
                 + ")";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setInt(i++, autor.getIdAutor());
-        ps.setString(i++, autor.getNome());
+        ps.setInt(i++, autor.getIdAutor()); // 
+        ps.setString(i++, autor.getNome()); // 
         ps.setString(i++, autor.getNomeFantasia());
         ps.setString(i++, autor.getNacionalidade());
         ps.executeUpdate();

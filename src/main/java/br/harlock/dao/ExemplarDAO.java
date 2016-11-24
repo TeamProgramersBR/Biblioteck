@@ -81,9 +81,10 @@ public class ExemplarDAO {
 
     }
     
-    public Iterator<Exemplar> ConsultarTodos() {
-		List<Exemplar> exemplars = new ArrayList<Exemplar>();
+    public Iterator<Exemplar> ConsultarTodos() throws Exception {
+		
 		try {
+                        List<Exemplar> exemplars = new ArrayList<Exemplar>();
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("select * from exemplar");
 			while (rs.next()) {
@@ -95,19 +96,21 @@ public class ExemplarDAO {
                                 exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
 				exemplars.add(exemplar);
 			}
+                        return exemplars.iterator();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			 throw new Exception("Erro ao consultar todos os exemplares"+e);
 		}
 
-		return exemplars.iterator();
+		
 	}
     
-    public Exemplar Pesquisar(String IdExe){
-        Exemplar exemplar = new Exemplar();
+    public Exemplar Pesquisar(Exemplar exemplar) throws Exception{
+        
         try {
-            String sql ="SELECT ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ID_EXE = "+IdExe;
-            Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
+            String sql ="SELECT ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ID_EXE = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, exemplar.getIdExe());
+	    ResultSet rs = ps.executeQuery(sql);
                                 
                                 rs.next();
 				exemplar.setIdExe(rs.getInt("ID_EXE"));
@@ -115,11 +118,12 @@ public class ExemplarDAO {
                                 exemplar.setDuracao(rs.getString("Duracao"));
                                 exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
                                 exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
-                                
+                                return exemplar;
                                 
                     
         } catch (Exception e) {
+            throw new Exception("Erro ao pesquisar pelo exemplar");
         }
-        return exemplar;
+        
     }
 }

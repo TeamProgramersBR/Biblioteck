@@ -99,13 +99,13 @@ public class ProdutoraDAO {
         return produtoras.iterator();
     }
 
-    public ProdutoraConteudo Pesquisar(String ID_PDC) {
-        ProdutoraConteudo produtora = new ProdutoraConteudo();
+    public ProdutoraConteudo Pesquisar(ProdutoraConteudo produtora) {
+        
         try {
-            
-            String sql="SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = "+ID_PDC;
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            String sql="SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, produtora.getIdPdc());
+            ResultSet rs = ps.executeQuery(sql);
             rs.next();
             produtora.setIdPdc(rs.getInt("ID_PDC"));
             produtora.setNomeProdutora(rs.getString("Nome_Produtora"));

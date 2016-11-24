@@ -6,8 +6,11 @@
 package br.harlock.bll;
 
 import br.harlock.dao.UsuarioDAO;
+import br.harlock.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,13 +23,25 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Auth", urlPatterns = {"/Auth"})
 public class Auth extends HttpServlet {
-    private UsuarioDAO usuario;
+    private UsuarioDAO usuDAO;
+    private String acao = "";
     public Auth(){
-         usuario = new UsuarioDAO();
+         usuDAO = new UsuarioDAO();
+         acao = "";
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-      
+            throws ServletException, IOException, Exception {
+        acao = request.getParameter("entrar");
+        
+        if (acao.equals("entrar")) {
+            Usuario usuario = new Usuario();
+            usuario.setEmail(request.getParameter("email"));
+            usuario.setSenha(request.getParameter("senha"));
+            usuario = usuDAO.Pesquisar(usuario);
+            if (!usuario.equals(null)) {
+                
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -41,7 +56,11 @@ public class Auth extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Auth.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -55,7 +74,11 @@ public class Auth extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Auth.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
