@@ -28,56 +28,55 @@ public class ExemplarDAOTest {
     /**
      * Test of Inserir method, of class ExemplarDAO.
      */
-    @Test
-    public void testInserir() {
-        System.out.println("Teste Inserir Exemplar");
-        Exemplar exemplar = new Exemplar(0, 0, "asd", Boolean.TRUE, "asdas", "asd");
-        
-        ExemplarDAO instance = new ExemplarDAO();
-        instance.Inserir(exemplar);
-        
-        
-    }
+//    @Test
+//    public void testInserir() {
+//        System.out.println("Teste Inserir Exemplar");
+//        Exemplar exemplar = new Exemplar(3, 1, Boolean.TRUE, "heyeyha", "2");
+//        
+//        ExemplarDAO instance = new ExemplarDAO();
+//        instance.Inserir(exemplar);
+//        
+//        
+//    }
 
     /**
      * Test of Remover method, of class ExemplarDAO.
      */
-    @Test
-    public void testRemover() {
-        System.out.println("Remover");
-        Exemplar exemplar = null;
-        ExemplarDAO instance = new ExemplarDAO();
-        instance.Remover(exemplar);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testRemover() {
+//        System.out.println("Remover");
+//        Exemplar exemplar = new Exemplar(3, 1, Boolean.TRUE, "heyeyha", "2");
+//        ExemplarDAO instance = new ExemplarDAO();
+//        instance.Remover(exemplar);
+//        
+//    }
 
     /**
      * Test of Update method, of class ExemplarDAO.
      */
-    @Test
-    public void testUpdate() {
-        System.out.println("Update");
-        Exemplar exemplar = null;
-        ExemplarDAO instance = new ExemplarDAO();
-        instance.Update(exemplar);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testUpdate() {
+//        System.out.println("Update");
+//        Exemplar exemplar = new Exemplar(3, 1, Boolean.TRUE, "heyeyhaAA", "2");
+//        ExemplarDAO instance = new ExemplarDAO();
+//        instance.Update(exemplar);
+//        
+//    
+//    }
 
     /**
      * Test of ConsultarTodos method, of class ExemplarDAO.
      */
-    @Test
-    public void testConsultarTodos() {
-        System.out.println("ConsultarTodos");
-        ExemplarDAO instance = new ExemplarDAO();
-        Iterator<Exemplar> expResult = null;
-        Iterator<Exemplar> result = instance.ConsultarTodos();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testConsultarTodos() {
+//        System.out.println("ConsultarTodos");
+//        ExemplarDAO instance = new ExemplarDAO();
+//        Iterator<Exemplar> expResult = null;
+//        Iterator<Exemplar> result = instance.ConsultarTodos();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of Pesquisar method, of class ExemplarDAO.
@@ -85,13 +84,12 @@ public class ExemplarDAOTest {
     @Test
     public void testPesquisar() {
         System.out.println("Pesquisar");
-        String ISBN = "";
+        String IdExe = "3";
         ExemplarDAO instance = new ExemplarDAO();
-        Exemplar expResult = null;
-        Exemplar result = instance.Pesquisar(ISBN);
+        Exemplar expResult = new Exemplar(3, 1, Boolean.TRUE, "heyeyhaAA", "2");
+        Exemplar result = instance.Pesquisar(IdExe);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

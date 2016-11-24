@@ -14,6 +14,16 @@ public class ProdutoraConteudo {
 
     private List<Titulo> tituloCollection;
 
+    public ProdutoraConteudo() {
+    }
+
+    public ProdutoraConteudo(Integer idPdc, String nomeProdutora, String descricao, String cnpj) {
+        this.idPdc = idPdc;
+        this.nomeProdutora = nomeProdutora;
+        this.descricao = descricao;
+        this.cnpj = cnpj;
+    }
+
     public Integer getIdPdc() {
         return idPdc;
     }

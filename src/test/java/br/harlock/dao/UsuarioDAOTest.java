@@ -53,15 +53,15 @@ public class UsuarioDAOTest {
     /**
      * Test of Update method, of class UsuarioDAO.
      */
-    @Test
-    public void testUpdate() {
-        System.out.println("Update");
-        Usuario usuario = new Usuario (1,"1", "Administrador", "234567890", "robervalda", "rerere", "afajgdadsds", "5656566645", "4554545453", "fdhdhhh", "24535323532532532", "45445346644747", "768875532552353", "565466549769769676", "5645689989", "fudido");
-        UsuarioDAO instance = new UsuarioDAO();
-        instance.Update(usuario);
-        // TODO review the generated test code and remove the default call to fail.
-        
-    }
+//    @Test
+//    public void testUpdate() {
+//        System.out.println("Update");
+//        Usuario usuario = new Usuario (1,"2", "Administrador", "234567890", "robervalda", "rerere", "afajgdadsds", "5656566645", "4554545453", "fdhdhhh", "24535323532532532", "45445346644747", "768875532552353", "565466549769769676", "5645689989", "fudido");
+//        UsuarioDAO instance = new UsuarioDAO();
+//        instance.Update(usuario);
+//        // TODO review the generated test code and remove the default call to fail.
+//        
+//    }
 
     /**
      * Test of ConsultarTodos method, of class UsuarioDAO.
@@ -73,23 +73,22 @@ public class UsuarioDAOTest {
 //        Iterator<Usuario> expResult = null;
 //        Iterator<Usuario> result = instance.ConsultarTodos();
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        
 //    }
 
     /**
      * Test of Pesquisar method, of class UsuarioDAO.
      */
-//    @Test
-//    public void testPesquisar() {
-//        System.out.println("Pesquisar");
-//        String ID_USU = "";
-//        UsuarioDAO instance = new UsuarioDAO();
-//        Usuario expResult = null;
-//        Usuario result = instance.Pesquisar(ID_USU);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testPesquisar() {
+        System.out.println("Pesquisar");
+        String ID_USU = "1";
+        UsuarioDAO instance = new UsuarioDAO();
+        Usuario expResult =new Usuario(1, "Funcionario", "Administrador", "234567890", "robervalda", "rerere", "afajgdadsds", "5656566645", "4554545453", "fdhdhhh", "24535323532532532", "45445346644747", "768875532552353", "565466549769769676", "5645689989", "fudido");
+        Usuario result = instance.Pesquisar(ID_USU);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        
+    }
     
 }

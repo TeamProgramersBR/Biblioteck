@@ -6,8 +6,6 @@ public class Exemplar {
 
     private int fkTitulo;
 
-    private String isbn;
-
     private Boolean liberadoParaEmprestimo;
 
     private String duracao;
@@ -19,10 +17,9 @@ public class Exemplar {
     public Exemplar() {
     }
 
-    public Exemplar(int idExe, int fkTitulo, String isbn, Boolean liberadoParaEmprestimo, String duracao, String quantidadePaginas) {
+    public Exemplar(int idExe, int fkTitulo, Boolean liberadoParaEmprestimo, String duracao, String quantidadePaginas) {
         this.idExe = idExe;
         this.fkTitulo = fkTitulo;
-        this.isbn = isbn;
         this.liberadoParaEmprestimo = liberadoParaEmprestimo;
         this.duracao = duracao;
         this.quantidadePaginas = quantidadePaginas;
@@ -44,14 +41,6 @@ public class Exemplar {
 
     public void setFkTitulo(int fkTitulo) {
         this.fkTitulo = fkTitulo;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public Boolean getLiberadoParaEmprestimo() {

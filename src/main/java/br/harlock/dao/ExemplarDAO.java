@@ -31,16 +31,15 @@ public class ExemplarDAO {
     public void Inserir(Exemplar exemplar) {
         try {
             String sql;
-            sql = "INSERT INTO exemplar(ID_EXE, ISBN, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
-                    + " VALUES (?,?,?,?,?,?)";
+            sql = "INSERT INTO exemplar(ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
+                    + " VALUES (?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setInt(1, exemplar.getIdExe());
-            ps.setString(2, exemplar.getIsbn());
-            ps.setBoolean(3, exemplar.getLiberadoParaEmprestimo());
-            ps.setString(4, exemplar.getDuracao());
-            ps.setString(5, exemplar.getQuantidadePaginas());
-            ps.setInt(6, exemplar.getFkTitulo());
+            ps.setBoolean(2, exemplar.getLiberadoParaEmprestimo());
+            ps.setString(3, exemplar.getDuracao());
+            ps.setString(4, exemplar.getQuantidadePaginas());
+            ps.setInt(5, exemplar.getFkTitulo());
 
             ps.executeUpdate();
 
@@ -66,15 +65,14 @@ public class ExemplarDAO {
     public void Update(Exemplar exemplar) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE exemplar SET ID_EXE=?,ISBN=?,LiberadoParaEmprestimo=?,Duracao=?,QuantidadePaginas=?,FK_TITULO=? WHERE ID_EXE=?");
+                    .prepareStatement("UPDATE exemplar SET ID_EXE=?,LiberadoParaEmprestimo=?,Duracao=?,QuantidadePaginas=?,FK_TITULO=? WHERE ID_EXE=?");
             // Parameters start with 1
             preparedStatement.setInt(1, exemplar.getIdExe());
-            preparedStatement.setString(2, exemplar.getIsbn());
-            preparedStatement.setBoolean(3, exemplar.getLiberadoParaEmprestimo());
-            preparedStatement.setString(4, exemplar.getDuracao());
-            preparedStatement.setString(5, exemplar.getQuantidadePaginas());
-            preparedStatement.setInt(6, exemplar.getFkTitulo());
-            preparedStatement.setInt(7, exemplar.getIdExe());
+            preparedStatement.setBoolean(2, exemplar.getLiberadoParaEmprestimo());
+            preparedStatement.setString(3, exemplar.getDuracao());
+            preparedStatement.setString(4, exemplar.getQuantidadePaginas());
+            preparedStatement.setInt(5, exemplar.getFkTitulo());
+            preparedStatement.setInt(6, exemplar.getIdExe());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -91,7 +89,6 @@ public class ExemplarDAO {
 			while (rs.next()) {
 				Exemplar exemplar = new Exemplar();
 				exemplar.setIdExe(rs.getInt("ID_EXE"));
-                                exemplar.setIsbn(rs.getString("ISBN"));
                                 exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
                                 exemplar.setDuracao(rs.getString("Duracao"));
                                 exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
@@ -105,15 +102,15 @@ public class ExemplarDAO {
 		return exemplars.iterator();
 	}
     
-    public Exemplar Pesquisar(String ISBN){
+    public Exemplar Pesquisar(String IdExe){
         Exemplar exemplar = new Exemplar();
         try {
-            PreparedStatement ps = (PreparedStatement) connection.createStatement();
-                    ResultSet rs = ps.executeQuery("SELECT ID_EXE, ISBN, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ISBN= ?");
-                                ps.setString(1, ISBN);
+            String sql ="SELECT ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ID_EXE = "+IdExe;
+            Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+                                
                                 rs.next();
 				exemplar.setIdExe(rs.getInt("ID_EXE"));
-                                exemplar.setIsbn(rs.getString("ISBN"));
                                 exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
                                 exemplar.setDuracao(rs.getString("Duracao"));
                                 exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));

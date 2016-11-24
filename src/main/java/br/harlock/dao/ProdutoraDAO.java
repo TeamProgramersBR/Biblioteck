@@ -102,9 +102,10 @@ public class ProdutoraDAO {
     public ProdutoraConteudo Pesquisar(String ID_PDC) {
         ProdutoraConteudo produtora = new ProdutoraConteudo();
         try {
-            PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = ?");
-            ps.setString(1, ID_PDC);
+            
+            String sql="SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = "+ID_PDC;
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
             rs.next();
             produtora.setIdPdc(rs.getInt("ID_PDC"));
             produtora.setNomeProdutora(rs.getString("Nome_Produtora"));

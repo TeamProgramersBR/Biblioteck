@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -95,9 +96,9 @@ public class UsuarioDAO {
                             + "  endereco_Cidade = ?,"
                             + "  endereco_Estado = ?,"
                             + "  endereco_Pais = ?,"
-                            + "  StatusDoUsuario = ?,"
-                            + "  WHERE"
-                            + " ID_USU = ?");
+                            + "  StatusDoUsuario = ?"
+                            + "  WHERE "
+                            + "ID_USU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, usuario.getIdUsu());
             preparedStatement.setString(2, usuario.getNivelDeAcesso());
@@ -159,11 +160,12 @@ public class UsuarioDAO {
     public Usuario Pesquisar(String ID_USU) {
         Usuario usuario = new Usuario();
         try {
-            PreparedStatement ps = (PreparedStatement) connection.createStatement();
-            ResultSet rs = ps.executeQuery("SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?");
-            ps.setString(1, ID_USU);
+            String sql ="SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = "+ID_USU;
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            
             rs.next();
-            usuario.setIdUsu(rs.getInt("ID_USU"));
+                usuario.setIdUsu(rs.getInt("ID_USU"));
                 usuario.setNivelDeAcesso(rs.getString("Nivel_De_Acesso"));
                 usuario.setNome(rs.getString("Nome"));
                 usuario.setCpf(rs.getString("CPF"));

@@ -32,8 +32,8 @@ public class TituloDAO {
     public void Inserir(Titulo titulo) {
         try {
             String sql;
-            sql = "INSERT INTO titulo(ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT)"
-                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "INSERT INTO titulo(ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC,FK_CAT_ARCE)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setInt(1, titulo.getIdTitu());
@@ -48,8 +48,8 @@ public class TituloDAO {
             ps.setString(10, titulo.getIdioma());
             ps.setString(11, titulo.getTraducao());
             ps.setString(12, titulo.getCapa());
-            ps.setInt(14, titulo.getFkItemPdc());
-            ps.setInt(15, titulo.getCategoriaitemacervo().getIdCat());
+            ps.setInt(13, titulo.getFkItemPdc());
+            ps.setInt(14, titulo.getFkItemAcervo());
 
             ps.executeUpdate();
 
@@ -77,7 +77,7 @@ public class TituloDAO {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE"
                             + "  titulo"
-                            + "SET"
+                            + " SET"
                             + "  ID_TITU = ?,"
                             + "  ISBN = ?,"
                             + "  ISSN = ?,"
@@ -91,8 +91,8 @@ public class TituloDAO {
                             + "  Traducao = ?,"
                             + "  Capa = ?,"
                             + "  FK_ITEM_PDC = ?,"
-                            + "  Categoria_item_acervo_ID_CAT = ?"
-                            + "WHERE"
+                            + "  FK_CAT_ARCE = ?"
+                            + " WHERE"
                             + "   ID_TITU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, titulo.getIdTitu());
@@ -108,7 +108,7 @@ public class TituloDAO {
             preparedStatement.setString(11, titulo.getTraducao());
             preparedStatement.setString(12, titulo.getCapa());
             preparedStatement.setInt(13, titulo.getFkItemPdc());
-            preparedStatement.setInt(14, titulo.getCategoriaitemacervo().getIdCat());
+            preparedStatement.setInt(14, titulo.getFkItemAcervo());
             preparedStatement.setInt(15, titulo.getIdTitu());
             preparedStatement.executeUpdate();
 
@@ -152,13 +152,14 @@ public class TituloDAO {
         try {
             PreparedStatement ps = (PreparedStatement) connection.createStatement();
             String sql = "";
-            
+            String where="";
             if (titulo.getIdTitu() != 0) {
-                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT FROM titulo WHERE ID_TITU = ? ";
-                ps.setInt(1, titulo.getIdTitu());
+                where=titulo.getIdTitu()+"";
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE FROM titulo WHERE ID_TITU = "+where;
             }else if (!titulo.getIdioma().equals(null)) {
-                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, Categoria_item_acervo_ID_CAT FROM titulo WHERE obra = ? ";
-                ps.setString(1, titulo.getObra());
+                where=titulo.getObra();
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE FROM titulo WHERE obra = "+where;
+                
                 
             }
             ResultSet rs = ps.executeQuery(sql);
@@ -178,7 +179,7 @@ public class TituloDAO {
                 titulo.setTraducao(rs.getString("Traducao"));
                 titulo.setCapa(rs.getString("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
-                titulo.getCategoriaitemacervo().setIdCat(rs.getInt("Categoria_item_acervo_ID_CAT"));
+                titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
 
         } catch (Exception e) {
         }

@@ -43,6 +43,27 @@ public class Titulo {
 
     private List<TituloTEMAutor> tituloTEMAutorCollection;
 
+    public Titulo() {
+    }
+
+    public Titulo(int idTitu, int fkItemAcervo, int fkItemPdc, String isbn, String issn, String obra, String descricao, Date dataDePublicacao, String cidadePublicacao, String estadoPublicacao, String edicao, String idioma, String traducao, String capa) {
+        this.idTitu = idTitu;
+        this.fkItemAcervo = fkItemAcervo;
+        this.fkItemPdc = fkItemPdc;
+        this.isbn = isbn;
+        this.issn = issn;
+        this.obra = obra;
+        this.descricao = descricao;
+        this.dataDePublicacao = dataDePublicacao;
+        this.cidadePublicacao = cidadePublicacao;
+        this.estadoPublicacao = estadoPublicacao;
+        this.edicao = edicao;
+        this.idioma = idioma;
+        this.traducao = traducao;
+        this.capa = capa;
+        
+    }
+
     public int getIdTitu() {
         return idTitu;
     }
