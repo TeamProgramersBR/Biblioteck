@@ -21,7 +21,7 @@ public class Conexao {
     
 
     private static Connection conexao = null;
-    public static Connection getConexao(){
+    public static Connection getConexao() throws Exception{
         if (conexao != null){
             return conexao;
         }
@@ -34,14 +34,12 @@ public class Conexao {
                 String password = "";
                 Class.forName(driver);
                 conexao = DriverManager.getConnection(url, user, password);
+                return conexao;
             }
             catch(ClassNotFoundException e){
                 e.printStackTrace();
+                throw new Exception("Erro ao conectar com DB");
             }
-            catch(SQLException e){
-                e.printStackTrace();
-            }
-            return conexao;
         }
     }   
 }
