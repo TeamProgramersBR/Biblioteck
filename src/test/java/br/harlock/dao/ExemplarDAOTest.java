@@ -82,12 +82,14 @@ public class ExemplarDAOTest {
      * Test of Pesquisar method, of class ExemplarDAO.
      */
     @Test
-    public void testPesquisar() {
+    public void testPesquisar() throws Exception {
         System.out.println("Pesquisar");
         String IdExe = "3";
         ExemplarDAO instance = new ExemplarDAO();
         Exemplar expResult = new Exemplar(3, 1, Boolean.TRUE, "heyeyhaAA", "2");
-        Exemplar result = instance.Pesquisar(IdExe);
+        Exemplar lks = new Exemplar();
+        lks.setIdExe(3);
+        Exemplar result = instance.Pesquisar(lks);
         assertEquals(expResult, result);
         
     }

@@ -80,12 +80,14 @@ public class UsuarioDAOTest {
      * Test of Pesquisar method, of class UsuarioDAO.
      */
     @Test
-    public void testPesquisar() {
+    public void testPesquisar() throws Exception {
         System.out.println("Pesquisar");
         String ID_USU = "1";
         UsuarioDAO instance = new UsuarioDAO();
         Usuario expResult =new Usuario(1, "Funcionario", "Administrador", "234567890", "robervalda", "rerere", "afajgdadsds", "5656566645", "4554545453", "fdhdhhh", "24535323532532532", "45445346644747", "768875532552353", "565466549769769676", "5645689989", "fudido");
-        Usuario result = instance.Pesquisar(ID_USU);
+        Usuario u = new Usuario();
+        u.setIdUsu(1);
+        Usuario result = instance.Pesquisar(u);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         

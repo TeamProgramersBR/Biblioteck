@@ -73,7 +73,7 @@ public class AutorDAO {
                 + "  Nome = ?,"
                 + "  NomeFantasia = ?,"
                 + "  Nacionalidade = ?"
-                + "WHERE"
+                + "WHERE"                                                                                
                 + "  ID_AUTOR = ?";
         int i = 1;
         PreparedStatement ps = connection.prepareStatement(sql);
