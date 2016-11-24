@@ -43,7 +43,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int idUsu, int fkTipoUsu, String nivelDeAcesso, String nome, String cpf, String email, String numeroResidencial, String numeroCelular, String numeroComercial, String matriculaEducacional, String senha, String enderecoLogadouro, String enderecoCEP, String enderecoCidade, String enderecoEstado, String enderecoPais, String statusDoUsuario) {
+    public Usuario(int idUsu, String nivelDeAcesso, String nome, String cpf, String email, String numeroResidencial, String numeroCelular, String numeroComercial, String matriculaEducacional, String senha, String enderecoLogadouro, String enderecoCEP, String enderecoCidade, String enderecoEstado, String enderecoPais, String statusDoUsuario) {
         this.idUsu = idUsu;
         this.nivelDeAcesso = nivelDeAcesso;
         this.nome = nome;

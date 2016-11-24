@@ -79,7 +79,7 @@ public class UsuarioDAO {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE"
                             + "  usuario"
-                            + "SET"
+                            + "  SET"
                             + "  ID_USU = ?,"
                             + "  Nivel_De_Acesso = ?,"
                             + "  Nome = ?,"
@@ -96,7 +96,7 @@ public class UsuarioDAO {
                             + "  endereco_Estado = ?,"
                             + "  endereco_Pais = ?,"
                             + "  StatusDoUsuario = ?,"
-                            + "WHERE"
+                            + "  WHERE"
                             + " ID_USU = ?");
             // Parameters start with 1
             preparedStatement.setInt(1, usuario.getIdUsu());
