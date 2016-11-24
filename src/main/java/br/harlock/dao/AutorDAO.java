@@ -25,16 +25,19 @@ public class AutorDAO {
     }
 
     public void Inserir(Autor autor) throws SQLException {
+        try {
+            
+        
         String sql;
         sql = "INSERT"
-                + "INTO"
+                + " INTO"
                 + "  Autor("
                 + "    ID_AUTOR,"
                 + "    Nome,"
                 + "    NomeFantasia,"
                 + "    Nacionalidade"
                 + "  )"
-                + "VALUES("
+                + " VALUES("
                 + "  ?,"
                 + "  ?,"
                 + "  ?,"
@@ -42,11 +45,14 @@ public class AutorDAO {
                 + ")";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setInt(i, autor.getIdAutor());
+        ps.setInt(i++, autor.getIdAutor());
         ps.setString(i++, autor.getNome());
         ps.setString(i++, autor.getNomeFantasia());
         ps.setString(i++, autor.getNacionalidade());
         ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

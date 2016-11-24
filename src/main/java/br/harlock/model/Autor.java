@@ -14,6 +14,16 @@ public class Autor {
 
     private List<TituloTEMAutor> tituloTEMAutorCollection;
 
+    public Autor() {
+    }
+
+    public Autor(Integer idAutor, String nome, String nomeFantasia, String nacionalidade) {
+        this.idAutor = idAutor;
+        this.nome = nome;
+        this.nomeFantasia = nomeFantasia;
+        this.nacionalidade = nacionalidade;
+    }
+
     public Integer getIdAutor() {
         return idAutor;
     }
