@@ -157,14 +157,22 @@ public class UsuarioDAO {
         return usuarios.iterator();
     }
 
-    public Usuario Pesquisar(String ID_USU) {
-        Usuario usuario = new Usuario();
+    public Usuario Pesquisar(Usuario usuario) throws SQLException, Exception {
+        
         try {
-            String sql ="SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = "+ID_USU;
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+             String sql = "";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            if (usuario.getEmail().equals("") || usuario.equals(null)) {
+                sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?";
+                ps.setInt(1, usuario.getIdUsu());
+            }else{
+                sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE email = ? AND senha = ?";
+                ps.setString(1, usuario.getEmail());
+                ps.setString(2, usuario.getSenha());
+            }
             
-            rs.next();
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
                 usuario.setIdUsu(rs.getInt("ID_USU"));
                 usuario.setNivelDeAcesso(rs.getString("Nivel_De_Acesso"));
                 usuario.setNome(rs.getString("Nome"));
@@ -181,10 +189,14 @@ public class UsuarioDAO {
                 usuario.setEnderecoEstado(rs.getString("endereco_Estado"));
                 usuario.setEnderecoPais(rs.getString("endereco_Pais"));
                 usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
-
+                return usuario;
+            }else{
+                return null;
+            }
         } catch (Exception e) {
+            throw new Exception("Erro ao pesquisar pelo usuario erro: "+e);
         }
-        return usuario;
+        
     }
 
 }
