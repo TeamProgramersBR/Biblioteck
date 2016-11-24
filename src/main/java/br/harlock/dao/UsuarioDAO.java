@@ -26,7 +26,7 @@ public class UsuarioDAO {
 
     Connection connection = null;
 
-    public UsuarioDAO() {
+    public UsuarioDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 

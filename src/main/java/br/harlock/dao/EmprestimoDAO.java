@@ -21,7 +21,7 @@ public class EmprestimoDAO {
 
     private Connection connection = null;
 
-    public EmprestimoDAO() {
+    public EmprestimoDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 

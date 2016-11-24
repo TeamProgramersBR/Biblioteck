@@ -20,7 +20,7 @@ public class AutorDAO {
 
     private Connection connection = null;
 
-    public AutorDAO() {
+    public AutorDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 

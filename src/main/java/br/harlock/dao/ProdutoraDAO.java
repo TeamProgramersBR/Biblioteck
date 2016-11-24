@@ -24,7 +24,7 @@ public class ProdutoraDAO {
 
     Connection connection = null;
 
-    public ProdutoraDAO() {
+    public ProdutoraDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 
@@ -99,7 +99,7 @@ public class ProdutoraDAO {
         return produtoras.iterator();
     }
 
-    public ProdutoraConteudo Pesquisar(ProdutoraConteudo produtora) {
+    public ProdutoraConteudo Pesquisar(ProdutoraConteudo produtora) throws Exception {
         
         try {
             String sql="SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = ?";
@@ -111,10 +111,12 @@ public class ProdutoraDAO {
             produtora.setNomeProdutora(rs.getString("Nome_Produtora"));
             produtora.setDescricao(rs.getString("Descricao"));
             produtora.setCnpj(rs.getString("CNPJ"));
-
+            return produtora;
         } catch (Exception e) {
+            throw  new Exception("erro pesquisa");
         }
-        return produtora;
+        
+        
     }
 
 }

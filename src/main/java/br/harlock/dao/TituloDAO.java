@@ -25,7 +25,7 @@ public class TituloDAO {
 
     Connection connection = null;
 
-    public TituloDAO() {
+    public TituloDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 

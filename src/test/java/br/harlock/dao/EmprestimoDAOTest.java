@@ -29,7 +29,7 @@ public class EmprestimoDAOTest {
     @Test
     public void testInserir() throws Exception {
         System.out.println("Inserir");
-        Emprestimo emprestimo = null;
+        Emprestimo emprestimo = new Emprestimo();
         EmprestimoDAO instance = new EmprestimoDAO();
         instance.Inserir(emprestimo);
         // TODO review the generated test code and remove the default call to fail.

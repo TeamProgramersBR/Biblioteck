@@ -24,7 +24,7 @@ public class ExemplarDAO {
 
     private Connection connection = null;
 
-    public ExemplarDAO() {
+    public ExemplarDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 
@@ -110,7 +110,7 @@ public class ExemplarDAO {
             String sql ="SELECT ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ID_EXE = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, exemplar.getIdExe());
-	    ResultSet rs = ps.executeQuery(sql);
+	    ResultSet rs = ps.executeQuery();
                                 
                                 rs.next();
 				exemplar.setIdExe(rs.getInt("ID_EXE"));

@@ -21,7 +21,7 @@ public class CategoriaDAO {
 
     private Connection connection = null;
 
-    public CategoriaDAO() {
+    public CategoriaDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 
