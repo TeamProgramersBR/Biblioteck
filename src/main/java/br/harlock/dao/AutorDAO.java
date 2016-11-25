@@ -68,19 +68,20 @@ public class AutorDAO {
         String sql;
         sql = "UPDATE"
                 + "  Autor"
-                + "SET"
+                + " SET"
                 + "  ID_AUTOR = ?,"
                 + "  Nome = ?,"
                 + "  NomeFantasia = ?,"
                 + "  Nacionalidade = ?"
-                + "WHERE"                                                                                
+                + " WHERE"                                                                                
                 + "  ID_AUTOR = ?";
         int i = 1;
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(i, autor.getIdAutor());
+        ps.setInt(i++, autor.getIdAutor());
         ps.setString(i++, autor.getNome());
         ps.setString(i++, autor.getNomeFantasia());
         ps.setString(i++, autor.getNacionalidade());
+        ps.setInt(i++, autor.getIdAutor());
         ps.executeUpdate();
     }
 

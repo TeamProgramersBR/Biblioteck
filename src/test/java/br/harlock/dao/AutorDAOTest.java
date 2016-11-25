@@ -26,42 +26,30 @@ public class AutorDAOTest {
     /**
      * Test of Inserir method, of class AutorDAO.
      */
-    @Test
-    public void testInserir() throws Exception {
-        System.out.println("Inserir");
-        Autor autor = new Autor(5, "mechamarorn", "pratal", "dsurub");
-        AutorDAO instance = new AutorDAO();
-        instance.Inserir(autor);
-        Autor autor2 =instance.Pesquisar(autor);
-        assertEquals(autor.getIdAutor(), autor2.getIdAutor());
-    }
-
-    /**
-     * Test of Remover method, of class AutorDAO.
-     */
 //    @Test
-//    public void testRemover() throws Exception {
-//        System.out.println("Remover");
-//        Autor autor = new Autor(4, "mechamarorn", "pratal", "dsurub");
+//    public void testInserir() throws Exception {
+//        System.out.println("Inserir");
+//        Autor autor = new Autor(5, "mechamarorn", "pratal", "dsurub");
 //        AutorDAO instance = new AutorDAO();
-//        instance.Remover(autor);
+//        instance.Inserir(autor);
 //        Autor autor2 =instance.Pesquisar(autor);
-//        assertNotEquals(autor.getIdAutor(), autor2.getIdAutor());
+//        assertEquals(autor.getIdAutor(), autor2.getIdAutor());
 //    }
-//
-//    /**
-//     * Test of Update method, of class AutorDAO.
-//     */
+
+   
+    /**
+     * Test of Update method, of class AutorDAO.
+     */
 //    @Test
 //    public void testUpdate() throws Exception {
 //        System.out.println("Update");
-//        Autor autor = new Autor(3, "mechamarorn", "pratal", "dsurub");
+//        Autor autor = new Autor(5, "mechamarorn", "Ouro", "Enois");
 //        AutorDAO instance = new AutorDAO();
 //        instance.Update(autor);
 //        Autor autor2 =instance.Pesquisar(autor);
-//        assertNotEquals(autor.getIdAutor(), autor2.getIdAutor());
+//        assertEquals(autor.getNomeFantasia(), autor2.getNomeFantasia());
 //    }
-//
+
 //    /**
 //     * Test of Pesquisar method, of class AutorDAO.
 //     */
@@ -73,7 +61,7 @@ public class AutorDAOTest {
 //        Autor expResult = new Autor(3, "mechamarorn", "pratal", "dsurub");
 //        Autor result = instance.Pesquisar(autor);
 //        Autor autor2 =instance.Pesquisar(autor);
-//        assertNotEquals(autor.getIdAutor(), autor2.getIdAutor());
+//        assertEquals(autor.getIdAutor(), autor2.getIdAutor());
 //
 //    }
 

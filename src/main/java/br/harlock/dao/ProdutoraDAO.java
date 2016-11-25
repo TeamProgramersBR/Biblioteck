@@ -105,7 +105,7 @@ public class ProdutoraDAO {
             String sql="SELECT ID_PDC, Nome_Produtora, Descricao, CNPJ FROM produtoraconteudo WHERE ID_PDC = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, produtora.getIdPdc());
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             rs.next();
             produtora.setIdPdc(rs.getInt("ID_PDC"));
             produtora.setNomeProdutora(rs.getString("Nome_Produtora"));

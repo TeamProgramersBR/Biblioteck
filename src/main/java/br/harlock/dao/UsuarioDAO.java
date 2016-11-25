@@ -34,7 +34,7 @@ public class UsuarioDAO {
         try {
             String sql;
             sql = "INSERT INTO usuario(ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario)"
-                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setInt(1, usuario.getIdUsu());
@@ -161,17 +161,22 @@ public class UsuarioDAO {
         
         try {
              String sql = "";
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps; 
             if (usuario.getEmail().equals("") || usuario.equals(null)) {
+                
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?";
+                ps =connection.prepareStatement(sql);
                 ps.setInt(1, usuario.getIdUsu());
             }else{
+                
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE email = ? AND senha = ?";
+                ps=connection.prepareStatement(sql);
                 ps.setString(1, usuario.getEmail());
                 ps.setString(2, usuario.getSenha());
+                
             }
             
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 usuario.setIdUsu(rs.getInt("ID_USU"));
                 usuario.setNivelDeAcesso(rs.getString("Nivel_De_Acesso"));
@@ -189,10 +194,9 @@ public class UsuarioDAO {
                 usuario.setEnderecoEstado(rs.getString("endereco_Estado"));
                 usuario.setEnderecoPais(rs.getString("endereco_Pais"));
                 usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
-                return usuario;
-            }else{
-                return null;
+                
             }
+            return usuario;
         } catch (Exception e) {
             throw new Exception("Erro ao pesquisar pelo usuario erro: "+e);
         }

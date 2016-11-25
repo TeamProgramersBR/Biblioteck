@@ -29,7 +29,7 @@ public class Conexao {
             try{
                 
                 String driver = "com.mysql.jdbc.Driver";
-                String url = "jdbc:mysql://192.168.43.1:3306/bancodb";
+                String url = "jdbc:mysql://191.128.212.196:3306/bancodb";
                 String user = "root";
                 String password = "";
                 Class.forName(driver);

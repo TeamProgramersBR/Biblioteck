@@ -30,7 +30,7 @@ public class CategoriaDAO {
         sql = "INSERT INTO Categoria_item_acervo(NomeCategoria,Descricao)VALUES (?,?);";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setString(i, categoria.getNomeCategoria());
+        ps.setString(i++, categoria.getNomeCategoria());
         ps.setString(i++, categoria.getDescricao());
         ps.executeUpdate();
 
@@ -46,18 +46,21 @@ public class CategoriaDAO {
 
     public void Update(Categoriaitemacervo categoria) throws SQLException {
         String sql;
-        sql = "UPDATE Categoria_item_acervo SET ID_CAT = ?, NomeCategori = ?, Descricao = ? WHERE ID_CAT = ?;";
+        sql = "UPDATE Categoria_item_acervo SET ID_CAT = ?, NomeCategoria = ?, Descricao = ? WHERE ID_CAT = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setInt(i, categoria.getIdCat());
-        ps.setString(i, categoria.getNomeCategoria());
+        ps.setInt(i++, categoria.getIdCat());
+        ps.setString(i++, categoria.getNomeCategoria());
         ps.setString(i++, categoria.getDescricao());
+        ps.setInt(i++, categoria.getIdCat());
         ps.executeUpdate();
     }
 
-    public Categoriaitemacervo Pesquisar(Categoriaitemacervo categoria) throws SQLException {
-        String sql;
-        sql = "SELECT ID_CAT, NomeCategoria,Descricao"
+    public Categoriaitemacervo Pesquisar(Categoriaitemacervo categoria) throws SQLException, Exception {
+        
+        try{
+            String sql;
+        sql = "SELECT ID_CAT, NomeCategoria,Descricao "
                 + "FROM categoria_item_acervo WHERE ID_CAT = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, categoria.getIdCat());
@@ -66,6 +69,9 @@ public class CategoriaDAO {
         categoria.setNomeCategoria(rs.getString("NomeCategoria"));
         categoria.setDescricao(rs.getString("Descricao"));
         return categoria;
+    }catch(Exception e){
+        throw new Exception("java.sql.SQLException");
+    }
     }
 
     public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException {

@@ -6,15 +6,13 @@
 package br.harlock.dao;
 
 import br.harlock.model.Titulo;
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Iterator;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -29,63 +27,57 @@ public class TituloDAOTest {
      * Test of Inserir method, of class TituloDAO.
      */
 //    @Test
-//    public void testInserir() {
+//    public void testInserir() throws Exception {
+//        String date1 ="2016-11-25";    
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        Date myDate1 =  formatter.parse(date1);
+//        java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
+//        
 //        System.out.println("Inserir");
-//        Titulo titulo = new Titulo(2, 1, 2, "2343243", "s", "dafsfdsdf", "sodijfsdoij", new Date(2016-11-24) , "gapspodk", "foijoijfdoi", "dadaiojd", "spdokpfdo", "apodskpolskad", "apokadpokds");
+//        Titulo titulo = new Titulo(3, 1, 2, "vamo", "s", "la", "adv", sqlDate1 , "ola", "q isso", "nova", "charmosa", "cheia", "mel");
 //        TituloDAO instance = new TituloDAO();
 //        instance.Inserir(titulo);
-//        
+//        Titulo resul = instance.Pesquisar(titulo);
+//         assertEquals(titulo.getIdTitu(), resul.getIdTitu());
 //    }
 
-    /**
-     * Test of Remover method, of class TituloDAO.
-     */
-//    @Test
-//    public void testRemover() {
-//        System.out.println("Remover");
-//        Titulo titulo = new Titulo(2, 1, 2, "2343243", "s", "dafsfdsdf", "sodijfsdoij", new Date(2016-11-24) , "gapspodk", "foijoijfdoi", "dadaiojd", "spdokpfdo", "apodskpolskad", "apokadpokds");
-//        TituloDAO instance = new TituloDAO();
-//        instance.Remover(titulo);
-//        // TODO review the generated test code and remove the default call to fail.
-//        
-//    }
 
-    /**
-     * Test of Update method, of class TituloDAO.
-     */
+
+//    /**
+//     * Test of Update method, of class TituloDAO.
+//     */
 //    @Test
-//    public void testUpdate() {
+//    public void testUpdate() throws Exception {
+//        String date1 ="2016-11-25";    
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        Date myDate1 =  formatter.parse(date1);
+//        java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
+//        
 //        System.out.println("Update");
-//        Titulo titulo = new Titulo(2, 1, 2, "baby", "dont", "hurt", "me", new Date(2016-11-24) , "HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOW what", "a", "hell", "is", "going", "on");
+//        Titulo titulo = new Titulo(3, 1, 2, "nao vamo", "s", "la", "adv", sqlDate1 , "ola", "q isso", "nova", "charmosa", "cheia", "mel");
 //        TituloDAO instance = new TituloDAO();
 //        instance.Update(titulo);
+//        Titulo resul = instance.Pesquisar(titulo);
+//        assertEquals(titulo.getIsbn(), resul.getIsbn());
 //        
 //    }
 
-    /**
-     * Test of ConsultarTodos method, of class TituloDAO.
-     */
-//    @Test
-//    public void testConsultarTodos() {
-//        System.out.println("ConsultarTodos");
-//        TituloDAO instance = new TituloDAO();
-//        Iterator<Titulo> expResult = null;
-//        Iterator<Titulo> result = instance.ConsultarTodos();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
 
     /**
      * Test of Pesquisar method, of class TituloDAO.
-     */
+//     */
 //    @Test
-//    public void testPesquisar() {
+//    public void testPesquisar() throws Exception {
+//        String date1 ="2016-11-25";    
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        Date myDate1 =  formatter.parse(date1);
+//        java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
 //        System.out.println("Pesquisar");
 //        TituloDAO instance = new TituloDAO();
-//        Titulo expResult = new Titulo(2, 1, 2, "baby", "dont", "hurt", "me", new Date(2016-11-24) , "HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOW what", "a", "hell", "is", "going", "on");
+//        Titulo expResult = new Titulo(3, 1, 2, "nao vamo", "s", "la", "adv", sqlDate1 , "ola", "q isso", "nova", "charmosa", "cheia", "mel");
 //        Titulo result = instance.Pesquisar(expResult);
-//        assertEquals(expResult, result);
+//        assertEquals(expResult.getIdTitu(), result.getIdTitu());
 //        
 //    }
     

@@ -12,6 +12,15 @@ public class Categoriaitemacervo {
 
     private List<Titulo> tituloCollection;
 
+    public Categoriaitemacervo() {
+    }
+
+    public Categoriaitemacervo(Integer idCat, String nomeCategoria, String descricao) {
+        this.idCat = idCat;
+        this.nomeCategoria = nomeCategoria;
+        this.descricao = descricao;
+    }
+    
     public Integer getIdCat() {
         return idCat;
     }
