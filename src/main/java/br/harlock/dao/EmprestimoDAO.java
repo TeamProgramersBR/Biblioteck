@@ -26,6 +26,9 @@ public class EmprestimoDAO {
     }
 
     public void Inserir(Emprestimo emprestimo) throws SQLException {
+        try {
+            
+        
         String sql;
         sql = "INSERT INTO emprestimo"
                 + "("
@@ -49,7 +52,8 @@ public class EmprestimoDAO {
                 + "?);";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setDate(i, (Date) emprestimo.getDataEmprestimo());
+        ps.setDate(i++, (Date) emprestimo.getDataEmprestimo());
+        ps.setDate(i++, (Date) emprestimo.getDataPrevDevolucao());
         ps.setDate(i++, (Date) emprestimo.getDataDevolucao());
         ps.setFloat(i++, emprestimo.getValorMulta());
         ps.setString(i++, emprestimo.getSituacao());
@@ -57,6 +61,9 @@ public class EmprestimoDAO {
         ps.setInt(i++, emprestimo.getfKFuncionario());
         ps.setInt(i++, emprestimo.getFkUsu());
         ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -69,10 +76,12 @@ public class EmprestimoDAO {
     }
 
     public void Update(Emprestimo emprestimo) throws SQLException {
+            try {
+        
         String sql;
         sql = "UPDATE"
                 + "  emprestimo"
-                + "SET"
+                + " SET"
                 + "  ID_EMP = ?,"
                 + "  DataEmprestimo = ?,"
                 + "  DataPrevDevolucao = ?,"
@@ -82,11 +91,13 @@ public class EmprestimoDAO {
                 + "  Reserva = ?,"
                 + "  FK_Funcionario = ?,"
                 + "  FK_USU = ?"
-                + "WHERE"
+                + " WHERE"
                 + "  ID_EMP = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setDate(i, (Date) emprestimo.getDataEmprestimo());
+        ps.setInt(i++, emprestimo.getIdEmp());
+        ps.setDate(i++, (Date) emprestimo.getDataEmprestimo());
+        ps.setDate(i++, (Date) emprestimo.getDataPrevDevolucao());
         ps.setDate(i++, (Date) emprestimo.getDataDevolucao());
         ps.setFloat(i++, emprestimo.getValorMulta());
         ps.setString(i++, emprestimo.getSituacao());
@@ -95,13 +106,18 @@ public class EmprestimoDAO {
         ps.setInt(i++, emprestimo.getFkUsu());
         ps.setInt(i++, emprestimo.getIdEmp());
         ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Emprestimo Pesquisar(Emprestimo emprestimo) throws SQLException {
-        Emprestimo retorno = new Emprestimo();
+        
         String sql;
             sql = "SELECT ID_EMP, DataEmprestimo, DataPrevDevolucao, DataDevolucao, ValorMulta, Situacao, Reserva, FK_Funcionario, FK_USU FROM emprestimo WHERE ID_EMP = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, emprestimo.getIdEmp());
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             emprestimo.setDataEmprestimo(rs.getDate("DataEmprestimo"));
@@ -110,10 +126,10 @@ public class EmprestimoDAO {
             emprestimo.setValorMulta(rs.getLong("ValorMulta"));
             emprestimo.setSituacao(rs.getString("Situacao"));
             emprestimo.setReserva(rs.getBoolean("Reserva"));
-            emprestimo.setfKFuncionario(rs.getInt("FK_Funcionario"));
             emprestimo.setFkUsu(rs.getInt("FK_USU"));
+            emprestimo.setfKFuncionario(rs.getInt("FK_Funcionario"));
         }
-        return retorno;
+        return emprestimo;
     }
 
     public Iterator<Emprestimo> ConsultarTodos() throws SQLException {

@@ -85,15 +85,20 @@ public class AutorDAO {
     }
 
     public Autor Pesquisar(Autor autor) throws SQLException {
-        String sql;
+        String sql = "";
+        PreparedStatement ps = null;
         if (!autor.getNome().equals("")) {
             sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM Autor WHERE Nome = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, autor.getNome());
         }else{
             sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM Autor WHERE ID_AUTOR = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, autor.getIdAutor());
         }
+         
         
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, autor.getIdAutor());
+        
         ResultSet rs = ps.executeQuery();
         rs.next();
         autor.setIdAutor(rs.getInt("ID_AUTOR"));

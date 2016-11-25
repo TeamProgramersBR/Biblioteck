@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Auth extends HttpServlet {
     private UsuarioDAO usuDAO;
     private String acao = "";
-    public Auth(){
+    public Auth() throws Exception{
          usuDAO = new UsuarioDAO();
          acao = "";
     }

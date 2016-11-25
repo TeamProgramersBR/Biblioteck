@@ -26,6 +26,21 @@ public class Emprestimo {
 
     private Usuario UsuarioDoSistema;
 
+    public Emprestimo() {
+    }
+
+    public Emprestimo(int idEmp, int fKFuncionario, int fkUsu, Date dataEmprestimo, Date dataPrevDevolucao, Date dataDevolucao, Long valorMulta, String situacao, Boolean reserva) {
+        this.idEmp=idEmp;
+        this.fKFuncionario = fKFuncionario;
+        this.fkUsu = fkUsu;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataPrevDevolucao = dataPrevDevolucao;
+        this.dataDevolucao = dataDevolucao;
+        this.valorMulta = valorMulta;
+        this.situacao = situacao;
+        this.reserva = reserva;
+    }
+    
     public int getIdEmp() {
         return idEmp;
     }

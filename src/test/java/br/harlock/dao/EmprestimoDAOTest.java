@@ -6,6 +6,10 @@
 package br.harlock.dao;
 
 import br.harlock.model.Emprestimo;
+
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,49 +30,65 @@ public class EmprestimoDAOTest {
     /**
      * Test of Inserir method, of class EmprestimoDAO.
      */
-    @Test
-    public void testInserir() throws Exception {
-        System.out.println("Inserir");
-        Emprestimo emprestimo = new Emprestimo();
-        EmprestimoDAO instance = new EmprestimoDAO();
-        instance.Inserir(emprestimo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testInserir() throws Exception {
+//        System.out.println("Inserir");
+//        Emprestimo emprestimo = new Emprestimo(2,1, 1,new Date(2016-11-24) , new Date(2016-12-03), new Date(2016-12-03), new Long(123) , "1", Boolean.FALSE);
+//        EmprestimoDAO instance = new EmprestimoDAO();
+//        instance.Inserir(emprestimo);
+//        
+//    }
 
-    /**
-     * Test of Remover method, of class EmprestimoDAO.
-     */
-    @Test
-    public void testRemover() throws Exception {
-        System.out.println("Remover");
-        Emprestimo emprestimo = null;
-        EmprestimoDAO instance = new EmprestimoDAO();
-        instance.Remover(emprestimo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of Update method, of class EmprestimoDAO.
-     */
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("Update");
-        Emprestimo emprestimo = null;
-        EmprestimoDAO instance = new EmprestimoDAO();
-        instance.Update(emprestimo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+//    /**
+//     * Test of Remover method, of class EmprestimoDAO.
+//     */
+//    @Test
+//    public void testRemover() throws Exception {
+//        System.out.println("Remover");
+//        Emprestimo emprestimo = new Emprestimo(2,1, 1,new Date(2016-11-24) , new Date(2016-12-03), new Date(2016-12-03), new Long(123) , "1", Boolean.FALSE);
+//        EmprestimoDAO instance = new EmprestimoDAO();
+//        instance.Remover(emprestimo);
+//        
+//    }
+//
+//    /**
+//     * Test of Update method, of class EmprestimoDAO.
+//     */
+//    @Test
+//    public void testUpdate() throws Exception {
+//        try{
+//        System.out.println("Update");
+//        String date1 ="2016-11-24";
+//        String date2 = "2016-12-03";
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        Date myDate1 = formatter.parse(date1);
+//        Date myDate2 = formatter.parse(date1);
+//        java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
+//        java.sql.Date sqlDate2 = new java.sql.Date(myDate1.getTime());
+//        
+//        Emprestimo emprestimo = new Emprestimo(3,1, 1,sqlDate1,sqlDate2,sqlDate2 , new Long(123) , "2", Boolean.FALSE);
+//        EmprestimoDAO instance = new EmprestimoDAO();
+//        instance.Update(emprestimo);
+//        }catch(Exception e){
+//        e.printStackTrace();
+//        }}
+//
     /**
      * Test of Pesquisar method, of class EmprestimoDAO.
      */
     @Test
     public void testPesquisar() throws Exception {
         System.out.println("Pesquisar");
-        Emprestimo emprestimo = null;
+        System.out.println("Update");
+        String date1 ="2016-11-24";
+        String date2 = "2016-12-03";
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date myDate1 = formatter.parse(date1);
+        Date myDate2 = formatter.parse(date1);
+        java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
+        java.sql.Date sqlDate2 = new java.sql.Date(myDate1.getTime());
+        
+        Emprestimo emprestimo = new Emprestimo(3,1, 1,sqlDate1,sqlDate2,sqlDate2 , new Long(123) , "2", Boolean.FALSE);
         EmprestimoDAO instance = new EmprestimoDAO();
         Emprestimo expResult = null;
         Emprestimo result = instance.Pesquisar(emprestimo);
@@ -76,19 +96,29 @@ public class EmprestimoDAOTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+//
     /**
      * Test of ConsultarTodos method, of class EmprestimoDAO.
      */
-    @Test
-    public void testConsultarTodos() throws Exception {
-        System.out.println("ConsultarTodos");
-        EmprestimoDAO instance = new EmprestimoDAO();
-        Iterator<Emprestimo> expResult = null;
-        Iterator<Emprestimo> result = instance.ConsultarTodos();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+//    @Test
+//    public void testConsultarTodos() throws Exception {
+//        System.out.println("ConsultarTodos");
+//        System.out.println("Update");
+//        String date1 ="2016-11-24";
+//        String date2 = "2016-12-03";
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        Date myDate1 = formatter.parse(date1);
+//        Date myDate2 = formatter.parse(date1);
+//        java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
+//        java.sql.Date sqlDate2 = new java.sql.Date(myDate1.getTime());
+//        
+//        Emprestimo emprestimo = new Emprestimo(3,1, 1,sqlDate1,sqlDate2,sqlDate2 , new Long(123) , "2", Boolean.FALSE);
+//        EmprestimoDAO instance = new EmprestimoDAO();
+//        Iterator<Emprestimo> expResult = null;
+//        Iterator<Emprestimo> result = instance.ConsultarTodos();
+//        assertEquals(expResult, result);
+//        
+//    }
+//    
 }
+

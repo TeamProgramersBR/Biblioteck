@@ -26,14 +26,15 @@ public class AutorDAOTest {
     /**
      * Test of Inserir method, of class AutorDAO.
      */
-//    @Test
-//    public void testInserir() throws Exception {
-//        System.out.println("Inserir");
-//        Autor autor = new Autor(3, "mechamarorn", "pratal", "dsurub");
-//        AutorDAO instance = new AutorDAO();
-//        instance.Inserir(autor);
-//        
-//    }
+    @Test
+    public void testInserir() throws Exception {
+        System.out.println("Inserir");
+        Autor autor = new Autor(5, "mechamarorn", "pratal", "dsurub");
+        AutorDAO instance = new AutorDAO();
+        instance.Inserir(autor);
+        Autor autor2 =instance.Pesquisar(autor);
+        assertEquals(autor.getIdAutor(), autor2.getIdAutor());
+    }
 
     /**
      * Test of Remover method, of class AutorDAO.
@@ -41,28 +42,29 @@ public class AutorDAOTest {
 //    @Test
 //    public void testRemover() throws Exception {
 //        System.out.println("Remover");
-//        Autor autor = new Autor(3, "mechamarorn", "pratal", "dsurub");
+//        Autor autor = new Autor(4, "mechamarorn", "pratal", "dsurub");
 //        AutorDAO instance = new AutorDAO();
 //        instance.Remover(autor);
-//        
+//        Autor autor2 =instance.Pesquisar(autor);
+//        assertNotEquals(autor.getIdAutor(), autor2.getIdAutor());
 //    }
-
-    /**
-     * Test of Update method, of class AutorDAO.
-     */
+//
+//    /**
+//     * Test of Update method, of class AutorDAO.
+//     */
 //    @Test
 //    public void testUpdate() throws Exception {
 //        System.out.println("Update");
 //        Autor autor = new Autor(3, "mechamarorn", "pratal", "dsurub");
 //        AutorDAO instance = new AutorDAO();
 //        instance.Update(autor);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        Autor autor2 =instance.Pesquisar(autor);
+//        assertNotEquals(autor.getIdAutor(), autor2.getIdAutor());
 //    }
-
-    /**
-     * Test of Pesquisar method, of class AutorDAO.
-     */
+//
+//    /**
+//     * Test of Pesquisar method, of class AutorDAO.
+//     */
 //    @Test
 //    public void testPesquisar() throws Exception {
 //        System.out.println("Pesquisar");
@@ -70,23 +72,11 @@ public class AutorDAOTest {
 //        AutorDAO instance = new AutorDAO();
 //        Autor expResult = new Autor(3, "mechamarorn", "pratal", "dsurub");
 //        Autor result = instance.Pesquisar(autor);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        Autor autor2 =instance.Pesquisar(autor);
+//        assertNotEquals(autor.getIdAutor(), autor2.getIdAutor());
+//
 //    }
 
-    /**
-     * Test of ConsultarTodos method, of class AutorDAO.
-     */
-//    @Test
-//    public void testConsultarTodos() throws Exception {
-//        System.out.println("ConsultarTodos");
-//        AutorDAO instance = new AutorDAO();
-//        Iterator<Autor> expResult = null;
-//        Iterator<Autor> result = instance.ConsultarTodos();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    
     
 }
