@@ -57,21 +57,21 @@ public class CategoriaDAO {
     }
 
     public Categoriaitemacervo Pesquisar(Categoriaitemacervo categoria) throws SQLException, Exception {
-        
-        try{
+
+        try {
             String sql;
-        sql = "SELECT ID_CAT, NomeCategoria,Descricao "
-                + "FROM categoria_item_acervo WHERE ID_CAT = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, categoria.getIdCat());
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        categoria.setNomeCategoria(rs.getString("NomeCategoria"));
-        categoria.setDescricao(rs.getString("Descricao"));
-        return categoria;
-    }catch(Exception e){
-        throw new Exception("java.sql.SQLException");
-    }
+            sql = "SELECT ID_CAT, NomeCategoria,Descricao "
+                    + "FROM categoria_item_acervo WHERE ID_CAT = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, categoria.getIdCat());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            categoria.setNomeCategoria(rs.getString("NomeCategoria"));
+            categoria.setDescricao(rs.getString("Descricao"));
+            return categoria;
+        } catch (Exception e) {
+            throw new Exception("java.sql.SQLException");
+        }
     }
 
     public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException {
@@ -80,14 +80,14 @@ public class CategoriaDAO {
         sql = "SELECT ID_CAT, NomeCategoria,Descricao"
                 + "FROM categoria_item_acervo";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs =  ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Categoriaitemacervo categoria = new Categoriaitemacervo();
             categoria.setIdCat(rs.getInt("ID_CAT"));
             categoria.setNomeCategoria(rs.getString("NomeCategoria"));
             categoria.setDescricao(rs.getString("Descricao"));
         }
-        
+
         return lista.iterator();
     }
 }

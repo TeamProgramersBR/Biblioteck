@@ -16,30 +16,39 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author minerthal
  */
-@WebServlet(name = "Auth", urlPatterns = {"/Auth"})
+@WebServlet("/Auth.do")
 public class Auth extends HttpServlet {
+
     private UsuarioDAO usuDAO;
     private String acao = "";
-    public Auth() throws Exception{
-         usuDAO = new UsuarioDAO();
-         acao = "";
+
+    public Auth() throws Exception {
+        usuDAO = new UsuarioDAO();
+        acao = "";
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        String pagina = "logininvalido.jsp";
         acao = request.getParameter("entrar");
-        
+
         if (acao.equals("entrar")) {
             Usuario usuario = new Usuario();
             usuario.setEmail(request.getParameter("email"));
             usuario.setSenha(request.getParameter("senha"));
             usuario = usuDAO.Pesquisar(usuario);
             if (!usuario.equals(null)) {
-                
+                HttpSession sessao = request.getSession();
+                // setando um atributo da sessao
+                sessao.setAttribute("login", request.getParameter("login"));
+                // como obtive sucesso, chamo a página principal
+                pagina = "principal.jsp";
             }
         }
     }
