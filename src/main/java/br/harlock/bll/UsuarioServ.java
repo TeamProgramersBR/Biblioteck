@@ -57,7 +57,9 @@ public class UsuarioServ extends HttpServlet {
             u.setEnderecoCidade(request.getParameter("cidade"));
             u.setEnderecoEstado(request.getParameter("estado"));
             u.setEnderecoPais(request.getParameter("pais"));
-            DAO.Inserir(u);   
+            u.setStatusDoUsuario("Pendente");
+            DAO.Inserir(u);  
+            pagina = "index.jsp?acao=logar";
         }
 
     }
