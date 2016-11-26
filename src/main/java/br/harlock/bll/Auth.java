@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sun.security.provider.MD5;
 
 /**
  *
@@ -37,7 +38,7 @@ public class Auth extends HttpServlet {
             throws ServletException, IOException, Exception {
         String pagina = "index.jsp";
         acao = request.getParameter("acao");
-
+        
         if (acao.equals("entrar")) {
             Usuario usuario = new Usuario();
             usuario.setEmail(request.getParameter("email"));

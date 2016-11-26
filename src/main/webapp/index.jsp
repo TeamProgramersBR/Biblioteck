@@ -3,10 +3,21 @@
     Created on : 21/11/2016, 20:08:09
     Author     : Harlock
 --%>
+<%@ page import="br.harlock.model.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
+
+<%
+    Usuario u = (Usuario) request.getAttribute("login");
+    String pagina = "home";
+        if(request.getParameter("pagina")!=null) {
+            pagina = request.getParameter("pagina");
+        }
+    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +32,22 @@
         <img  class="logo" src="template/imgs/logo.png" alt="" />
       </div>
       <div class="containerMD direita horizontal">
-        <button class="botaoX preto" type="button" name="button">Entrar</button>
-        <button class="botaoX vermelho" type="button" name="button">Cadastrar</button>
+          <a href="index.jsp?pagina=entrar" ><button class="botaoX azul">Entrar</button></a>
+          <a href="index.jsp?pagina=cadastro"  ><button class="botaoX vermelho">Cadastrar</button></a>
       </div>
     </div>
   </div>
   <!--- aqui vai corpo -->
   
     <div class="containerX">
-        <jsp:include page = "template/paginas/login.html" />
+        <%if(pagina.equals("cadastro")){%>
+        <jsp:include page = "template/paginas/cadastro.html" />
+        
+        <%}else if(pagina.equals("entrar")){%>
+            <jsp:include page = "template/paginas/login.html" />
+        <%}else{%>
+            <jsp:include page = "template/paginas/home.html" />
+        <%}%>
     </div>
   </div>
   
