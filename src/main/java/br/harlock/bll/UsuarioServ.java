@@ -6,13 +6,20 @@
 package br.harlock.bll;
 
 import br.harlock.dao.UsuarioDAO;
+import br.harlock.model.MD5;
+import br.harlock.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 
 /**
  *
@@ -21,13 +28,37 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Usuario.do")
 public class UsuarioServ extends HttpServlet {
     private String acao = "";
-    private UsuarioDAO usuarioDAO;
+    private UsuarioDAO DAO;
+    private MD5 pss;
     public UsuarioServ() throws Exception{
-        usuarioDAO  = new UsuarioDAO();
+        DAO  = new UsuarioDAO();
+        acao = "";
+        pss = new MD5();
+        
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NoSuchAlgorithmException {
+        String pagina = "cadastrousu.html";
+        acao = request.getParameter("acao");
+        if(acao.equalsIgnoreCase("cadastrar")){
+            Usuario u = new Usuario();
+            u.setNivelDeAcesso(request.getParameter("acesso"));
+            u.setNome(request.getParameter("nome"));
+            u.setCpf(request.getParameter("CPF"));
+            u.setEmail(request.getParameter("email"));
+            u.setSenha(pss.toMD5(request.getParameter("senha")));
+            u.setNumeroResidencial(request.getParameter("telres"));
+            u.setNumeroCelular(request.getParameter("telcel"));
+            u.setNumeroComercial(request.getParameter("telcom"));
+            u.setMatriculaEducacional(request.getParameter("matricula"));
+            u.setEnderecoLogadouro(request.getParameter("logr"));
+            u.setEnderecoCEP(request.getParameter("CEP"));
+            u.setEnderecoCidade(request.getParameter("cidade"));
+            u.setEnderecoEstado(request.getParameter("estado"));
+            u.setEnderecoPais(request.getParameter("pais"));
+            DAO.Inserir(u);   
+        }
 
     }
 
@@ -43,7 +74,11 @@ public class UsuarioServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -57,7 +92,11 @@ public class UsuarioServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
