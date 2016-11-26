@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author minerthal
  */
-@WebServlet(name = "Categoria.do", urlPatterns = {"/CategoriaServ"})
+@WebServlet("/Categoria.do")
 public class CategoriaServ extends HttpServlet {
     private CategoriaDAO categoriaDAO;
     private String acao = "";

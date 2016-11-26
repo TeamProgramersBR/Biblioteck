@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author minerthal
  */
-@WebServlet("/EmprestimoServ")
+@WebServlet("/Emprestimo.do")
 public class EmprestimoServ extends HttpServlet {
     private EmprestimoDAO emprestimoDAO;
     private String acao = "";

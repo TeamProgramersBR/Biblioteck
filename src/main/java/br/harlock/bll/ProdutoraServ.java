@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author minerthal
  */
-@WebServlet(name = "ProdutoraServ", urlPatterns = {"/ProdutoraServ"})
+@WebServlet("/Produtora.do")
 public class ProdutoraServ extends HttpServlet {
     private String acao = "";
     private ProdutoraDAO produtoraDAO;

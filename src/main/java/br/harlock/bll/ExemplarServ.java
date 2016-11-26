@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author minerthal
  */
-@WebServlet(name = "ExemplarServ", urlPatterns = {"/ExemplarServ"})
+@WebServlet("/Exemplar.do")
 public class ExemplarServ extends HttpServlet {
     private ExemplarDAO exemplarDAO;
     private String acao = "";

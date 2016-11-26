@@ -35,22 +35,27 @@ public class Auth extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        String pagina = "logininvalido.jsp";
-        acao = request.getParameter("entrar");
+        String pagina = "index.jsp";
+        acao = request.getParameter("acao");
 
         if (acao.equals("entrar")) {
             Usuario usuario = new Usuario();
             usuario.setEmail(request.getParameter("email"));
             usuario.setSenha(request.getParameter("senha"));
             usuario = usuDAO.Pesquisar(usuario);
-            if (!usuario.equals(null)) {
+            if (usuario != null) {
                 HttpSession sessao = request.getSession();
                 // setando um atributo da sessao
                 sessao.setAttribute("login", request.getParameter("login"));
                 // como obtive sucesso, chamo a página principal
-                pagina = "principal.jsp";
+                pagina = "index.jsp";
+            }else{
+                 pagina = "index.jsp";
+                 
             }
         }
+        response.sendRedirect(pagina);
+                
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

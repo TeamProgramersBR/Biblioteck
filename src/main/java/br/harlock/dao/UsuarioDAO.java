@@ -194,9 +194,12 @@ public class UsuarioDAO {
                 usuario.setEnderecoEstado(rs.getString("endereco_Estado"));
                 usuario.setEnderecoPais(rs.getString("endereco_Pais"));
                 usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
-                
+                return usuario;
+            }else{
+                usuario = null;
+                return usuario;
             }
-            return usuario;
+            
         } catch (Exception e) {
             throw new Exception("Erro ao pesquisar pelo usuario erro: "+e);
         }
