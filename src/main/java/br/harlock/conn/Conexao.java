@@ -28,14 +28,14 @@ public class Conexao {
         else{
             try{
                 
-//                String driver = "com.mysql.jdbc.Driver";
-//                String url = "jdbc:mysql://31.170.166.50:3306/u465595781_bibli";
-//                String user = "u465595781_bibli";
-//                String password = "biblibibli";
                 String driver = "com.mysql.jdbc.Driver";
-                String url = "jdbc:mysql://localhost:3306/mydb";
-                String user = "root";
-                String password = "123456";
+                String url = "jdbc:mysql://31.170.166.50:3306/u465595781_bibli";
+                String user = "u465595781_bibli";
+                String password = "biblibibli";
+//                String driver = "com.mysql.jdbc.Driver";
+//                String url = "jdbc:mysql://localhost:3306/mydb";
+//                String user = "root";
+//                String password = "123456";
                 Class.forName(driver);
                 conexao = DriverManager.getConnection(url, user, password);
                 return conexao;

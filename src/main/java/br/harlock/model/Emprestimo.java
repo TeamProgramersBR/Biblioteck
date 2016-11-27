@@ -1,6 +1,10 @@
 package br.harlock.model;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Emprestimo {
 
@@ -29,13 +33,14 @@ public class Emprestimo {
     public Emprestimo() {
     }
 
-    public Emprestimo(int idEmp, int fKFuncionario, int fkUsu, Date dataEmprestimo, Date dataPrevDevolucao, Date dataDevolucao, Long valorMulta, String situacao, Boolean reserva) {
+    
+    public Emprestimo(int idEmp, int fKFuncionario, int fkUsu, String dataEmprestimo, String dataPrevDevolucao, String dataDevolucao, Long valorMulta, String situacao, Boolean reserva) throws ParseException {
         this.idEmp=idEmp;
         this.fKFuncionario = fKFuncionario;
         this.fkUsu = fkUsu;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataPrevDevolucao = dataPrevDevolucao;
-        this.dataDevolucao = dataDevolucao;
+        setDataEmprestimo(dataEmprestimo);
+        setDataPrevDevolucao(dataPrevDevolucao);
+        setDataDevolucao(dataDevolucao);
         this.valorMulta = valorMulta;
         this.situacao = situacao;
         this.reserva = reserva;
@@ -69,24 +74,30 @@ public class Emprestimo {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
+    public void setDataEmprestimo(String dataEmprestimo) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sdf.parse(dataEmprestimo);
+        this.dataEmprestimo = date;
     }
 
     public Date getDataPrevDevolucao() {
         return dataPrevDevolucao;
     }
 
-    public void setDataPrevDevolucao(Date dataPrevDevolucao) {
-        this.dataPrevDevolucao = dataPrevDevolucao;
+    public void setDataPrevDevolucao(String dataPrevDevolucao) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sdf.parse(dataPrevDevolucao);
+        this.dataPrevDevolucao = date;
     }
 
     public Date getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
+    public void setDataDevolucao(String dataDevolucao) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sdf.parse(dataDevolucao);
+        this.dataDevolucao = date;
     }
 
     public Long getValorMulta() {
