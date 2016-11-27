@@ -31,14 +31,14 @@ public class ProdutoraDAO {
     public void Inserir(ProdutoraConteudo produtora) {
         try {
             String sql;
-            sql = "INSERT INTO produtoraconteudo(ID_PDC, Nome_Produtora, Descricao, CNPJ)"
-                    + " VALUES (?,?,?,?)";
+            sql = "INSERT INTO produtoraconteudo(Nome_Produtora, Descricao, CNPJ)"
+                    + " VALUES (?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
-            ps.setInt(1, produtora.getIdPdc());
-            ps.setString(2, produtora.getNomeProdutora());
-            ps.setString(3, produtora.getDescricao());
-            ps.setString(4, produtora.getCnpj());
+            
+            ps.setString(1, produtora.getNomeProdutora());
+            ps.setString(2, produtora.getDescricao());
+            ps.setString(3, produtora.getCnpj());
 
             ps.executeUpdate();
 

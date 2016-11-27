@@ -28,15 +28,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Categoria.do")
 public class CategoriaServ extends HttpServlet {
-    private CategoriaDAO categoriaDAO;
+    private CategoriaDAO DAO;
     private String acao = "";
     public CategoriaServ() throws Exception{
-        categoriaDAO = new CategoriaDAO();
+        DAO = new CategoriaDAO();
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         acao = request.getParameter("acao");
-        if (acao.equals("listarTodos")) {
+        if(acao.equals("cadastrar")){
+            Categoriaitemacervo c = new Categoriaitemacervo();
+            c.setNomeCategoria(request.getParameter("nome"));
+            c.setDescricao(request.getParameter("desc"));
+            DAO.Inserir(c);
+        }else if(acao.equals("listarTodos")) {
             request.setAttribute("categorias", listarCategorias());
         }else if(acao.equals("pesquisar")){
             Categoriaitemacervo c = new Categoriaitemacervo();
@@ -96,11 +101,11 @@ public class CategoriaServ extends HttpServlet {
     }// </editor-fold>
     
     public Iterator listarCategorias() throws SQLException{
-        Iterator e = categoriaDAO.ConsultarTodos();
+        Iterator e = DAO.ConsultarTodos();
         return e;
     }
     public Categoriaitemacervo pesquisar(Categoriaitemacervo c) throws Exception{
-        c = categoriaDAO.Pesquisar(c);
+        c = DAO.Pesquisar(c);
         return c;
     }
 }

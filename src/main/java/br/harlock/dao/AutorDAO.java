@@ -31,21 +31,21 @@ public class AutorDAO {
         String sql;
         sql = "INSERT"
                 + " INTO"
-                + "  Autor("
-                + "    ID_AUTOR,"
+                + "  autor("
+ //               + "    ID_AUTOR,"
                 + "    Nome,"
                 + "    NomeFantasia,"
                 + "    Nacionalidade"
                 + "  )"
                 + " VALUES("
-                + "  ?,"
+ //               + "  ?,"
                 + "  ?,"
                 + "  ?,"
                 + "  ?"
                 + ")";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
-        ps.setInt(i++, autor.getIdAutor()); // 
+//        ps.setInt(i++, autor.getIdAutor()); // 
         ps.setString(i++, autor.getNome()); // 
         ps.setString(i++, autor.getNomeFantasia());
         ps.setString(i++, autor.getNacionalidade());

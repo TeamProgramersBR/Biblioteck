@@ -26,14 +26,21 @@ public class CategoriaDAO {
     }
 
     public void Inserir(Categoriaitemacervo categoria) throws SQLException {
-        String sql;
-        sql = "INSERT INTO Categoria_item_acervo(NomeCategoria,Descricao)VALUES (?,?);";
+       
+        try {
+                
+            
+            String sql;
+        
+        sql = "INSERT INTO categoria_item_acervo(NomeCategoria,Descricao)VALUES (?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
         ps.setString(i++, categoria.getNomeCategoria());
         ps.setString(i++, categoria.getDescricao());
         ps.executeUpdate();
-
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public void Remover(Categoriaitemacervo categoria) throws SQLException {

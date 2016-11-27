@@ -6,6 +6,7 @@
 package br.harlock.bll;
 
 import br.harlock.dao.ProdutoraDAO;
+import br.harlock.model.ProdutoraConteudo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,14 +22,23 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Produtora.do")
 public class ProdutoraServ extends HttpServlet {
     private String acao = "";
-    private ProdutoraDAO produtoraDAO;
+    private ProdutoraDAO DAO;
     public ProdutoraServ() throws Exception{
-        produtoraDAO = new ProdutoraDAO();
+        DAO = new ProdutoraDAO();
+        acao = "";
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+            String pagina = "cadastroprodutora";
+            acao = request.getParameter("acao");
+            if(acao.equalsIgnoreCase("cadastrar")){
+                ProdutoraConteudo p = new ProdutoraConteudo();
+                p.setNomeProdutora(request.getParameter("nome"));
+                p.setDescricao(request.getParameter("desc"));
+                p.setCnpj(request.getParameter("CNPJ"));
+                DAO.Inserir(p);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
