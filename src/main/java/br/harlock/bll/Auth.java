@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,24 +37,32 @@ public class Auth extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        HttpSession sessao = request.getSession();
         String pagina = "index.jsp";
         acao = request.getParameter("acao");
         
         if (acao.equals("entrar")) {
             Usuario usuario = new Usuario();
+            // Aplica MD5
+            br.harlock.model.MD5 md5 = new br.harlock.model.MD5();
             usuario.setEmail(request.getParameter("email"));
-            usuario.setSenha(request.getParameter("senha"));
+            usuario.setSenha(md5.toMD5(request.getParameter("senha")));
             usuario = usuDAO.Pesquisar(usuario);
             if (usuario != null) {
-                HttpSession sessao = request.getSession();
+                if (usuario.getStatusDoUsuario().equals("liberado")) {
                 // setando um atributo da sessao
-                sessao.setAttribute("login", request.getParameter("login"));
+                sessao.setAttribute("login", usuario);
+                }
                 // como obtive sucesso, chamo a página principal
                 pagina = "index.jsp";
             }else{
-                 pagina = "index.jsp";
-                 
+                pagina = "index.jsp";
             }
+        }
+        if (acao.equals("sair")) {
+            sessao.setAttribute("login", null);
+            sessao.invalidate();
+            pagina = "index.jsp";
         }
         response.sendRedirect(pagina);
                 

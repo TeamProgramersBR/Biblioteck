@@ -8,15 +8,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-
+<%@ page session="true" %>
 
 <%
-    Usuario u = (Usuario) request.getAttribute("login");
+    Usuario u = (Usuario) session.getAttribute("login");
     String pagina = "home";
         if(request.getParameter("pagina")!=null) {
             pagina = request.getParameter("pagina");
         }
-    
+        
 %>
 <!DOCTYPE html>
 <html>
@@ -32,8 +32,21 @@
         <img  class="logo" src="template/imgs/logo.png" alt="" />
       </div>
       <div class="containerMD direita horizontal">
-          <a href="index.jsp?pagina=entrar" ><button class="botaoX azul">Entrar</button></a>
+          <%if(u == null){%>
+          <div class="col-9">
+              <a href="index.jsp?pagina=entrar" ><button class="botaoX azul">Entrar</button></a>
           <a href="index.jsp?pagina=cadastro"  ><button class="botaoX vermelho">Cadastrar</button></a>
+          </div>
+          
+          <%}else{%>
+          <div class="col-9">
+              <div class="col-9 float-l txt-branco"><%=u.getNome()%>
+              <a href="Auth.do?acao=sair"><button class="botaoX vermelho">Sair</button></a>
+              </div>
+          </div>
+          
+          
+          <%}%>
       </div>
     </div>
   </div>
