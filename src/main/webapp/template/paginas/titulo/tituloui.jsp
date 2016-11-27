@@ -23,64 +23,66 @@
     String[] tipoDeTitulo = {"Livro", "Vídeo", "Artigo", "Revista"};
 %>
 
+<form method="POST" action="" name="salvar"  >
 
     <div class="col-12">
         <label>Nome da obra</label>
         <input type="text" name="obra" >
         <input type="hidden" id="idTitulo" value="<%=titulo.getIdTitu()%>"
-    
-    <div class="col-10 float-l">
-        <label>tipo de obra</label>
-        <select onclick="tipoDeTitulo()" id="tipoobra" name="tipoObra">
-            <option>Selecione</option>
-            <%
-                for (String tipo : tipoDeTitulo) {
-                    if (tipo == titulo.getTipoDeObra()) {
-            %>
-            <option value="<%=tipo%>" selected=""><%=tipo%></option>
-            <% } else {%>
-            <option value=""><%=tipo%></option>
-            <%
+
+               <div class="col-10 float-l">
+            <label>tipo de obra</label>
+            <select onclick="tipoDeTitulo()" id="tipoobra" name="tipoObra">
+                <option>Selecione</option>
+                <%
+                    for (String tipo : tipoDeTitulo) {
+                        if (tipo == titulo.getTipoDeObra()) {
+                %>
+                <option value="<%=tipo%>" selected=""><%=tipo%></option>
+                <% } else {%>
+                <option value=""><%=tipo%></option>
+                <%
+                        }
                     }
-                }
-            %>
-        </select>
-    </div>
-    <div class="col-5 float-l">
-        <label>Descrição</label>
-        <textarea id="descricao" name="descricao" value="<%=titulo.getDescricao()%>"></textarea>
-    </div>
-    <div class="col-5 float-l">
-        <label>Imagem</label>
-        <input type="file" name="pic" accept="image/*">
-        <img src="" width="140" height="170">
-    </div>
-    <div class="col-10">
-        <label >ISBN</label>
-        <input type="text" id="ISBN" name="ISBN"  value="<%=titulo.getIsbn()%>">
-    </div>
-    <br>
-
-    <div class="col-10">
-
-        <label>ISSN</label>
-        <input type="text" name="ISSN" id="ISSN"  value="<%=titulo.getIssn()%>">
-    </div>
-    <div class="col-5 float-l">
-        <label>Editor</label>
-        <select id="editor">
-            <option>
-                Selecione um editor
-            </option>
-            <%for (Autor a : autores) {%>
-            <option value="<%=a.getIdAutor()%>"><%=a.getNome()%></option>
-            <%}%>
-        </select>
-    </div>
+                %>
+            </select>
+        </div>
         <div class="col-5 float-l">
-        <label>Volume</label>
-        <input type="text" id="Volume" name="Volume" value="<%=titulo.getEdicao()%>"
-</div>
+            <label>Descrição</label>
+            <textarea id="descricao" name="descricao" value="<%=titulo.getDescricao()%>"></textarea>
+        </div>
+        <div class="col-5 float-l">
+            <label>Imagem</label>
+            <input type="file" name="inp" id="inp" accept="image/*">
+            <img id="img" width="140" height="170">
+            <input type="hidden" name="base64img" value="<%=titulo.getCapa()%>">
+        </div>
+        <div class="col-10">
+            <label >ISBN</label>
+            <input type="text" id="ISBN" name="ISBN"  value="<%=titulo.getIsbn()%>">
+        </div>
+        <br>
+
+        <div class="col-10">
+
+            <label>ISSN</label>
+            <input type="text" name="ISSN" id="ISSN"  value="<%=titulo.getIssn()%>">
+        </div>
+        <div class="col-5 float-l">
+            <label>Editor</label>
+            <select id="editor">
+                <option>
+                    Selecione um editor
+                </option>
+                <%for (Autor a : autores) {%>
+                <option value="<%=a.getIdAutor()%>"><%=a.getNome()%></option>
+                <%}%>
+            </select>
+        </div>
+        <div class="col-5 float-l">
+            <label>Volume</label>
+            <input type="text" id="Volume" name="Volume" value="<%=titulo.getEdicao()%>"
+        </div>
     </div>
 
     <div class="col-5 float-l">
@@ -132,13 +134,13 @@
                 <tr>
                     <th class="texto-centro">Tipo de autor</th>
                     <th class="texto-centro">Nome autor </th>
-                    <th><a onclick="addRowAutores()"><button class="botaoS verde">+</button></a></th>
+                    <th><a onclick="addRowAutores()"><input type='button' value='+' class='botaoS verde'></a></th>
                 </tr>
             </tbody>
 
         </table>
     </div>
-            <div class="col-5 float-l">
+    <div class="col-5 float-l">
         <label>Exemplares</label>
         <table id="exemplaresTB" name="exemplaresTB">
             <tbody>
@@ -146,13 +148,13 @@
                     <th class="texto-centro">ID</th>
                     <th class="texto-centro">Código</th>
                     <th class="texto-centro">Apenas consulta<th>
-                    <th><a onclick="addRowExemplares()"><button class="botaoS verde">+</button></a></th>
+                    <th><a onclick="addRowExemplares()"><input type='button' value='+' class='botaoS verde'></a></th>
                 </tr>
             </tbody>
-            
+
         </table>
     </div>
-        
+
     <div class="col-5 float-l"></div>
     <div class="col-5 float-l"> 
         <a href=""><button class="botaoX verde float-r">Salvar</button></a>
@@ -160,7 +162,7 @@
     </div>
 
 
-
+</form>
 
 
 <script>
@@ -173,7 +175,7 @@
     function addRowExemplares() {
         var html = "<tr><td>Pendente</td><td>Pendente</td><td><input type='checkbox' name='liberadoParaEmprestimo' value='1' > </td><td><a onclick='deletarRowExemplares(this)'><button class='botaos vermelho'>-</button></a></td></tr>";
         $('#exemplaresTB > tbody:last-child').append(html);
-}
+    }
 
     function deletarRowAutores(remove) {
         $(remove).parent().parent().remove();
@@ -224,7 +226,19 @@
         }
         ;
 
+        function readFile() {
+            if (this.files && this.files[0]) {
+                var FR = new FileReader();
+                FR.onload = function (e) {
+                    document.getElementById("img").src = e.target.result;
+                    console.log(e.target.result);
+//                    document.getElementById("b64").innerHTML = e.target.result;
+                };
+                FR.readAsDataURL(this.files[0]);
+            }
+        }
 
+        document.getElementById("inp").addEventListener("change", readFile, false);
     }
 
 

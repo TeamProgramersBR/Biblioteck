@@ -8,9 +8,11 @@ package br.harlock.bll;
 import br.harlock.dao.AutorDAO;
 import br.harlock.dao.ProdutoraDAO;
 import br.harlock.dao.TituloDAO;
+import br.harlock.model.Titulo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +40,7 @@ public class TituloServ extends HttpServlet {
     }
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, ParseException {
             String pagina = "index.jsp";
             acao = request.getParameter("acao");
             if (acao.equals("tituloui")) {
@@ -47,6 +49,10 @@ public class TituloServ extends HttpServlet {
                 request.setAttribute("autores", iteratorAutores);
                 request.setAttribute("prdoutoras", iteratorProdutoraDeConteudo);
                 pagina = "index.jsp?pagina=tituloui";
+            }
+            if (acao.equals("salvar")) {
+                Titulo titulo = new Titulo(" ");
+                
             }
             request.getRequestDispatcher(pagina).forward(request, response);
     }
@@ -67,6 +73,8 @@ public class TituloServ extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,6 +92,8 @@ public class TituloServ extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
