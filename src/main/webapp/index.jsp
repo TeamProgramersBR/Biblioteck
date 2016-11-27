@@ -50,6 +50,18 @@
       </div>
     </div>
   </div>
+      <div class="containerX">
+          <nav >
+          <ul>
+            <li><a href="index.jsp">Inicio</a></li>
+            <li><a href="index.jsp?pagina=titulosCTRL">Titulos</a></li>
+            <li><a href="index.jsp?pagina=autoresCTRL">Autores</a></li>
+            <li><a href="index.jsp?pagina=produtoresCTRL">Produtores de Conteudo</a></li>
+            <li><a href="index.jsp?pagina=emprestimosCTRL">Emprestimos</a></li>
+            <li><a href="index.jsp?pagina=usuariosCTRL">Usuários</a></li>
+          </ul>
+              </nav>
+      </div>
   <!--- aqui vai corpo -->
   
     <div class="containerX">
@@ -57,6 +69,18 @@
         <jsp:include page = "template/paginas/cadastro.html" />
         
         <%}else if(pagina.equals("entrar")){%>
+            <jsp:include page = "template/paginas/login.html" />
+        <%}else if(pagina.equals("titulosCTRL")){%>
+            <jsp:include page = "template/paginas/titulo/listarTitulos.jsp" />
+        <%}else if(pagina.equals("tituloui")){%>
+            <jsp:include page = "template/paginas/titulo/tituloui.jsp" />
+        <%}else if(pagina.equals("autoresCTRL")){%>
+            <jsp:include page = "template/paginas/login.html" />
+        <%}else if(pagina.equals("produtoresCTRL")){%>
+             <jsp:include page = "template/paginas/login.html" />
+        <%}else if(pagina.equals("emprestimosCTRL")){%>
+            <jsp:include page = "template/paginas/login.html" />
+        <%}else if(pagina.equals("usuariosCTRL")){%>
             <jsp:include page = "template/paginas/login.html" />
         <%}else{%>
             <jsp:include page = "template/paginas/home.html" />
