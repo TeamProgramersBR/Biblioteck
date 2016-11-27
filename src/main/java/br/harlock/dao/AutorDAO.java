@@ -57,17 +57,22 @@ public class AutorDAO {
     }
 
     public void Remover(Autor autor) throws SQLException {
+        try {
         String sql;
-        sql = "DELETE FROM Autor WHERE ID_AUTOR = ? ";
+        sql = "DELETE FROM autor WHERE ID_AUTOR = ? ";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, autor.getIdAutor());
-        ps.executeUpdate();
+        ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void Update(Autor autor) throws SQLException {
+        try{
         String sql;
         sql = "UPDATE"
-                + "  Autor"
+                + "  autor"
                 + " SET"
                 + "  ID_AUTOR = ?,"
                 + "  Nome = ?,"
@@ -82,18 +87,21 @@ public class AutorDAO {
         ps.setString(i++, autor.getNomeFantasia());
         ps.setString(i++, autor.getNacionalidade());
         ps.setInt(i++, autor.getIdAutor());
-        ps.executeUpdate();
-    }
+        ps.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        }
 
     public Autor Pesquisar(Autor autor) throws SQLException {
         String sql = "";
         PreparedStatement ps = null;
         if (!autor.getNome().equals("")) {
-            sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM Autor WHERE Nome = ?";
+            sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM autor WHERE Nome = ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, autor.getNome());
         }else{
-            sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM Autor WHERE ID_AUTOR = ?";
+            sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM autor WHERE ID_AUTOR = ?";
             ps = connection.prepareStatement(sql);
             ps.setInt(1, autor.getIdAutor());
         }
@@ -112,7 +120,7 @@ public class AutorDAO {
     public Iterator<Autor> ConsultarTodos() throws SQLException {
         List lista = new ArrayList();
         String sql;
-        sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM Autor";
+        sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM autor";
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {

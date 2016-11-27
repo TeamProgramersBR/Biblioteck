@@ -33,26 +33,25 @@ public class UsuarioDAO {
     public void Inserir(Usuario usuario) {
         try {
             String sql;
-            sql = "INSERT INTO usuario(ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario)"
+            sql = "INSERT INTO usuario(Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario)"
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
-            ps.setInt(1, usuario.getIdUsu());
-            ps.setString(2, usuario.getNivelDeAcesso());
-            ps.setString(3, usuario.getNome());
-            ps.setString(4, usuario.getCpf());
-            ps.setString(5, usuario.getEmail());
-            ps.setString(6, usuario.getNumeroResidencial());
-            ps.setString(7, usuario.getNumeroCelular());
-            ps.setString(8, usuario.getNumeroComercial());
-            ps.setString(9, usuario.getMatriculaEducacional());
-            ps.setString(10, usuario.getSenha());
-            ps.setString(11, usuario.getEnderecoLogadouro());
-            ps.setString(12, usuario.getEnderecoCEP());
-            ps.setString(13, usuario.getEnderecoCidade());
-            ps.setString(14, usuario.getEnderecoEstado());
-            ps.setString(15, usuario.getEnderecoPais());
-            ps.setString(16, usuario.getStatusDoUsuario());
+            ps.setString(1, usuario.getNivelDeAcesso());
+            ps.setString(2, usuario.getNome());
+            ps.setString(3, usuario.getCpf());
+            ps.setString(4, usuario.getEmail());
+            ps.setString(5, usuario.getNumeroResidencial());
+            ps.setString(6, usuario.getNumeroCelular());
+            ps.setString(7, usuario.getNumeroComercial());
+            ps.setString(8, usuario.getMatriculaEducacional());
+            ps.setString(9, usuario.getSenha());
+            ps.setString(10, usuario.getEnderecoLogadouro());
+            ps.setString(11, usuario.getEnderecoCEP());
+            ps.setString(12, usuario.getEnderecoCidade());
+            ps.setString(13, usuario.getEnderecoEstado());
+            ps.setString(14, usuario.getEnderecoPais());
+            ps.setString(15, usuario.getStatusDoUsuario());
 
             ps.executeUpdate();
 

@@ -31,15 +31,15 @@ public class ExemplarDAO {
     public void Inserir(Exemplar exemplar) {
         try {
             String sql;
-            sql = "INSERT INTO exemplar(ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
-                    + " VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO exemplar(LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
+                    + " VALUES (?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
-            ps.setInt(1, exemplar.getIdExe());
-            ps.setBoolean(2, exemplar.getLiberadoParaEmprestimo());
-            ps.setString(3, exemplar.getDuracao());
-            ps.setString(4, exemplar.getQuantidadePaginas());
-            ps.setInt(5, exemplar.getFkTitulo());
+
+            ps.setBoolean(1, exemplar.getLiberadoParaEmprestimo());
+            ps.setString(2, exemplar.getDuracao());
+            ps.setString(3, exemplar.getQuantidadePaginas());
+            ps.setInt(4, exemplar.getFkTitulo());
 
             ps.executeUpdate();
 

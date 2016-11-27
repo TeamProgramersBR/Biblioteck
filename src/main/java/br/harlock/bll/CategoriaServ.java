@@ -35,17 +35,22 @@ public class CategoriaServ extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
-        acao = request.getParameter("acao");
-        if(acao.equals("cadastrar")){
             Categoriaitemacervo c = new Categoriaitemacervo();
             c.setNomeCategoria(request.getParameter("nome"));
             c.setDescricao(request.getParameter("desc"));
+        acao = request.getParameter("acao");
+        if(acao.equals("cadastrar")){
             DAO.Inserir(c);
+        }else if(acao.equals("atualizar")){
+            c.setIdCat(Integer.parseInt(request.getParameter("ID")));
+            DAO.Update(c);
+        }else if(acao.equals("remover")){
+            c.setIdCat(Integer.parseInt(request.getParameter("ID")));
+            DAO.Remover(c);
         }else if(acao.equals("listarTodos")) {
             request.setAttribute("categorias", listarCategorias());
         }else if(acao.equals("pesquisar")){
-            Categoriaitemacervo c = new Categoriaitemacervo();
-            c.setIdCat(Integer.parseInt(request.getParameter("id")));
+            c.setIdCat(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("categoria", pesquisar(c));
         }
     }

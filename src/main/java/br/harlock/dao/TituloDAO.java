@@ -32,24 +32,23 @@ public class TituloDAO {
     public void Inserir(Titulo titulo) {
         try {
             String sql;
-                sql = "INSERT INTO titulo(ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC,FK_CAT_ARCE)"
-                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "INSERT INTO titulo(ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC,FK_CAT_ARCE)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
-            ps.setInt(1, titulo.getIdTitu());
-            ps.setString(2, titulo.getIsbn());
-            ps.setString(3, titulo.getIssn());
-            ps.setString(4, titulo.getObra());
-            ps.setString(5, titulo.getDescricao());
-            ps.setDate(6, (Date) titulo.getDataDePublicacao());
-            ps.setString(7, titulo.getCidadePublicacao());
-            ps.setString(8, titulo.getEstadoPublicacao());
-            ps.setString(9, titulo.getEdicao());
-            ps.setString(10, titulo.getIdioma());
-            ps.setString(11, titulo.getTraducao());
-            ps.setString(12, titulo.getCapa());
-            ps.setInt(13, titulo.getFkItemPdc());
-            ps.setInt(14, titulo.getFkItemAcervo());
+            ps.setString(1, titulo.getIsbn());
+            ps.setString(2, titulo.getIssn());
+            ps.setString(3, titulo.getObra());
+            ps.setString(4, titulo.getDescricao());
+            ps.setDate(5, (Date) titulo.getDataDePublicacao());
+            ps.setString(6, titulo.getCidadePublicacao());
+            ps.setString(7, titulo.getEstadoPublicacao());
+            ps.setString(8, titulo.getEdicao());
+            ps.setString(9, titulo.getIdioma());
+            ps.setString(10, titulo.getTraducao());
+            ps.setString(11, titulo.getCapa());
+            ps.setInt(12, titulo.getFkItemPdc());
+            ps.setInt(13, titulo.getFkItemAcervo());
 
             ps.executeUpdate();
 
