@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -43,15 +44,25 @@ public class AutorServ extends HttpServlet {
         a.setNomeFantasia(request.getParameter("fantasia"));
         a.setNacionalidade(request.getParameter("nacio"));
         acao = request.getParameter("acao");
-        if (acao.equalsIgnoreCase("cadastrar")) {
-            DAO.Inserir(a);
-        } else if (acao.equals("atualizar")) {
+        if (acao.equalsIgnoreCase("salvar")) {
+            if (Integer.parseInt(request.getParameter("ID")) != 0) {
+                DAO.Inserir(a);
+            }else{
+                DAO.Update(a);
+            }           
+        }else if(acao.equals("update")){
             a.setIdAutor(Integer.parseInt(request.getParameter("ID")));
-            DAO.Update(a);
-        } else if (acao.equals("remover")) {
+            request.setAttribute("autor", DAO.Pesquisar(a));
+            pagina =  "index.jsp?pagina=editarAutor";
+        }else if (acao.equals("remover")) {
             a.setIdAutor(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(a);
+        } else if (acao.equals("autores")){
+            Iterator autores = DAO.ConsultarTodos();
+            request.setAttribute("autores", autores);
+            pagina = "index.jsp?pagina=autoresCTRL";
         }
+        request.getRequestDispatcher(pagina).forward(request, response);
     }
 
     @Override
