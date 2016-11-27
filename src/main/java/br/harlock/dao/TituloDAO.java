@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,8 +33,8 @@ public class TituloDAO {
     public void Inserir(Titulo titulo) {
         try {
             String sql;
-                sql = "INSERT INTO titulo(ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC,FK_CAT_ARCE)"
-                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "INSERT INTO titulo(ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC,FK_CAT_ARCE,duracao,volume,quatidadepaginas,tipoDeObra)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setString(1, titulo.getIsbn());
@@ -49,7 +50,10 @@ public class TituloDAO {
             ps.setString(11, titulo.getCapa());
             ps.setInt(12, titulo.getFkItemPdc());
             ps.setInt(13, titulo.getFkItemAcervo());
-
+            ps.setFloat(14, titulo.getDuracao());
+            ps.setString(15, titulo.getVolume());
+            ps.setInt(16, (int) titulo.getQuantidadePaginas());
+            ps.setInt(17, Integer.parseInt(titulo.getTipoDeObra()));
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -73,7 +77,7 @@ public class TituloDAO {
 
     public void Update(Titulo titulo) {
         try {
-            PreparedStatement preparedStatement = connection
+            PreparedStatement ps = connection
                     .prepareStatement("UPDATE"
                             + "  titulo"
                             + " SET"
@@ -91,33 +95,44 @@ public class TituloDAO {
                             + "  Capa = ?,"
                             + "  FK_ITEM_PDC = ?,"
                             + "  FK_CAT_ARCE = ?"
+                            + "  tipoDeObra = ?"
+                            + "  duracao = ?"
+                            + "  volume = ?"
+                            + "  quatidadepaginas = ?"
                             + " WHERE"
                             + "   ID_TITU = ?");
             // Parameters start with 1
-            preparedStatement.setInt(1, titulo.getIdTitu());
-            preparedStatement.setString(2, titulo.getIsbn());
-            preparedStatement.setString(3, titulo.getIssn());
-            preparedStatement.setString(4, titulo.getObra());
-            preparedStatement.setString(5, titulo.getDescricao());
-            preparedStatement.setDate(6, (Date) titulo.getDataDePublicacao());
-            preparedStatement.setString(7, titulo.getCidadePublicacao());
-            preparedStatement.setString(8, titulo.getEstadoPublicacao());
-            preparedStatement.setString(9, titulo.getEdicao());
-            preparedStatement.setString(10, titulo.getIdioma());
-            preparedStatement.setString(11, titulo.getTraducao());
-            preparedStatement.setString(12, titulo.getCapa());
-            preparedStatement.setInt(13, titulo.getFkItemPdc());
-            preparedStatement.setInt(14, titulo.getFkItemAcervo());
-            preparedStatement.setInt(15, titulo.getIdTitu());
-            preparedStatement.executeUpdate();
-
+            ps.setInt(1, titulo.getIdTitu());
+            ps.setString(2, titulo.getIsbn());
+            ps.setString(3, titulo.getIssn());
+            ps.setString(4, titulo.getObra());
+            ps.setString(5, titulo.getDescricao());
+            ps.setDate(6, (Date) titulo.getDataDePublicacao());
+            ps.setString(7, titulo.getCidadePublicacao());
+            ps.setString(8, titulo.getEstadoPublicacao());
+            ps.setString(9, titulo.getEdicao());
+            ps.setString(10, titulo.getIdioma());
+            ps.setString(11, titulo.getTraducao());
+            ps.setString(12, titulo.getCapa());
+            ps.setInt(13, titulo.getFkItemPdc());
+            ps.setInt(14, titulo.getFkItemAcervo());
+            ps.setInt(15, titulo.getIdTitu());
+            ps.setInt(16, Integer.parseInt(titulo.getTipoDeObra()));
+            ps.setFloat(17, titulo.getDuracao());
+            ps.setString(18, titulo.getVolume());
+            ps.setInt(19, (int) titulo.getQuantidadePaginas());
+            ps.executeUpdate();
+//            titulo.getTipoDeObra()
+//            titulo.getDuracao()
+//            itulo.getVolume()
+//            titulo.getQuantidadePaginas()
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
-    public Iterator<Titulo> ConsultarTodos() {
+    public Iterator<Titulo> ConsultarTodos() throws ParseException {
         List<Titulo> titulos = new ArrayList<Titulo>();
         try {
             Statement statement = connection.createStatement();
@@ -129,7 +144,7 @@ public class TituloDAO {
                 titulo.setIssn(rs.getString("ISSN"));
                 titulo.setObra(rs.getString("obra"));
                 titulo.setDescricao(rs.getString("Descricao"));
-                titulo.setDataDePublicacao(rs.getDate("DataDePublicacao"));
+                titulo.setDataDePublicacao(rs.getString("DataDePublicacao"));
                 titulo.setCidadePublicacao(rs.getString("CidadePublicacao"));
                 titulo.setEstadoPublicacao(rs.getString("EstadoPublicacao"));
                 titulo.setEdicao(rs.getString("Edicao"));
@@ -138,6 +153,10 @@ public class TituloDAO {
                 titulo.setCapa(rs.getString("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
                 titulo.getCategoriaitemacervo().setIdCat(rs.getInt("Categoria_item_acervo_ID_CAT"));
+                titulo.setTipoDeObra(rs.getString("tipoDeObra"));
+                titulo.setDuracao(rs.getFloat("duracao"));
+                titulo.setVolume(rs.getString("volume"));
+                titulo.setQuantidadePaginas(rs.getInt("quatidadepaginas"));
                 titulos.add(titulo);
             }
         } catch (SQLException e) {
@@ -154,12 +173,10 @@ public class TituloDAO {
             String where="";
             if (titulo.getIdTitu() != 0) {
                 where=titulo.getIdTitu()+"";
-                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE FROM titulo WHERE ID_TITU = "+where;
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas FROM titulo WHERE ID_TITU = "+where;
             }else if (!titulo.getIdioma().equals(null)) {
                 where=titulo.getObra();
-                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE FROM titulo WHERE obra = "+where;
-                
-                
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas  FROM titulo WHERE obra = "+where;
             }
             ResultSet rs = ps.executeQuery(sql);
             rs.next();
@@ -170,7 +187,7 @@ public class TituloDAO {
                 titulo.setIssn(rs.getString("ISSN"));
                 titulo.setObra(rs.getString("obra"));
                 titulo.setDescricao(rs.getString("Descricao"));
-                titulo.setDataDePublicacao(rs.getDate("DataDePublicacao"));
+                titulo.setDataDePublicacao(rs.getString("DataDePublicacao"));
                 titulo.setCidadePublicacao(rs.getString("CidadePublicacao"));
                 titulo.setEstadoPublicacao(rs.getString("EstadoPublicacao"));
                 titulo.setEdicao(rs.getString("Edicao"));
@@ -179,6 +196,11 @@ public class TituloDAO {
                 titulo.setCapa(rs.getString("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
                 titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
+                titulo.setTipoDeObra(rs.getString("tipoDeObra"));
+                titulo.setDuracao(rs.getFloat("duracao"));
+                titulo.setVolume(rs.getString("volume"));
+                titulo.setQuantidadePaginas(rs.getInt("quatidadepaginas"));
+
 
         } catch (Exception e) {
         }

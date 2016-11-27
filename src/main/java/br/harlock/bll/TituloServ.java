@@ -5,9 +5,15 @@
  */
 package br.harlock.bll;
 
+import br.harlock.dao.AutorDAO;
+import br.harlock.dao.ProdutoraDAO;
 import br.harlock.dao.TituloDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,13 +29,26 @@ public class TituloServ extends HttpServlet {
 
     private String acao = "";
     private TituloDAO tituloDAO;
+    private ProdutoraDAO produtoraDAO;
+    private AutorDAO autorDAO;
     public TituloServ() throws Exception{
         tituloDAO = new TituloDAO();
+        produtoraDAO = new ProdutoraDAO();
+        autorDAO = new AutorDAO();
     }
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException, SQLException {
+            String pagina = "index.jsp";
+            acao = request.getParameter("acao");
+            if (acao.equals("tituloui")) {
+                Iterator iteratorAutores = autorDAO.ConsultarTodos();
+                Iterator iteratorProdutoraDeConteudo = produtoraDAO.ConsultarTodos();
+                request.setAttribute("autores", iteratorAutores);
+                request.setAttribute("prdoutoras", iteratorProdutoraDeConteudo);
+                pagina = "index.jsp?pagina=tituloui";
+            }
+            request.getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -44,7 +63,11 @@ public class TituloServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -58,7 +81,11 @@ public class TituloServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

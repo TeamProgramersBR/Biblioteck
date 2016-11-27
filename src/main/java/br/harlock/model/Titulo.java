@@ -1,5 +1,7 @@
 package br.harlock.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +34,11 @@ public class Titulo {
     private String traducao;
 
     private String capa;
-
+    private String volume;
+    private String tipoDeObra;
+    private float  duracao ;
+    private float quantidadePaginas;
+    
     private Categoriaitemacervo categoriaitemacervo;
 
     private ProdutoraConteudo produtoraConteudo;
@@ -42,7 +48,25 @@ public class Titulo {
     private List<TitulohasEditor> titulohasEditorCollection;
 
     private List<TituloTEMAutor> tituloTEMAutorCollection;
-
+        
+    public Titulo(String empty) throws ParseException{
+        this.idTitu = 0;
+        this.fkItemAcervo = 0;
+        this.fkItemPdc = 0;
+        this.isbn = " ";
+        this.issn = " ";
+        this.obra = " ";
+        this.descricao = " ";
+        setDataDePublicacao("01/01/1900");
+        this.cidadePublicacao = " ";
+        this.estadoPublicacao = " ";
+        this.edicao = " ";
+        this.idioma = " ";
+        this.traducao = " ";
+        this.capa = " ";
+        this.duracao = 0;
+        this.quantidadePaginas = 0;
+    }
     public Titulo() {
     }
 
@@ -124,8 +148,10 @@ public class Titulo {
         return dataDePublicacao;
     }
 
-    public void setDataDePublicacao(Date dataDePublicacao) {
-        this.dataDePublicacao = dataDePublicacao;
+    public void setDataDePublicacao(String dataDePublicacao) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sdf.parse(dataDePublicacao);
+        this.dataDePublicacao = date;
     }
 
     public String getCidadePublicacao() {
@@ -216,5 +242,38 @@ public class Titulo {
         this.tituloTEMAutorCollection = tituloTEMAutorCollection;
     }
 
+    public String getTipoDeObra() {
+        return tipoDeObra;
+    }
+
+    public void setTipoDeObra(String tipoDeObra) {
+        this.tipoDeObra = tipoDeObra;
+    }
+
+    public float getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(float duracao) {
+        this.duracao = duracao;
+    }
+
+    public float getQuantidadePaginas() {
+        return quantidadePaginas;
+    }
+
+    public void setQuantidadePaginas(float quantidadePaginas) {
+        this.quantidadePaginas = quantidadePaginas;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+    
+    
     
 }

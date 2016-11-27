@@ -66,8 +66,7 @@
   
     <div class="containerX">
         <%if(pagina.equals("cadastro")){%>
-        <jsp:include page = "template/paginas/cadastro.jsp" />
-        
+            <jsp:include page = "template/paginas/cadastro.jsp" />
         <%}else if(pagina.equals("entrar")){%>
             <jsp:include page = "template/paginas/login.html" />
         <%}else if(pagina.equals("titulosCTRL")){%>
@@ -89,7 +88,8 @@
   </div>
   
   <!-- aqui vai css -->
-  <script src="js/sessao.js" charset="utf-8"></script>
-  <script src="js/formularios.js" charset="utf-8"></script>
+  <script src="template/js/jquery-3.1.1.min.js"></script>
+  <!--<script src="js/sessao.js" charset="utf-8"></script>-->
+  <!--<script src="js/formularios.js" charset="utf-8"></script>-->
 </body>
 </html>

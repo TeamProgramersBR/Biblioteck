@@ -108,7 +108,16 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
-
+input[type=date] {
+    width: 100%;
+    /*background-color: #4CAF50;*/
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 input[type=submit]:hover {
     background-color: #45a049;
 }

@@ -12,12 +12,13 @@
             titulos.add(iterator.next());
         }
     }
+   
 %>
 
 
 <div class="containerX">
     <div class="float-r">
-        <a href="index.jsp?pagina=tituloui"><button class="botaoX verde texto-branco">+ Titulo</button></a>
+        <a href="Titulo.do?acao=tituloui"><button class="botaoX verde texto-branco">+ Titulo</button></a>
     </div>
 </div>
 <% if(titulos.isEmpty()){ %>
