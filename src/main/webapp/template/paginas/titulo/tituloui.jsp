@@ -3,7 +3,6 @@
 <%@page import="br.harlock.model.ProdutoraConteudo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
-TESTE
 <%
     ArrayList<Autor> autores = new ArrayList();
     ArrayList<ProdutoraConteudo> produtoras = new ArrayList();
@@ -23,12 +22,13 @@ TESTE
     }
     String[] tipoDeTitulo = {"Livro", "Vídeo", "Artigo", "Revista"};
 %>
-<div class="containerX">
+
+
     <div class="col-12">
         <label>Nome da obra</label>
         <input type="text" name="obra" >
         <input type="hidden" id="idTitulo" value="<%=titulo.getIdTitu()%>"
-    </div>
+    
     <div class="col-10 float-l">
         <label>tipo de obra</label>
         <select onclick="tipoDeTitulo()" id="tipoobra" name="tipoObra">
@@ -67,97 +67,118 @@ TESTE
         <input type="text" name="ISSN" id="ISSN"  value="<%=titulo.getIssn()%>">
     </div>
     <div class="col-5 float-l">
-        <label>Edição</label>
-        <select>
+        <label>Editor</label>
+        <select id="editor">
             <option>
                 Selecione um editor
             </option>
             <%for (Autor a : autores) {%>
-
             <option value="<%=a.getIdAutor()%>"><%=a.getNome()%></option>
             <%}%>
         </select>
     </div>
-    <div class="col-5 float-l">
-        <label>Edição</label>
-        <input type="text" id="edicao" name="edicao" value="<%=titulo.getEdicao()%>"
+        <div class="col-5 float-l">
+        <label>Volume</label>
+        <input type="text" id="Volume" name="Volume" value="<%=titulo.getEdicao()%>"
+</div>
     </div>
-</div>
 
-<div class="col-5 float-l">
-    <label>Duração</label>
-    <input type="text" name="duracao" id="duracao"  value="<%=titulo.getDuracao()%>">
-</div>
-<div class="col-5 float-l">
-    <label>Número de páginas </label>
-    <input type="text" name="numeropaginas" id="numeropaginas"  value="<%=titulo.getQuantidadePaginas()%>">
-</div>
-<div class="col-5 float-l">
-    <label>Data de publicação</label>
-    <input type="date" name="datapublicacao"  value="<%=titulo.getDataDePublicacao()%>">
-</div>
-<div class="col-5 float-l">
-    <label>Estado de Publicacao</label>
-    <select id="estado" name="estado"  value="<%=titulo.getEstadoPublicacao()%>"></select>
-</div>
-<div class="col-5 float-l">
-    <label>Cidade de publicação</label>
-    <select id="cidade" name="cidade"  value="<%=titulo.getCidadePublicacao()%>"></select>
-</div>
+    <div class="col-5 float-l">
+        <label>Duração</label>
+        <input type="text" name="duracao" id="duracao"  value="<%=titulo.getDuracao()%>">
+    </div>
+    <div class="col-5 float-l">
+        <label>Número de páginas </label>
+        <input type="text" name="numeropaginas" id="numeropaginas"  value="<%=titulo.getQuantidadePaginas()%>">
+    </div>
+    <div class="col-4 float-l">
+        <label>Data de publicação</label>
+        <input type="date" name="datapublicacao"  value="<%=titulo.getDataDePublicacao()%>">
+    </div>
+    <div class="col-10 float-l">
+        <label>Estado de Publicacao</label>
+        <select id="estado" name="estado"  value="<%=titulo.getEstadoPublicacao()%>"></select>
+    </div>
+    <div class="col-5 float-l">
+        <label>Cidade de publicação</label>
+        <select id="cidade" name="cidade"  value="<%=titulo.getCidadePublicacao()%>"></select>
+    </div>
 
 
-<div class="col-5 float-l">
-    <label>Idioma Original</label>
-    <select id="idiomaObra" name="idiomaObra"  value="<%=titulo.getIdioma()%>"></select>
-</div>
+    <div class="col-5 float-l">
+        <label>Idioma Original</label>
+        <select id="idiomaObra" name="idiomaObra"  value="<%=titulo.getIdioma()%>"></select>
+    </div>
 
-<div class="col-5 float-l">
-    <label>Idioma da tradução</label>
-    <select id="traducao" name="traducao"  value="<%=titulo.getTraducao()%>"></select>
-</div>
-<div class="col-5 float-l">
-    <label>Produtora</label>
-    <select id="produtora" name="produtora">
-        <% for (ProdutoraConteudo p : produtoras) {%>
-        <% if (p.getIdPdc() == titulo.getFkItemPdc()) {%>
-        <option value="<%=p.getIdPdc()%>" selected=""><%=p.getNomeProdutora()%></option>
-        <%}%>
-        <option value="<%=p.getIdPdc()%>"><%=p.getNomeProdutora()%></option>
-        <% }%>
-    </select>
-</div>
-<div class="col-5 float-l">
-    <label>Autores e co-autores</label>
-    <table id="AutoresTb" name="AutoresTb">
-        <tbody>
-            <tr>
-                <th class="texto-centro">Tipo de autor</th>
-                <th class="texto-centro">Nome autor </th>
-                <th><a onclick="addRowAutores()"><button class="botaoS verde">+</button></a></th>
-            </tr>
-        </tbody>
+    <div class="col-5 float-l">
+        <label>Idioma da tradução</label>
+        <select id="traducao" name="traducao"  value="<%=titulo.getTraducao()%>"></select>
+    </div>
+    <div class="col-10 float-l">
+        <label>Produtora</label>
+        <select id="produtora" name="produtora">
+            <% for (ProdutoraConteudo p : produtoras) {%>
+            <% if (p.getIdPdc() == titulo.getFkItemPdc()) {%>
+            <option value="<%=p.getIdPdc()%>" selected=""><%=p.getNomeProdutora()%></option>
+            <%}%>
+            <option value="<%=p.getIdPdc()%>"><%=p.getNomeProdutora()%></option>
+            <% }%>
+        </select>
+    </div>
+    <div class="col-5 float-l">
+        <label>Autores e co-autores</label>
+        <table id="AutoresTb" name="AutoresTb">
+            <tbody>
+                <tr>
+                    <th class="texto-centro">Tipo de autor</th>
+                    <th class="texto-centro">Nome autor </th>
+                    <th><a onclick="addRowAutores()"><button class="botaoS verde">+</button></a></th>
+                </tr>
+            </tbody>
 
-    </table>
-</div>
-<div class="col-5 float-l"></div>
-<div class="col-5 float-l"> 
-    <a href=""><button class="botaoX verde float-r">Salvar</button></a>
-    <div class="float-r"></div>
-</div>
-</div>
+        </table>
+    </div>
+            <div class="col-5 float-l">
+        <label>Exemplares</label>
+        <table id="exemplaresTB" name="exemplaresTB">
+            <tbody>
+                <tr>
+                    <th class="texto-centro">ID</th>
+                    <th class="texto-centro">Código</th>
+                    <th class="texto-centro">Apenas consulta<th>
+                    <th><a onclick="addRowExemplares()"><button class="botaoS verde">+</button></a></th>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+        
+    <div class="col-5 float-l"></div>
+    <div class="col-5 float-l"> 
+        <a href=""><button class="botaoX verde float-r">Salvar</button></a>
+        <div class="float-r"></div>
+    </div>
+
 
 
 
 
 <script>
 
-    function addRowAutores(parameters) {
+    function addRowAutores() {
         var html = "<tr><td><select id='tipoDeAutor' ><option value='Autor'>Autor</option><option value='Co-autor'>Co-autor</option></select></td><td><select id='autorObra'><%for (Autor a : autores) {%><option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option><%}%></select></td><td><a onclick='deletarRowAutores(this);'><button class='botaos vermelho'>-</button></a> </td></tr>";
 
         $('#AutoresTb > tbody:last-child').append(html);
     }
- 
-    function deletarRowAutores(remove){
+    function addRowExemplares() {
+        var html = "<tr><td>Pendente</td><td>Pendente</td><td><input type='checkbox' name='liberadoParaEmprestimo' value='1' > </td><td><a onclick='deletarRowExemplares(this)'><button class='botaos vermelho'>-</button></a></td></tr>";
+        $('#exemplaresTB > tbody:last-child').append(html);
+}
+
+    function deletarRowAutores(remove) {
+        $(remove).parent().parent().remove();
+    }
+    function deletarRowExemplares(remove) {
         $(remove).parent().parent().remove();
     }
     function tipoDeTitulo() {
