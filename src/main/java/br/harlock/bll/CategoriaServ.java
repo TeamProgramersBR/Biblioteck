@@ -35,24 +35,38 @@ public class CategoriaServ extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
+            String pagina = "cadastrocategoria";
+            
             Categoriaitemacervo c = new Categoriaitemacervo();
+            
             c.setNomeCategoria(request.getParameter("nome"));
             c.setDescricao(request.getParameter("desc"));
+            
         acao = request.getParameter("acao");
-        if(acao.equals("cadastrar")){
-            DAO.Inserir(c);
-        }else if(acao.equals("atualizar")){
+        
+        if(acao.equals("salvar")){
+            if (Integer.parseInt(request.getParameter("ID")) == 0) {
+                
+                DAO.Inserir(c);
+            }else{
+                c.setIdCat(Integer.parseInt(request.getParameter("ID")));
+                DAO.Update(c);
+            }           
+            pagina = "Autor.do?acao=autores";
+            
+        }else if(acao.equals("update")){
             c.setIdCat(Integer.parseInt(request.getParameter("ID")));
-            DAO.Update(c);
+            request.setAttribute("cat", DAO.Pesquisar(c));
+            pagina =  "index.jsp?pagina=autorui";
         }else if(acao.equals("remover")){
             c.setIdCat(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(c);
-        }else if(acao.equals("listarTodos")) {
-            request.setAttribute("categorias", listarCategorias());
-        }else if(acao.equals("pesquisar")){
-            c.setIdCat(Integer.parseInt(request.getParameter("ID")));
-            request.setAttribute("categoria", pesquisar(c));
+        }else if(acao.equals("categorias")) {
+            Iterator categorias = DAO.ConsultarTodos();
+            request.setAttribute("categorias", categorias);
+            pagina = "index.jsp?pagina=categoriasCTRL";
         }
+        request.getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
