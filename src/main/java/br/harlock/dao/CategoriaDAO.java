@@ -44,16 +44,21 @@ public class CategoriaDAO {
     }
 
     public void Remover(Categoriaitemacervo categoria) throws SQLException {
+        try{
         String sql;
         sql = "DELETE FROM categoria_item_acervo WHERE ID_CAT = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, categoria.getIdCat());
         ps.executeUpdate();
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public void Update(Categoriaitemacervo categoria) throws SQLException {
+        try{
         String sql;
-        sql = "UPDATE Categoria_item_acervo SET ID_CAT = ?, NomeCategoria = ?, Descricao = ? WHERE ID_CAT = ?";
+        sql = "UPDATE categoria_item_acervo SET ID_CAT = ?, NomeCategoria = ?, Descricao = ? WHERE ID_CAT = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
         ps.setInt(i++, categoria.getIdCat());
@@ -61,6 +66,9 @@ public class CategoriaDAO {
         ps.setString(i++, categoria.getDescricao());
         ps.setInt(i++, categoria.getIdCat());
         ps.executeUpdate();
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public Categoriaitemacervo Pesquisar(Categoriaitemacervo categoria) throws SQLException, Exception {

@@ -19,46 +19,57 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 /**
  *
  * @author minerthal
  */
 @WebServlet("/Usuario.do")
 public class UsuarioServ extends HttpServlet {
+
     private String acao = "";
     private UsuarioDAO DAO;
     private MD5 pss;
-    public UsuarioServ() throws Exception{
-        DAO  = new UsuarioDAO();
-        acao = "";
+
+    public UsuarioServ() throws Exception {
+        DAO = new UsuarioDAO();
+
         pss = new MD5();
-        
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NoSuchAlgorithmException {
         String pagina = "cadastrousu.html";
         acao = request.getParameter("acao");
-        if(acao.equalsIgnoreCase("cadastrar")){
-            Usuario u = new Usuario();
-            u.setNivelDeAcesso(request.getParameter("acesso"));
-            u.setNome(request.getParameter("nome"));
-            u.setCpf(request.getParameter("CPF"));
-            u.setEmail(request.getParameter("email"));
-            u.setSenha(pss.toMD5(request.getParameter("senha")));
-            u.setNumeroResidencial(request.getParameter("telres"));
-            u.setNumeroCelular(request.getParameter("telcel"));
-            u.setNumeroComercial(request.getParameter("telcom"));
-            u.setMatriculaEducacional(request.getParameter("matricula"));
-            u.setEnderecoLogadouro(request.getParameter("logr"));
-            u.setEnderecoCEP(request.getParameter("CEP"));
-            u.setEnderecoCidade(request.getParameter("cidade"));
-            u.setEnderecoEstado(request.getParameter("estado"));
-            u.setEnderecoPais(request.getParameter("pais"));
+        Usuario u = new Usuario();
+
+        u.setNivelDeAcesso(request.getParameter("acesso"));
+        u.setNome(request.getParameter("nome"));
+        u.setCpf(request.getParameter("CPF"));
+        u.setEmail(request.getParameter("email"));
+        u.setSenha(pss.toMD5(request.getParameter("senha")));
+        u.setNumeroResidencial(request.getParameter("telres"));
+        u.setNumeroCelular(request.getParameter("telcel"));
+        u.setNumeroComercial(request.getParameter("telcom"));
+        u.setMatriculaEducacional(request.getParameter("matricula"));
+        u.setEnderecoLogadouro(request.getParameter("logr"));
+        u.setEnderecoCEP(request.getParameter("CEP"));
+        u.setEnderecoCidade(request.getParameter("cidade"));
+        u.setEnderecoEstado(request.getParameter("estado"));
+        u.setEnderecoPais(request.getParameter("pais"));
+        u.setStatusDoUsuario(request.getParameter("sts"));
+        if (acao.equalsIgnoreCase("cadastrar")) {
+
             u.setStatusDoUsuario("Pendente");
-            DAO.Inserir(u);  
+            DAO.Inserir(u);
+            pagina = "index.jsp?acao=logar";
+        } else if (acao.equals("atualizar")) {
+            u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
+            DAO.Update(u);
+            pagina = "index.jsp?acao=logar";
+        } else if (acao.equals("remover")) {
+            u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
+            DAO.Remover(u);
             pagina = "index.jsp?acao=logar";
         }
 

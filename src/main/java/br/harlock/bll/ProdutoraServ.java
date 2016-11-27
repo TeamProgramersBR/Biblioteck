@@ -21,24 +21,34 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Produtora.do")
 public class ProdutoraServ extends HttpServlet {
+
     private String acao = "";
     private ProdutoraDAO DAO;
-    public ProdutoraServ() throws Exception{
+
+    public ProdutoraServ() throws Exception {
         DAO = new ProdutoraDAO();
         acao = "";
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String pagina = "cadastroprodutora";
-            acao = request.getParameter("acao");
-            if(acao.equalsIgnoreCase("cadastrar")){
-                ProdutoraConteudo p = new ProdutoraConteudo();
-                p.setNomeProdutora(request.getParameter("nome"));
-                p.setDescricao(request.getParameter("desc"));
-                p.setCnpj(request.getParameter("CNPJ"));
-                DAO.Inserir(p);
-            }
+        String pagina = "cadastroprodutora";
+        
+        ProdutoraConteudo p = new ProdutoraConteudo();
+        
+        p.setNomeProdutora(request.getParameter("nome"));
+        p.setDescricao(request.getParameter("desc"));
+        p.setCnpj(request.getParameter("CNPJ"));
+        acao = request.getParameter("acao");
+        if (acao.equalsIgnoreCase("cadastrar")) {
+            DAO.Inserir(p);
+        }else if(acao.equals("atualizar")){
+            p.setIdPdc(Integer.parseInt(request.getParameter("ID")));
+            DAO.Update(p);
+        }else if(acao.equals("remover")){
+            p.setIdPdc(Integer.parseInt(request.getParameter("ID")));
+            DAO.Remover(p);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

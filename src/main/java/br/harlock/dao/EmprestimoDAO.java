@@ -49,7 +49,7 @@ public class EmprestimoDAO {
                 + "?,"
                 + "?,"
                 + "?,"
-                + "?);";
+                + "?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         int i = 1;
         ps.setDate(i++, (Date) emprestimo.getDataEmprestimo());

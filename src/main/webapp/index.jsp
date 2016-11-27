@@ -41,7 +41,7 @@
   
     <div class="containerX">
         <%if(pagina.equals("cadastro")){%>
-        <jsp:include page = "template/paginas/cadastro.html" />
+        <jsp:include page = "template/paginas/cadastro.jsp" />
         
         <%}else if(pagina.equals("entrar")){%>
             <jsp:include page = "template/paginas/login.html" />
