@@ -23,7 +23,12 @@ public class Autor {
         this.nomeFantasia = nomeFantasia;
         this.nacionalidade = nacionalidade;
     }
-
+    public Autor(String v) {
+        this.idAutor = 0;
+        this.nome = "";
+        this.nomeFantasia = "";
+        this.nacionalidade = "";
+    }
     public Integer getIdAutor() {
         return idAutor;
     }

@@ -26,30 +26,29 @@ public class AutorDAO {
 
     public void Inserir(Autor autor) throws SQLException {
         try {
-            
-        
-        String sql;
-        sql = "INSERT"
-                + " INTO"
-                + "  autor("
- //               + "    ID_AUTOR,"
-                + "    Nome,"
-                + "    NomeFantasia,"
-                + "    Nacionalidade"
-                + "  )"
-                + " VALUES("
- //               + "  ?,"
-                + "  ?,"
-                + "  ?,"
-                + "  ?"
-                + ")";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        int i = 1;
+
+            String sql;
+            sql = "INSERT"
+                    + " INTO"
+                    + "  autor("
+                    //               + "    ID_AUTOR,"
+                    + "    Nome,"
+                    + "    NomeFantasia,"
+                    + "    Nacionalidade"
+                    + "  )"
+                    + " VALUES("
+                    //               + "  ?,"
+                    + "  ?,"
+                    + "  ?,"
+                    + "  ?"
+                    + ")";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            int i = 1;
 //        ps.setInt(i++, autor.getIdAutor()); // 
-        ps.setString(i++, autor.getNome()); // 
-        ps.setString(i++, autor.getNomeFantasia());
-        ps.setString(i++, autor.getNacionalidade());
-        ps.executeUpdate();
+            ps.setString(i++, autor.getNome()); // 
+            ps.setString(i++, autor.getNomeFantasia());
+            ps.setString(i++, autor.getNacionalidade());
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,56 +57,54 @@ public class AutorDAO {
 
     public void Remover(Autor autor) throws SQLException {
         try {
-        String sql;
-        sql = "DELETE FROM autor WHERE ID_AUTOR = ? ";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, autor.getIdAutor());
-        ps.execute();
+            String sql;
+            sql = "DELETE FROM autor WHERE ID_AUTOR = ? ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, autor.getIdAutor());
+            ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void Update(Autor autor) throws SQLException {
-        try{
-        String sql;
-        sql = "UPDATE"
-                + "  autor"
-                + " SET"
-                + "  ID_AUTOR = ?,"
-                + "  Nome = ?,"
-                + "  NomeFantasia = ?,"
-                + "  Nacionalidade = ?"
-                + " WHERE"                                                                                
-                + "  ID_AUTOR = ?";
-        int i = 1;
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(i++, autor.getIdAutor());
-        ps.setString(i++, autor.getNome());
-        ps.setString(i++, autor.getNomeFantasia());
-        ps.setString(i++, autor.getNacionalidade());
-        ps.setInt(i++, autor.getIdAutor());
-        ps.execute();
-        }catch(Exception e){
+        try {
+            String sql;
+            sql = "UPDATE"
+                    + "  autor"
+                    + " SET"
+                    + "  ID_AUTOR = ?,"
+                    + "  Nome = ?,"
+                    + "  NomeFantasia = ?,"
+                    + "  Nacionalidade = ?"
+                    + " WHERE"
+                    + "  ID_AUTOR = ?";
+            int i = 1;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(i++, autor.getIdAutor());
+            ps.setString(i++, autor.getNome());
+            ps.setString(i++, autor.getNomeFantasia());
+            ps.setString(i++, autor.getNacionalidade());
+            ps.setInt(i++, autor.getIdAutor());
+            ps.execute();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        }
+    }
 
     public Autor Pesquisar(Autor autor) throws SQLException {
         String sql = "";
-        PreparedStatement ps = null;
-        if (!autor.getNome().equals("")) {
+        if (autor.getNome() != null) {
             sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM autor WHERE Nome = ?";
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, autor.getNome());
-        }else{
+        } else {
             sql = "SELECT ID_AUTOR, Nome, NomeFantasia, Nacionalidade FROM autor WHERE ID_AUTOR = ?";
-            ps = connection.prepareStatement(sql);
+        }
+        PreparedStatement ps = connection.prepareStatement(sql);
+        if (autor.getNome() != null) {
+            ps.setString(1, autor.getNome());
+        } else {
             ps.setInt(1, autor.getIdAutor());
         }
-         
-        
-        
         ResultSet rs = ps.executeQuery();
         rs.next();
         autor.setIdAutor(rs.getInt("ID_AUTOR"));
