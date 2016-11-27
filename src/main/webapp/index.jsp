@@ -75,7 +75,7 @@
             <jsp:include page = "template/paginas/titulo/tituloui.jsp" />
             <%} else if (pagina.equals("autoresCTRL")) {%>
             <jsp:include page = "template/paginas/autor/listar.jsp" />
-            <%} else if (pagina.equals("editarAutor")) {%>
+            <%} else if (pagina.equals("autorui")) {%>
             <jsp:include page = "template/paginas/autor/cadastroautor.jsp" />
             <%} else if (pagina.equals("produtoresCTRL")) {%>
             <%} else if (pagina.equals("produtoresCTRL")) {%>

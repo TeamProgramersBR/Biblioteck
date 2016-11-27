@@ -45,15 +45,18 @@ public class AutorServ extends HttpServlet {
         a.setNacionalidade(request.getParameter("nacio"));
         acao = request.getParameter("acao");
         if (acao.equalsIgnoreCase("salvar")) {
-            if (Integer.parseInt(request.getParameter("ID")) != 0) {
+            if (Integer.parseInt(request.getParameter("ID")) == 0) {
+                
                 DAO.Inserir(a);
             }else{
+                a.setIdAutor(Integer.parseInt(request.getParameter("ID")));
                 DAO.Update(a);
             }           
+            pagina = "Autor.do?acao=autores";
         }else if(acao.equals("update")){
             a.setIdAutor(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("autor", DAO.Pesquisar(a));
-            pagina =  "index.jsp?pagina=editarAutor";
+            pagina =  "index.jsp?pagina=autorui";
         }else if (acao.equals("remover")) {
             a.setIdAutor(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(a);

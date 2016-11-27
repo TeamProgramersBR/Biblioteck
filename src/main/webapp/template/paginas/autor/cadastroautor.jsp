@@ -5,16 +5,24 @@
     Autor autor = new Autor();
     if (request.getAttribute("autor") != null) {
         autor = (Autor) request.getAttribute("autor");
+    }else{
+        autor.setNome("");
+        autor.setIdAutor(0);
+        autor.setNomeFantasia("");
+        autor.setNacionalidade(" ");
     }
 %>
 <div class="containerX">
-    <div class="col-12 ">
+    <div class="col-5 float-l">
+        <h2><%if(autor.getIdAutor()!=0){%>Editar Autor<%}else{%>Cadastrar Autor<%}%></h2>
+    </div>
+    <div class="col-5 float-l">
         <a onclick="voltar()" class="float-r"><button class="botaoX verde">Voltar</button></a>
     </div>
 </div>
 <div class="containerX">
     <div class="containerMD">
-        <form class="form-login" name="salvarForm" action="<%=s.url%>Autor.do" id="salvarForm" method="post">
+        <form class="form-login" name="salvarForm" action="<%=s.url%>Autor.do?acao=salvar" id="salvarForm" method="post">
             <input type="hidden" id="acao" name="acao" value="cadastrar" />
             <div class="float-l">
                 <input type="hidden" name="ID" class="campo-form" value="<%=autor.getIdAutor()%>" size="30"> 
@@ -33,7 +41,7 @@
             </div>
             <div class="float-l">
                 <a onclick="salvar('salvar')">
-                    <input type="button" class="botaoX verde" name="cadastrar" value="Salvar"> </a>
+                    <input type="button" class="botaoX verde" value="Salvar"> </a>
             </div>
             
         </form>
@@ -41,7 +49,6 @@
 </div>
 <script>
     function salvar(acao) {
-        document.getElementById("acao").value = acao;
         document.getElementById("salvarForm").submit();
     }
     function voltar() {

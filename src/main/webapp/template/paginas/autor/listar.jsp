@@ -19,6 +19,9 @@
     }
 
 %>
+<div class="containerX">
+    <a href="index.jsp?pagina=autorui" class="float-r"><button class="botaoX verde">+Novo Autor</button></a>
+</div>
 <%if (mostrar) {%>
 <table>
     <tr>

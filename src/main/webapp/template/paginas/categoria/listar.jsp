@@ -1,3 +1,8 @@
+<%
+    boolean visualizar = false;
+%>
+
+<%if(visualizar){%>
 <table>
     <tr>
         <th class="texto-centro">Obra</th>
@@ -16,3 +21,4 @@
     </tr>
 
 </table>
+<%}%>
