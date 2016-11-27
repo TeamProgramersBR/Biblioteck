@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -112,7 +113,7 @@ public class EmprestimoDAO {
 
     }
 
-    public Emprestimo Pesquisar(Emprestimo emprestimo) throws SQLException {
+    public Emprestimo Pesquisar(Emprestimo emprestimo) throws SQLException, ParseException {
         
         String sql;
             sql = "SELECT ID_EMP, DataEmprestimo, DataPrevDevolucao, DataDevolucao, ValorMulta, Situacao, Reserva, FK_Funcionario, FK_USU FROM emprestimo WHERE ID_EMP = ?";
@@ -120,9 +121,9 @@ public class EmprestimoDAO {
         ps.setInt(1, emprestimo.getIdEmp());
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            emprestimo.setDataEmprestimo(rs.getDate("DataEmprestimo"));
-            emprestimo.setDataPrevDevolucao(rs.getDate("DataPrevDevolucao"));
-            emprestimo.setDataDevolucao(rs.getDate("DataDevolucao"));
+            emprestimo.setDataEmprestimo(rs.getString("DataEmprestimo"));
+            emprestimo.setDataPrevDevolucao(rs.getString("DataPrevDevolucao"));
+            emprestimo.setDataDevolucao(rs.getString("DataDevolucao"));
             emprestimo.setValorMulta(rs.getLong("ValorMulta"));
             emprestimo.setSituacao(rs.getString("Situacao"));
             emprestimo.setReserva(rs.getBoolean("Reserva"));
@@ -132,7 +133,7 @@ public class EmprestimoDAO {
         return emprestimo;
     }
 
-    public Iterator<Emprestimo> ConsultarTodos() throws SQLException {
+    public Iterator<Emprestimo> ConsultarTodos() throws SQLException, ParseException {
         List lista = new ArrayList();
 
         String sql;
@@ -141,9 +142,9 @@ public class EmprestimoDAO {
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Emprestimo emprestimo = new Emprestimo();
-            emprestimo.setDataEmprestimo(rs.getDate("DataEmprestimo"));
-            emprestimo.setDataPrevDevolucao(rs.getDate("DataPrevDevolucao"));
-            emprestimo.setDataDevolucao(rs.getDate("DataDevolucao"));
+            emprestimo.setDataEmprestimo(rs.getString("DataEmprestimo"));
+            emprestimo.setDataPrevDevolucao(rs.getString("DataPrevDevolucao"));
+            emprestimo.setDataDevolucao(rs.getString("DataDevolucao"));
             emprestimo.setValorMulta(rs.getLong("ValorMulta"));
             emprestimo.setSituacao(rs.getString("Situacao"));
             emprestimo.setReserva(rs.getBoolean("Reserva"));
