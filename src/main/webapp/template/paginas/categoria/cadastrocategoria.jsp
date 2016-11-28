@@ -27,7 +27,6 @@
                 <form class="form-login" name="salvarForm" action="<%=s.url%>Categoria.do" id="salvarForm" method="post">
                     <input type="hidden" id="acao" name="acao" value="cadastrar" />
                     <div class="float-l">
-                        <label>ID</label>
                         <input type="hidden" name="ID" class="campo-form" value="<%=cat.getIdCat()%>" size="30"> </div>
                     <div class="float-l">
                         <label>Nome</label>

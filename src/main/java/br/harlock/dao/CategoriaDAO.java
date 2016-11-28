@@ -92,8 +92,7 @@ public class CategoriaDAO {
     public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException {
         List lista = new ArrayList();
         String sql;
-        sql = "SELECT ID_CAT, NomeCategoria,Descricao"
-                + "FROM categoria_item_acervo";
+        sql = "SELECT * FROM categoria_item_acervo";
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -101,6 +100,7 @@ public class CategoriaDAO {
             categoria.setIdCat(rs.getInt("ID_CAT"));
             categoria.setNomeCategoria(rs.getString("NomeCategoria"));
             categoria.setDescricao(rs.getString("Descricao"));
+            lista.add(categoria);
         }
 
         return lista.iterator();

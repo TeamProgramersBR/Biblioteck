@@ -4,8 +4,7 @@
 <%@page import="java.util.Iterator"%>
 
 <%
-    
-boolean mostrar = false;
+    boolean mostrar = false;
     ArrayList<Categoriaitemacervo> categorias = new ArrayList();
     if (request.getAttribute("categorias") != null) {
         Iterator iterator = (Iterator) request.getAttribute("categorias");
@@ -21,6 +20,7 @@ boolean mostrar = false;
 
 
 %>
+
 <div class="containerX">
     <a href="index.jsp?pagina=categoriaui" class="float-r"><button class="botaoX verde">+Nova Categoria</button></a>
 </div>
@@ -33,13 +33,14 @@ boolean mostrar = false;
     </tr>
     <%for (Categoriaitemacervo cat: categorias) {%>
     <tr>   
-        <td></td>
-        <td></td>
+        <td><%=cat.getNomeCategoria()%></td>
+        <td><%=cat.getDescricao()%></td>
         <td class="float-r">
-            <a href="Titulo.do?acao=update&ID=<%=cat.getIdCat()%>"><button class="botaoX azul">Editar</button></a>
-            <a href="Titulo.do?acao=remover&ID=<%=cat.getIdCat()%>"><button class="botaoX verde">Excluir</button></a>
+            <a href="Categoria.do?acao=update&ID=<%=cat.getIdCat()%>"><button class="botaoX azul">Editar</button></a>
+            <a href="Categoria.do?acao=remover&ID=<%=cat.getIdCat()%>"><button class="botaoX verde">Excluir</button></a>
         </td>
     </tr>
+    <%}%>
 
 </table>
 <%}%>

@@ -52,12 +52,12 @@ public class CategoriaServ extends HttpServlet {
                 c.setIdCat(Integer.parseInt(request.getParameter("ID")));
                 DAO.Update(c);
             }           
-            pagina = "Autor.do?acao=autores";
+            pagina = "Categoria.do?acao=autores";
             
         }else if(acao.equals("update")){
             c.setIdCat(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("cat", DAO.Pesquisar(c));
-            pagina =  "index.jsp?pagina=autorui";
+            pagina =  "index.jsp?pagina=categoriaui";
         }else if(acao.equals("remover")){
             c.setIdCat(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(c);
