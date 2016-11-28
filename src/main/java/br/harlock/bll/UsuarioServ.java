@@ -64,6 +64,8 @@ public class UsuarioServ extends HttpServlet {
                 DAO.Update(u);
                 pagina = "index.jsp?pagina=usuariosCTRL";
             } else {
+                MD5 md5 = new MD5();
+                u.setSenha(md5.toMD5(u.getSenha()));
                 u.setStatusDoUsuario("Pendente");
                 DAO.Inserir(u);
                 pagina = "index.jsp?pagina=entrar";
