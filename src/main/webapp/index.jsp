@@ -11,7 +11,12 @@
 <%@ page session="true" %>
 
 <%
-    Usuario u = (Usuario) session.getAttribute("login");
+    Usuario u = null;
+    if(session.getAttribute("login") != null){
+        u = new Usuario();
+        u.setNome(session.getAttribute("login").toString());
+    }
+    
     String pagina = "home";
     if (request.getParameter("pagina") != null) {
         pagina = request.getParameter("pagina");
@@ -54,7 +59,7 @@
             <nav >
                 <ul>
                     <li><a href="index.jsp">Inicio</a></li>
-                    <li><a href="index.jsp?pagina=titulosCTRL">Titulos</a></li>
+                    <li><a href="Titulo.do?acao=tituloui">Titulos</a></li>
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
                     <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>

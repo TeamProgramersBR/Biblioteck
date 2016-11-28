@@ -51,7 +51,7 @@ public class Auth extends HttpServlet {
             if (usuario != null) {
                 if (usuario.getStatusDoUsuario().equals("liberado")) {
                 // setando um atributo da sessao
-                sessao.setAttribute("login", usuario);
+                sessao.setAttribute("login", usuario.getNome());
                 }
                 // como obtive sucesso, chamo a página principal
                 pagina = "index.jsp";
@@ -65,6 +65,7 @@ public class Auth extends HttpServlet {
             pagina = "index.jsp";
         }
         response.sendRedirect(pagina);
+        
                 
     }
 

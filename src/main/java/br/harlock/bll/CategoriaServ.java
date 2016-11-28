@@ -46,7 +46,6 @@ public class CategoriaServ extends HttpServlet {
         
         if(acao.equals("salvar")){
             if (Integer.parseInt(request.getParameter("ID")) == 0) {
-                
                 DAO.Inserir(c);
             }else{
                 c.setIdCat(Integer.parseInt(request.getParameter("ID")));
