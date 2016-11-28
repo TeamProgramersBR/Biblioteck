@@ -56,7 +56,7 @@
                     <li><a href="index.jsp">Inicio</a></li>
                     <li><a href="index.jsp?pagina=titulosCTRL">Titulos</a></li>
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
-                    <li><a href="index.jsp?pagina=produtoresCTRL">Produtores de Conteudo</a></li>
+                    <li><a href="Produtora.do?acao=produtoras">Produtores de Conteudo</a></li>
                     <li><a href="index.jsp?pagina=emprestimosCTRL">Emprestimos</a></li>
                     <li><a href="index.jsp?pagina=usuariosCTRL">Usuários</a></li>
                 </ul>
@@ -78,7 +78,9 @@
             <%} else if (pagina.equals("autorui")) {%>
             <jsp:include page = "template/paginas/autor/cadastroautor.jsp" />
             <%} else if (pagina.equals("produtoresCTRL")) {%>
-            <%} else if (pagina.equals("produtoresCTRL")) {%>
+            <jsp:include page = "template/paginas/produtora/listar.jsp" />
+            <%} else if (pagina.equals("produtoresui")) {%>
+            <jsp:include page = "template/paginas/produtora/cadastroprodutora.jsp" />
             <%} else if (pagina.equals("produtoresCTRL")) {%>
             <jsp:include page = "template/paginas/login.html" />
             <%} else if (pagina.equals("emprestimosCTRL")) {%>

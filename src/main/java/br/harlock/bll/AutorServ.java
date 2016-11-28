@@ -60,6 +60,7 @@ public class AutorServ extends HttpServlet {
         }else if (acao.equals("remover")) {
             a.setIdAutor(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(a);
+            pagina = "Autor.do?acao=autores";
         } else if (acao.equals("autores")){
             Iterator autores = DAO.ConsultarTodos();
             request.setAttribute("autores", autores);

@@ -79,7 +79,7 @@ public class ProdutoraDAO {
 
     }
 
-    public Iterator<ProdutoraConteudo> ConsultarTodos() {
+    public Iterator<ProdutoraConteudo> ConsultarTodos() throws Exception{
         List<ProdutoraConteudo> produtoras = new ArrayList<ProdutoraConteudo>();
         try {
             Statement statement = connection.createStatement();
@@ -92,11 +92,13 @@ public class ProdutoraDAO {
                 produtora.setCnpj(rs.getString("CNPJ"));
                 produtoras.add(produtora);
             }
+            return produtoras.iterator();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new Exception(e);
         }
 
-        return produtoras.iterator();
+        
     }
 
     public ProdutoraConteudo Pesquisar(ProdutoraConteudo produtora) throws Exception {

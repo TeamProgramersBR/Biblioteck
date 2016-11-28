@@ -9,6 +9,9 @@ import br.harlock.dao.ProdutoraDAO;
 import br.harlock.model.ProdutoraConteudo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,24 +34,41 @@ public class ProdutoraServ extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         String pagina = "cadastroprodutora";
-        
+
         ProdutoraConteudo p = new ProdutoraConteudo();
-        
-        p.setNomeProdutora(request.getParameter("nome"));
-        p.setDescricao(request.getParameter("desc"));
-        p.setCnpj(request.getParameter("CNPJ"));
+
         acao = request.getParameter("acao");
-        if (acao.equalsIgnoreCase("cadastrar")) {
-            DAO.Inserir(p);
-        }else if(acao.equals("atualizar")){
+        if (acao.equalsIgnoreCase("salvar")) {
+            p.setNomeProdutora(request.getParameter("nome"));
+            p.setDescricao(request.getParameter("desc"));
+            p.setCnpj(request.getParameter("CNPJ"));
             p.setIdPdc(Integer.parseInt(request.getParameter("ID")));
-            DAO.Update(p);
-        }else if(acao.equals("remover")){
+            if (p.getIdPdc() != 0) {
+                DAO.Update(p);
+                
+            } else {
+                DAO.Inserir(p);
+            }
+
+            pagina = "Produtora.do?acao=produtoras";
+        } else if (acao.equals("remover")) {
+            p.setIdPdc(Integer.parseInt(request.getParameter("ID")));
             p.setIdPdc(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(p);
+            pagina = "index.jsp?pagina=produtoresCTRL";
+        } else if (acao.equals("produtoras")) {
+            Iterator produtoras = DAO.ConsultarTodos();
+            request.setAttribute("produtoras", produtoras);
+            pagina = "index.jsp?pagina=produtoresCTRL";
+        } else if (acao.equals("update")) {
+            p.setIdPdc(Integer.parseInt(request.getParameter("ID")));
+            ProdutoraConteudo pdc = DAO.Pesquisar(p);
+            request.setAttribute("produtora", pdc);
+            pagina = "index.jsp?pagina=produtoresui";
         }
+        request.getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +83,11 @@ public class ProdutoraServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoraServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -77,7 +101,11 @@ public class ProdutoraServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoraServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

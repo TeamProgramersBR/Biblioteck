@@ -40,7 +40,7 @@ public class TituloServ extends HttpServlet {
     }
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ParseException {
+            throws ServletException, IOException, SQLException, ParseException, Exception {
             String pagina = "index.jsp";
             acao = request.getParameter("acao");
             if (acao.equals("tituloui")) {
@@ -75,6 +75,8 @@ public class TituloServ extends HttpServlet {
             Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -94,6 +96,8 @@ public class TituloServ extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(TituloServ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
