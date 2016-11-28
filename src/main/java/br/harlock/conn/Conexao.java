@@ -33,16 +33,15 @@ public class Conexao {
 //                String user = "u465595781_bibli";
 //                String password = "biblibibli";
                 String driver = "com.mysql.jdbc.Driver";
-                String url = "jdbc:mysql://localhost:3306/mydb";
+                String url = "jdbc:mysql://127.0.0.1:3306/mydb";
                 String user = "root";
                 String password = "123456";
                 Class.forName(driver);
                 conexao = DriverManager.getConnection(url, user, password);
                 return conexao;
             }
-            catch(ClassNotFoundException e){
-                e.printStackTrace();
-                throw new Exception("Erro ao conectar com DB");
+            catch(SQLException e){
+                throw new Exception("Erro ao conectar com DB"+e);
             }
         }
     }   

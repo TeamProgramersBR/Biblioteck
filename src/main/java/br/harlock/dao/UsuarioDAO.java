@@ -124,7 +124,7 @@ public class UsuarioDAO {
 
     }
 
-    public Iterator<Usuario> ConsultarTodos() {
+    public Iterator<Usuario> ConsultarTodos() throws Exception {
         List<Usuario> usuarios = new ArrayList<Usuario>();
         try {
             Statement statement = connection.createStatement();
@@ -149,20 +149,25 @@ public class UsuarioDAO {
                 usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
                 usuarios.add(usuario);
             }
+            return usuarios.iterator();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new Exception(e);
         }
 
-        return usuarios.iterator();
+        
     }
 
     public Usuario Pesquisar(Usuario usuario) throws SQLException, Exception {
         
         try {
              String sql = "";
-            PreparedStatement ps; 
-            if (usuario.getEmail().equals("") || usuario.equals(null)) {
-                
+            PreparedStatement ps = connection.prepareStatement(sql) ;
+            if(usuario.getEmail() == null){
+                String vrau = "s";
+            }
+            if (usuario.getEmail() == "" || null == usuario.getEmail()) {
+                String val = "";
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?";
                 ps =connection.prepareStatement(sql);
                 ps.setInt(1, usuario.getIdUsu());
@@ -199,7 +204,7 @@ public class UsuarioDAO {
                 return usuario;
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new Exception("Erro ao pesquisar pelo usuario erro: "+e);
         }
         

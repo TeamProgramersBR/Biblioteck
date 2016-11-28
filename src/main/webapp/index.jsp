@@ -58,8 +58,8 @@
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
                     <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>
-                    <li><a href="index.jsp?pagina=emprestimosCTRL">Emprestimos</a></li>
-                    <li><a href="index.jsp?pagina=usuariosCTRL">Usuários</a></li>
+                    <li><a href="#">Emprestimos</a></li>
+                    <li><a href="Usuario.do?acao=usuarios">Usuários</a></li>
                 </ul>
             </nav>
         </div>
@@ -87,7 +87,9 @@
             <%} else if (pagina.equals("categoriaui")) {%>
             <jsp:include page = "template/paginas/categoria/cadastrocategoria.jsp" />
             <%} else if (pagina.equals("usuariosCTRL")) {%>
-            <jsp:include page = "template/paginas/login.html" />
+            <jsp:include page = "template/paginas/usuario/listar.jsp" />
+            <%} else if (pagina.equals("usuarioui")) {%>
+            <jsp:include page = "template/paginas/cadastro.jsp" />
             <%} else {%>
             <jsp:include page = "template/paginas/home.html" />
             <%}%>

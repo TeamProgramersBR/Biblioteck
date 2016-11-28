@@ -38,40 +38,49 @@ public class UsuarioServ extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, NoSuchAlgorithmException {
+            throws ServletException, IOException, NoSuchAlgorithmException, Exception {
         String pagina = "cadastrousu.html";
         acao = request.getParameter("acao");
         Usuario u = new Usuario();
 
-        u.setNivelDeAcesso(request.getParameter("acesso"));
-        u.setNome(request.getParameter("nome"));
-        u.setCpf(request.getParameter("CPF"));
-        u.setEmail(request.getParameter("email"));
-        u.setSenha(pss.toMD5(request.getParameter("senha")));
-        u.setNumeroResidencial(request.getParameter("telres"));
-        u.setNumeroCelular(request.getParameter("telcel"));
-        u.setNumeroComercial(request.getParameter("telcom"));
-        u.setMatriculaEducacional(request.getParameter("matricula"));
-        u.setEnderecoLogadouro(request.getParameter("logr"));
-        u.setEnderecoCEP(request.getParameter("CEP"));
-        u.setEnderecoCidade(request.getParameter("cidade"));
-        u.setEnderecoEstado(request.getParameter("estado"));
-        u.setEnderecoPais(request.getParameter("pais"));
-        u.setStatusDoUsuario(request.getParameter("sts"));
-        if (acao.equalsIgnoreCase("cadastrar")) {
-
-            u.setStatusDoUsuario("Pendente");
-            DAO.Inserir(u);
-            pagina = "index.jsp?acao=logar";
-        } else if (acao.equals("atualizar")) {
-            u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
-            DAO.Update(u);
-            pagina = "index.jsp?acao=logar";
+        if (acao.equalsIgnoreCase("salvar")) {
+            u.setNivelDeAcesso(request.getParameter("acesso"));
+            u.setNome(request.getParameter("nome"));
+            u.setCpf(request.getParameter("CPF"));
+            u.setEmail(request.getParameter("email"));
+            u.setSenha(pss.toMD5(request.getParameter("senha")));
+            u.setNumeroResidencial(request.getParameter("telres"));
+            u.setNumeroCelular(request.getParameter("telcel"));
+            u.setNumeroComercial(request.getParameter("telcom"));
+            u.setMatriculaEducacional(request.getParameter("matricula"));
+            u.setEnderecoLogadouro(request.getParameter("logr"));
+            u.setEnderecoCEP(request.getParameter("CEP"));
+            u.setEnderecoCidade(request.getParameter("cidade"));
+            u.setEnderecoEstado(request.getParameter("estado"));
+            u.setEnderecoPais(request.getParameter("pais"));
+            u.setNivelDeAcesso(request.getParameter("acesso"));
+            if (Integer.parseInt(request.getParameter("ID")) != 0) {
+                u.setStatusDoUsuario(request.getParameter("status"));
+                DAO.Update(u);
+                pagina = "index.jsp?pagina=usuariosCTRL";
+            } else {
+                u.setStatusDoUsuario("Pendente");
+                DAO.Inserir(u);
+                pagina = "index.jsp?pagina=entrar";
+            }
         } else if (acao.equals("remover")) {
             u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(u);
             pagina = "index.jsp?acao=logar";
+        } else if (acao.equals("usuarios")) {
+            request.setAttribute("usuarios", DAO.ConsultarTodos());
+            pagina = "index.jsp?pagina=usuariosCTRL";
+        } else if (acao.equals("update")) {
+            u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("usuario", DAO.Pesquisar(u));
+            pagina = "index.jsp?pagina=usuarioui";
         }
+        request.getRequestDispatcher(pagina).forward(request, response);
 
     }
 
@@ -91,6 +100,8 @@ public class UsuarioServ extends HttpServlet {
             processRequest(request, response);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioServ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,6 +119,8 @@ public class UsuarioServ extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioServ.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(UsuarioServ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
