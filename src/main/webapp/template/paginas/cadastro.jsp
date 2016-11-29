@@ -3,7 +3,10 @@
     Usuario u = (Usuario) session.getAttribute("login");
     if (u == null) {
         u = new Usuario();
+            u.setNome("");
+            u.setSenha("");
             u.setCpf("");
+            u.setMatriculaEducacional("");
             u.setEmail("");
             u.setEnderecoCEP("");
             u.setEnderecoCidade("");
@@ -24,6 +27,9 @@
             
             
             cadastrado.setIdUsu(0);
+            cadastrado.setNome("");
+            cadastrado.setSenha("");
+            cadastrado.setMatriculaEducacional("");
             cadastrado.setCpf("");
             cadastrado.setEmail("");
             cadastrado.setEnderecoCEP("");
@@ -96,7 +102,7 @@
                 
             <div class="float-l">
                 <label>Tipo de conta:</label>
-                <select class="" name="acesso" >
+                <select class="" name="acesso" id="acesso">
                     <option value="option">Tipo de conta</option>
                     <%if(cadastrado.getNivelDeAcesso()!="")%> <option value="<%=cadastrado.getNivelDeAcesso()%>"><%=cadastrado.getNivelDeAcesso()%></option> <%;%>
                     <option value="4">Aluno</option>

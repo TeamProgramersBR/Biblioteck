@@ -23,7 +23,7 @@
     String[] tipoDeTitulo = {"Livro", "Vídeo", "Artigo", "Revista"};
 %>
 
-<form method="POST" action="" name="salvar"  >
+<form method="POST" action="Titulo.do?acao=salvar" name="salvar" id="form" >
 
     <div class="col-12">
         <label>Nome da obra</label>
@@ -55,7 +55,7 @@
             <label>Imagem</label>
             <input type="file" name="inp" id="inp" accept="image/*">
             <img id="img" width="140" height="170">
-            <input type="hidden" name="base64img" value="<%=titulo.getCapa()%>">
+            <input type="hidden" name="base64img" id="base64img" value="<%=titulo.getCapa()%>">
         </div>
         <div class="col-10">
             <label >ISBN</label>
@@ -99,22 +99,30 @@
     </div>
     <div class="col-10 float-l">
         <label>Estado de Publicacao</label>
-        <select id="estado" name="estado"  value="<%=titulo.getEstadoPublicacao()%>"></select>
+        <select id="estado" name="estado"  value="<%=titulo.getEstadoPublicacao()%>">
+            <option value="goias">Goias</option>
+        </select>
     </div>
     <div class="col-5 float-l">
         <label>Cidade de publicação</label>
-        <select id="cidade" name="cidade"  value="<%=titulo.getCidadePublicacao()%>"></select>
+        <select id="cidade" name="cidade"  value="<%=titulo.getCidadePublicacao()%>">
+            <option value="gyn">Goiania</option>
+        </select>
     </div>
 
 
     <div class="col-5 float-l">
         <label>Idioma Original</label>
-        <select id="idiomaObra" name="idiomaObra"  value="<%=titulo.getIdioma()%>"></select>
+        <select id="idiomaObra" name="idiomaObra"  value="<%=titulo.getIdioma()%>">
+            <option value="gyn">Goiania</option>
+        </select>
     </div>
 
     <div class="col-5 float-l">
         <label>Idioma da tradução</label>
-        <select id="traducao" name="traducao"  value="<%=titulo.getTraducao()%>"></select>
+        <select id="traducao" name="traducao"  value="<%=titulo.getTraducao()%>">
+            <option value="gyn">Goiania</option>
+        </select>
     </div>
     <div class="col-10 float-l">
         <label>Produtora</label>
@@ -157,7 +165,7 @@
 
     <div class="col-5 float-l"></div>
     <div class="col-5 float-l"> 
-        <a href=""><button class="botaoX verde float-r">Salvar</button></a>
+        <button type="submit" class="botaoX verde float-r">Salvar</button>
         <div class="float-r"></div>
     </div>
 
@@ -168,12 +176,14 @@
 <script>
 
     function addRowAutores() {
-        var html = "<tr><td><select id='tipoDeAutor' ><option value='Autor'>Autor</option><option value='Co-autor'>Co-autor</option></select></td><td><select id='autorObra'><%for (Autor a : autores) {%><option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option><%}%></select></td><td><a onclick='deletarRowAutores(this);'><button class='botaos vermelho'>-</button></a> </td></tr>";
+        
+        var html = "<tr><td><select id='tipoDeAutor' name='autores'><option value='Autor'>Autor</option><option value='Co-autor'>Co-autor</option></select></td><td><select id='autorObra'><%for (Autor a : autores) {%><option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option><%}%></select></td><td><a onclick='deletarRowAutores(this);'><button class='botaos vermelho'>-</button></a> </td></tr>";
 
         $('#AutoresTb > tbody:last-child').append(html);
     }
+
     function addRowExemplares() {
-        var html = "<tr><td>Pendente</td><td>Pendente</td><td><input type='checkbox' name='liberadoParaEmprestimo' value='1' > </td><td><a onclick='deletarRowExemplares(this)'><button class='botaos vermelho'>-</button></a></td></tr>";
+        var html = "<tr><td><input type='hidden' name='exemplar' value='oi'>Pendente</td><td>Pendente</td><td><input type='checkbox' name='liberadoParaEmprestimo' value='1' > </td><td><a onclick='deletarRowExemplares(this)'><button class='botaos vermelho'>-</button></a></td></tr>";
         $('#exemplaresTB > tbody:last-child').append(html);
     }
 

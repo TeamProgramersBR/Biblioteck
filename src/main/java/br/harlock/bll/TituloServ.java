@@ -8,6 +8,8 @@ package br.harlock.bll;
 import br.harlock.dao.AutorDAO;
 import br.harlock.dao.ProdutoraDAO;
 import br.harlock.dao.TituloDAO;
+import br.harlock.model.Categoriaitemacervo;
+import br.harlock.model.ProdutoraConteudo;
 import br.harlock.model.Titulo;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,7 +53,37 @@ public class TituloServ extends HttpServlet {
                 pagina = "index.jsp?pagina=tituloui";
             }
             if (acao.equals("salvar")) {
-                Titulo titulo = new Titulo(" ");
+                
+                Titulo ti = new Titulo();
+                ProdutoraConteudo produtoraConteudo = new ProdutoraConteudo();
+                produtoraConteudo.setIdPdc(Integer.parseInt(request.getParameter("produtora")));
+                ti.setProdutoraConteudo(produtoraConteudo);
+                ti.setObra(request.getParameter("obra"));
+                ti.setIssn(request.getParameter("ISSN"));
+                ti.setIsbn(request.getParameter("ISBN"));
+                ti.setIdioma(request.getParameter("idiomaObra"));
+                if (request.getParameter("idTitulo") != null ) {
+                    ti.setIdTitu(Integer.parseInt(request.getParameter("idTitulo")));
+                }
+                
+                ti.setVolume(request.getParameter("Volume"));
+                ti.setFkItemPdc(Integer.parseInt(request.getParameter("produtora")));
+                ti.setEstadoPublicacao(request.getParameter(""));
+                ti.setEdicao(request.getParameter(""));
+                ti.setDuracao(Float.parseFloat(request.getParameter("duracao")));
+                ti.setQuantidadePaginas(Integer.parseInt(request.getParameter("numeropaginas")));
+                ti.setDescricao(request.getParameter("descricao"));
+                ti.setDataDePublicacao(request.getParameter("datapublicacao"));
+                ti.setEstadoPublicacao(request.getParameter("estado"));
+                ti.setCidadePublicacao(request.getParameter("cidade"));
+                Categoriaitemacervo categoriaitemacervo = new Categoriaitemacervo();
+                ti.setCategoriaitemacervo(categoriaitemacervo);
+                ti.setCapa(request.getParameter("base64img"));
+                ti.setTraducao(request.getParameter("traducao"));
+                String[] autres = request.getParameterValues("autores");
+                String[] exemplares = request.getParameterValues("exemplar");
+                String nul = null;
+                
                 
             }
             request.getRequestDispatcher(pagina).forward(request, response);

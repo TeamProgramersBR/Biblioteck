@@ -11,10 +11,13 @@
 <%@ page session="true" %>
 
 <%
+    Boolean liberadoADMN = false;
     Usuario u = null;
     if(session.getAttribute("login") != null){
         u = (Usuario) session.getAttribute("login");
-        
+        if (u.getNivelDeAcesso().equals("Adminstrador")) {
+                liberadoADMN = true;
+            }
     }
     
     String pagina = "home";
@@ -55,16 +58,19 @@
                 </div>
             </div>
         </div>
+                
         <div class="containerX">
             <nav >
                 <ul>
                     <li><a href="index.jsp">Inicio</a></li>
+                    <%if(liberadoADMN){%>
                     <li><a href="Titulo.do?acao=tituloui">Titulos</a></li>
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
                     <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>
                     <li><a href="#">Emprestimos</a></li>
                     <li><a href="Usuario.do?acao=usuarios">Usuários</a></li>
+                    <%}%>
                 </ul>
             </nav>
         </div>
