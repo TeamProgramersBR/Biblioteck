@@ -13,8 +13,8 @@
 <%
     Usuario u = null;
     if(session.getAttribute("login") != null){
-        u = new Usuario();
-        u.setNome(session.getAttribute("login").toString());
+        u = (Usuario) session.getAttribute("login");
+        
     }
     
     String pagina = "home";
