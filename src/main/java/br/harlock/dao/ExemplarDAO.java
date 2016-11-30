@@ -8,6 +8,7 @@ package br.harlock.dao;
 import br.harlock.model.Exemplar;
 import java.sql.Connection;
 import br.harlock.conn.Conexao;
+import br.harlock.model.Titulo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -126,4 +127,5 @@ public class ExemplarDAO {
         }
         
     }
+
 }

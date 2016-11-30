@@ -13,13 +13,13 @@
 <%
     Boolean liberadoADMN = false;
     Usuario u = null;
-    if(session.getAttribute("login") != null){
+    if (session.getAttribute("login") != null) {
         u = (Usuario) session.getAttribute("login");
         if (u.getNivelDeAcesso().equals("Adminstrador")) {
-                liberadoADMN = true;
-            }
+            liberadoADMN = true;
+        }
     }
-    
+
     String pagina = "home";
     if (request.getParameter("pagina") != null) {
         pagina = request.getParameter("pagina");
@@ -58,19 +58,19 @@
                 </div>
             </div>
         </div>
-                
+
         <div class="containerX">
             <nav >
                 <ul>
                     <li><a href="index.jsp">Inicio</a></li>
-                    <%if(liberadoADMN){%>
+                        <%if (liberadoADMN) {%>
                     <li><a href="Titulo.do?acao=tituloui">Titulos</a></li>
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
                     <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>
-                    <li><a href="#">Emprestimos</a></li>
+                    <li><a href="Emprestimo.do?acao=emprestimos">Emprestimos</a></li>
                     <li><a href="Usuario.do?acao=usuarios">Usuários</a></li>
-                    <%}%>
+                        <%}%>
                 </ul>
             </nav>
         </div>
@@ -101,6 +101,10 @@
             <jsp:include page = "template/paginas/usuario/listar.jsp" />
             <%} else if (pagina.equals("usuarioui")) {%>
             <jsp:include page = "template/paginas/cadastro.jsp" />
+            <%} else if (pagina.equals("emprestimosCTRL")) {%>
+            <jsp:include page = "template/paginas/emprestimo/listar.jsp" />
+            <%} else if (pagina.equals("novoemprestimo")) {%>
+            <jsp:include page = "template/paginas/emprestimo/realizar.jsp" />
             <%} else {%>
             <jsp:include page = "template/paginas/home.html" />
             <%}%>

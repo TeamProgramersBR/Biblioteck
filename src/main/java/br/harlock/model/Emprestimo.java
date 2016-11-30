@@ -29,7 +29,8 @@ public class Emprestimo {
     private Usuario Funcionario;
 
     private Usuario UsuarioDoSistema;
-
+    
+    private  boolean locado;
     public Emprestimo() {
     }
 
@@ -138,6 +139,14 @@ public class Emprestimo {
 
     public void setUsuarioDoSistema(Usuario UsuarioDoSistema) {
         this.UsuarioDoSistema = UsuarioDoSistema;
+    }
+
+    public boolean isLocado() {
+        return locado;
+    }
+
+    public void setLocado(boolean locado) {
+        this.locado = locado;
     }
 
     

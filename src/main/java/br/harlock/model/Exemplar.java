@@ -1,7 +1,7 @@
 package br.harlock.model;
 
 public class Exemplar {
-
+    private String statusDeEmprestimo;
     private int idExe;
 
     private int fkTitulo;
@@ -75,5 +75,14 @@ public class Exemplar {
         this.titulo = titulo;
     }
 
+    public String getStatusDeEmprestimo() {
+        return statusDeEmprestimo;
+    }
+
+    public void setStatusDeEmprestimo(String statusDeEmprestimo) {
+        this.statusDeEmprestimo = statusDeEmprestimo;
+    }
+    
+    
     
 }
