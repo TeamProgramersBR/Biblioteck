@@ -166,11 +166,15 @@ public class UsuarioDAO {
             if(usuario.getEmail() == null){
                 String vrau = "s";
             }
-            if (usuario.getEmail() == "" || null == usuario.getEmail()) {
+            if ("".equals(usuario.getEmail()) || null == usuario.getEmail() && usuario.getCpf() == null) {
                 String val = "";
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?";
                 ps =connection.prepareStatement(sql);
                 ps.setInt(1, usuario.getIdUsu());
+            }if(usuario.getCpf() != null){
+                sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE CPF = ?";
+                ps=connection.prepareStatement(sql);
+                ps.setString(1, usuario.getCpf());
             }else{
                 
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE email = ? AND senha = ?";

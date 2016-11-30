@@ -97,8 +97,12 @@ public class Emprestimo {
 
     public void setDataDevolucao(String dataDevolucao) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (dataDevolucao == null || dataDevolucao == "") {
+            this.dataDevolucao = null;
+        }else{
         Date date = sdf.parse(dataDevolucao);
         this.dataDevolucao = date;
+        }
     }
 
     public Long getValorMulta() {
