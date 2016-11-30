@@ -119,7 +119,7 @@ public class CategoriaServ extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    public Iterator listarCategorias() throws SQLException{
+    public Iterator listarCategorias() throws SQLException, Exception{
         Iterator e = DAO.ConsultarTodos();
         return e;
     }

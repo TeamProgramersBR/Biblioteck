@@ -89,7 +89,8 @@ public class CategoriaDAO {
         }
     }
 
-    public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException {
+    public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException, Exception {
+        try{
         List lista = new ArrayList();
         String sql;
         sql = "SELECT * FROM categoria_item_acervo";
@@ -104,5 +105,9 @@ public class CategoriaDAO {
         }
 
         return lista.iterator();
+        }catch(Exception e){
+            e.printStackTrace();
+             throw new Exception("java.sql.SQLException");
+        }
     }
 }

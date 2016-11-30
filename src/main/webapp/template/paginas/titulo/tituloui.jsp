@@ -1,3 +1,4 @@
+<%@page import="br.harlock.model.Categoriaitemacervo"%>
 <%@page import="br.harlock.model.Titulo"%>
 <%@page import="br.harlock.model.Autor"%>
 <%@page import="br.harlock.model.ProdutoraConteudo"%>
@@ -6,15 +7,21 @@
 <%
     ArrayList<Autor> autores = new ArrayList();
     ArrayList<ProdutoraConteudo> produtoras = new ArrayList();
+    ArrayList<Categoriaitemacervo> categorias = new ArrayList();
     if (request.getAttribute("autores") != null && request.getAttribute("prdoutoras") != null) {
         Iterator iteratorAutores = (Iterator) request.getAttribute("autores");
         Iterator iteratorProdutoraDeConteudo = (Iterator) request.getAttribute("prdoutoras");
+        Iterator iteratorCategoria = (Iterator) request.getAttribute("categorias");
         while (iteratorAutores.hasNext()) {
             autores.add((Autor) iteratorAutores.next());
         }
         while (iteratorProdutoraDeConteudo.hasNext()) {
             produtoras.add((ProdutoraConteudo) iteratorProdutoraDeConteudo.next());
         }
+        while (iteratorCategoria.hasNext()) {
+                categorias.add((Categoriaitemacervo) iteratorCategoria.next());
+                
+            }
     }
     Titulo titulo = new Titulo(" ");
     if (request.getAttribute("titulo") != null) {
@@ -40,7 +47,13 @@
                 %>
                 <option value="<%=tipo%>" selected=""><%=tipo%></option>
                 <% } else {%>
-                <option value=""><%=tipo%></option>
+                <%   String value = "";
+                    if(tipo.equals("Livro")) value = "1";
+                    if(tipo.equals("Video")) value = "2";
+                    if(tipo.equals("Artigo")) value = "3";
+                    if(tipo.equals("Revista")) value = "4";
+                %>
+                <option value="<%=value%>"><%=tipo%></option>
                 <%
                         }
                     }
@@ -76,6 +89,17 @@
                 </option>
                 <%for (Autor a : autores) {%>
                 <option value="<%=a.getIdAutor()%>"><%=a.getNome()%></option>
+                <%}%>
+            </select>
+        </div>
+        <div class="col-5 float-l">
+            <label>Categoria</label>
+            <select id="categoria" name="categoria">
+                <option>
+                    Selecione uma categoria
+                </option>
+                <%for (Categoriaitemacervo c : categorias) {%>
+                <option value="<%=c.getIdCat()%>"><%=c.getNomeCategoria()%></option>
                 <%}%>
             </select>
         </div>
@@ -177,7 +201,7 @@
 
     function addRowAutores() {
         
-        var html = "<tr><td><select id='tipoDeAutor' name='autores'><option value='Autor'>Autor</option><option value='Co-autor'>Co-autor</option></select></td><td><select id='autorObra'><%for (Autor a : autores) {%><option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option><%}%></select></td><td><a onclick='deletarRowAutores(this);'><button class='botaos vermelho'>-</button></a> </td></tr>";
+        var html = "<tr><td><select id='tipoDeAutor' name='autores'><option value='Autor'>Autor</option><option value='Co-autor'>Co-autor</option></select></td><td><select name='idAutor' id='autorObra'><%for (Autor a : autores) {%><option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option><%}%></select></td><td><a onclick='deletarRowAutores(this);'><button class='botaos vermelho'>-</button></a> </td></tr>";
 
         $('#AutoresTb > tbody:last-child').append(html);
     }

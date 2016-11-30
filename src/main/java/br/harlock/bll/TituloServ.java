@@ -7,6 +7,7 @@ package br.harlock.bll;
 
 import br.harlock.conn.Conexao;
 import br.harlock.dao.AutorDAO;
+import br.harlock.dao.CategoriaDAO;
 import br.harlock.dao.ProdutoraDAO;
 import br.harlock.dao.TituloDAO;
 import br.harlock.model.Autor;
@@ -40,7 +41,9 @@ public class TituloServ extends HttpServlet {
     private ProdutoraDAO produtoraDAO;
     private AutorDAO autorDAO;
     private Autor autor;
+    private CategoriaDAO categoriaDAO;
     public TituloServ() throws Exception{
+        categoriaDAO = new CategoriaDAO();
         tituloDAO = new TituloDAO();
         produtoraDAO = new ProdutoraDAO();
         autorDAO = new AutorDAO();
@@ -54,8 +57,10 @@ public class TituloServ extends HttpServlet {
             if (acao.equals("tituloui")) {
                 Iterator iteratorAutores = autorDAO.ConsultarTodos();
                 Iterator iteratorProdutoraDeConteudo = produtoraDAO.ConsultarTodos();
+                Iterator iteratorCategoria = categoriaDAO.ConsultarTodos();
                 request.setAttribute("autores", iteratorAutores);
                 request.setAttribute("prdoutoras", iteratorProdutoraDeConteudo);
+                request.setAttribute("categorias", iteratorCategoria);
                 pagina = "index.jsp?pagina=tituloui";
             }
             if (acao.equals("salvar")) {
@@ -67,6 +72,7 @@ public class TituloServ extends HttpServlet {
                 ti.setObra(request.getParameter("obra"));
                 ti.setIssn(request.getParameter("ISSN"));
                 ti.setIsbn(request.getParameter("ISBN"));
+                ti.setTipoDeObra(request.getParameter("tipoObra"));
                 ti.setIdioma(request.getParameter("idiomaObra"));
                 if (request.getParameter("idTitulo") != null ) {
                     ti.setIdTitu(Integer.parseInt(request.getParameter("idTitulo")));
@@ -92,11 +98,16 @@ public class TituloServ extends HttpServlet {
                 ti.setEstadoPublicacao(request.getParameter("estado"));
                 ti.setCidadePublicacao(request.getParameter("cidade"));
                 Categoriaitemacervo categoriaitemacervo = new Categoriaitemacervo();
-                ti.setCategoriaitemacervo(categoriaitemacervo);
+                categoriaitemacervo.setIdCat(Integer.parseInt(request.getParameter("categoria")));
+                ti.setFkItemAcervo(categoriaitemacervo.getIdCat());
                 ti.setCapa(request.getParameter("base64img"));
                 ti.setTraducao(request.getParameter("traducao"));
+                tituloDAO.Inserir(ti);
+                ti = tituloDAO.Pesquisar(ti);
                 String[] autres = request.getParameterValues("autores");
+                String[] idAutores = request.getParameterValues("idAutor");
                 String[] exemplares = request.getParameterValues("exemplar");
+                String[] liberadoEmp = request.getParameterValues("liberadoParaEmprestimo");
                 String nul = null;
 //                for (String aut : autres) {
 //                    autor = new Autor(0, aut, " ", " ");

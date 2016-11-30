@@ -7,6 +7,7 @@ package br.harlock.dao;
 
 import br.harlock.model.Titulo;
 import br.harlock.conn.Conexao;
+import br.harlock.model.dataParseToSQL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -25,12 +26,13 @@ import java.util.List;
 public class TituloDAO {
 
     Connection connection = null;
-
+    
     public TituloDAO() throws Exception {
         connection = Conexao.getConexao();
     }
 
     public void Inserir(Titulo titulo) {
+        dataParseToSQL parse = new dataParseToSQL();
         try {
             String sql;
                 sql = "INSERT INTO titulo(ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC,FK_CAT_ARCE,duracao,volume,quatidadepaginas,tipoDeObra)"
@@ -41,7 +43,8 @@ public class TituloDAO {
             ps.setString(2, titulo.getIssn());
             ps.setString(3, titulo.getObra());
             ps.setString(4, titulo.getDescricao());
-            ps.setDate(5, (Date) titulo.getDataDePublicacao());
+            
+            ps.setDate(5, parse.convertJavaDateToSqlDate(titulo.getDataDePublicacao()));
             ps.setString(6, titulo.getCidadePublicacao());
             ps.setString(7, titulo.getEstadoPublicacao());
             ps.setString(8, titulo.getEdicao());
@@ -166,9 +169,9 @@ public class TituloDAO {
         return titulos.iterator();
     }
 
-    public Titulo Pesquisar(Titulo titulo) {
+    public Titulo Pesquisar(Titulo titulo) throws Exception {
         try {
-            PreparedStatement ps = (PreparedStatement) connection.createStatement();
+            Statement statement = connection.createStatement();
             String sql = "";
             String where="";
             if (titulo.getIdTitu() != 0) {
@@ -178,7 +181,7 @@ public class TituloDAO {
                 where=titulo.getObra();
                 sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas  FROM titulo WHERE obra = "+where;
             }
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = statement.executeQuery(sql);
             rs.next();
            
             
@@ -201,9 +204,11 @@ public class TituloDAO {
                 titulo.setVolume(rs.getString("volume"));
                 titulo.setQuantidadePaginas(rs.getInt("quatidadepaginas"));
 
-
+                return titulo;
         } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(" r"+e);
         }
-        return titulo;
+        
     }
 }

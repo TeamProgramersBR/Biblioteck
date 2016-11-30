@@ -8,17 +8,17 @@ import java.text.SimpleDateFormat;
 
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
 /**
  *
  * @author kai
  */
 public class dataParseToSQL {
     
-//    public Date sqlData(String dataStri){
-//        
-//          DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//          Date myDate1 = formatter.parse(dataStri);
-//          java.sql.Date sqlDate1 = new java.sql.Date(myDate1.getTime());
-//    }
-//    
+    public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
+        
+    return new java.sql.Date(date.getTime());
+}
+    
 }
