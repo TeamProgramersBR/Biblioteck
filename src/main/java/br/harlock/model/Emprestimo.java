@@ -75,7 +75,7 @@ public class Emprestimo {
     }
 
     public void setDataEmprestimo(String dataEmprestimo) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(dataEmprestimo);
         this.dataEmprestimo = date;
     }
@@ -85,7 +85,7 @@ public class Emprestimo {
     }
 
     public void setDataPrevDevolucao(String dataPrevDevolucao) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(dataPrevDevolucao);
         this.dataPrevDevolucao = date;
     }
@@ -95,7 +95,7 @@ public class Emprestimo {
     }
 
     public void setDataDevolucao(String dataDevolucao) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(dataDevolucao);
         this.dataDevolucao = date;
     }

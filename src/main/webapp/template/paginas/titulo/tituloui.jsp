@@ -16,7 +16,7 @@
             produtoras.add((ProdutoraConteudo) iteratorProdutoraDeConteudo.next());
         }
     }
-    Titulo titulo = new Titulo("");
+    Titulo titulo = new Titulo(" ");
     if (request.getAttribute("titulo") != null) {
         titulo = (Titulo) request.getAttribute("titulo");
     }

@@ -57,15 +57,17 @@ public class Titulo {
         this.issn = " ";
         this.obra = " ";
         this.descricao = " ";
-        setDataDePublicacao("01/01/1900");
+        setDataDePublicacao("1900-01-01");
         this.cidadePublicacao = " ";
         this.estadoPublicacao = " ";
         this.edicao = " ";
         this.idioma = " ";
         this.traducao = " ";
         this.capa = " ";
-        this.quantidadePaginas = 0.0f;
-        this.duracao = 0.0f;
+        this.quantidadePaginas = 0;
+        this.duracao = 0;
+        setVolume(" ");
+        setTipoDeObra(" ");
     }
     public Titulo() {
     }
@@ -147,11 +149,15 @@ public class Titulo {
     public Date getDataDePublicacao() {
         return dataDePublicacao;
     }
-
+    
     public void setDataDePublicacao(String dataDePublicacao) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+       try{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(dataDePublicacao);
         this.dataDePublicacao = date;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getCidadePublicacao() {

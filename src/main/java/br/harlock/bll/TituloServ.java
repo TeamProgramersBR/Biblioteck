@@ -5,14 +5,18 @@
  */
 package br.harlock.bll;
 
+import br.harlock.conn.Conexao;
 import br.harlock.dao.AutorDAO;
 import br.harlock.dao.ProdutoraDAO;
 import br.harlock.dao.TituloDAO;
+import br.harlock.model.Autor;
 import br.harlock.model.Categoriaitemacervo;
 import br.harlock.model.ProdutoraConteudo;
 import br.harlock.model.Titulo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Iterator;
@@ -30,15 +34,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Titulo.do")
 public class TituloServ extends HttpServlet {
-
+    private Connection connection = null;
     private String acao = "";
     private TituloDAO tituloDAO;
     private ProdutoraDAO produtoraDAO;
     private AutorDAO autorDAO;
+    private Autor autor;
     public TituloServ() throws Exception{
         tituloDAO = new TituloDAO();
         produtoraDAO = new ProdutoraDAO();
         autorDAO = new AutorDAO();
+        connection = Conexao.getConexao();
     }
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +60,7 @@ public class TituloServ extends HttpServlet {
             }
             if (acao.equals("salvar")) {
                 
-                Titulo ti = new Titulo();
+                Titulo ti = new Titulo(" ");
                 ProdutoraConteudo produtoraConteudo = new ProdutoraConteudo();
                 produtoraConteudo.setIdPdc(Integer.parseInt(request.getParameter("produtora")));
                 ti.setProdutoraConteudo(produtoraConteudo);
@@ -68,9 +74,19 @@ public class TituloServ extends HttpServlet {
                 
                 ti.setVolume(request.getParameter("Volume"));
                 ti.setFkItemPdc(Integer.parseInt(request.getParameter("produtora")));
-                ti.setEdicao(request.getParameter(""));
-                ti.setDuracao(Float.parseFloat(request.getParameter("duracao")));
-                ti.setQuantidadePaginas(Integer.parseInt(request.getParameter("numeropaginas")));
+//                ti.setEdicao(request.getParameter(""));
+                String f = request.getParameter("duracao");
+                if(f == null){
+                    ti.setDuracao(0);
+                }else{
+                    ti.setDuracao(Float.parseFloat(request.getParameter("duracao")));
+                }
+                 String PG = request.getParameter("numeropaginas");
+                if(PG == null){
+                    ti.setQuantidadePaginas(0);
+                }else{
+                    ti.setQuantidadePaginas(Float.parseFloat(request.getParameter("numeropaginas")));
+                }
                 ti.setDescricao(request.getParameter("descricao"));
                 ti.setDataDePublicacao(request.getParameter("datapublicacao"));
                 ti.setEstadoPublicacao(request.getParameter("estado"));
@@ -82,6 +98,17 @@ public class TituloServ extends HttpServlet {
                 String[] autres = request.getParameterValues("autores");
                 String[] exemplares = request.getParameterValues("exemplar");
                 String nul = null;
+//                for (String aut : autres) {
+//                    autor = new Autor(0, aut, " ", " ");
+//                   int ID = autorDAO.Pesquisar(autor).getIdAutor();
+//                   String nA = autorDAO.Pesquisar(autor).getNome();
+//                   String sql= "";
+//                   sql="INSERT INTO titulo_tem_autor (Titulo_idTitulo, Autor_idAutor, TipoDeAutor) VALUES ("+ID+" , "+nA+" , ? )";
+//                   PreparedStatement ps = connection.prepareStatement(sql);
+//                   ps.execute();
+//                }
+
+                
                 
                 
             }
