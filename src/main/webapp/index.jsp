@@ -114,6 +114,6 @@
     <!-- aqui vai css -->
     <script src="template/js/jquery-3.1.1.min.js"></script>
     <!--<script src="js/sessao.js" charset="utf-8"></script>-->
-    <!--<script src="js/formularios.js" charset="utf-8"></script>-->
+    <script src="template/js/formularios.js" charset="utf-8"></script>
 </body>
 </html>

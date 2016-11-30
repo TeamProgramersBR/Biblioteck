@@ -6,6 +6,7 @@
 package br.harlock.bll;
 
 import br.harlock.dao.EmprestimoDAO;
+import br.harlock.dao.UsuarioDAO;
 import br.harlock.model.Emprestimo;
 import br.harlock.model.Exemplar;
 import br.harlock.model.Usuario;
@@ -32,50 +33,74 @@ import javax.servlet.http.HttpSession;
 public class EmprestimoServ extends HttpServlet {
 
     private EmprestimoDAO emprestimoDAO;
+    private UsuarioDAO usuarioDAO;
     private String acao = "";
 
     public EmprestimoServ() throws Exception {
         emprestimoDAO = new EmprestimoDAO();
-
+        usuarioDAO = new UsuarioDAO();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException, Exception {
-
+        HttpSession sessao = request.getSession();
         String pagina = "index.jsp";
         acao = request.getParameter("acao");
+        Usuario usuarioRequere = new Usuario();
         
+         ArrayList emprestimosACancelar = new ArrayList();
         
         if (acao.equals("emprestimos")) {
             Iterator lista = emprestimoDAO.ConsultarTodos();
             request.setAttribute("autor", lista);
             pagina = "index.jsp?pagina=emprestimosCTRL";
         }
-        if (!response.isCommitted()) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher(pagina);
-            dispatcher.forward(request, response);
-        }
+       
         if (acao.equals("pesquisaExemplar")) {
-            HttpSession sessao = request.getSession();
             Exemplar consultarExemplar = new Exemplar();
             ArrayList listaDeExemplares = null;
             if (sessao == null) {
                 listaDeExemplares = new ArrayList();
                 sessao = request.getSession();
             } else {
-               listaDeExemplares = (ArrayList) sessao.getAttribute("carrinho");
+                if (sessao.getAttribute("carrinho") != null) {
+                    listaDeExemplares = (ArrayList) sessao.getAttribute("carrinho");
+                }
+                if (sessao.getAttribute("usuarioRequere") != null) {
+                    usuarioRequere = (Usuario) sessao.getAttribute("usuarioRequere");
+                }
+                if (sessao.getAttribute("cancelarEmprestimos") != null) {
+                    emprestimosACancelar = (ArrayList) sessao.getAttribute("cancelarEmprestimos");
+                }
             }
             consultarExemplar.setFkTitulo(Integer.parseInt(request.getParameter("idT")));
             consultarExemplar.setIdExe(Integer.parseInt(request.getParameter("idE")));
             Exemplar exemplar = emprestimoDAO.PesquisarExemplarParamprestimo(consultarExemplar);
             if (exemplar == null) {
-                pagina = "";
-            }else{
+                pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";
+            } else {
                 Emprestimo e = emprestimoDAO.exemplarLiberado(exemplar);
-                
+                if (usuarioRequere.getNivelDeAcesso().equals("Professor") && e.getUsuarioDoSistema().getNivelDeAcesso().equals("aluno")) {
+                    e.setSituacao("Cancelado");
+                    emprestimosACancelar.add(e);
+                    sessao.setAttribute("cancelarEmprestimos", emprestimosACancelar);
+
+                }
                 listaDeExemplares.add(exemplar);
             }
         }
+        if (acao.equals("verificarUsuario")) {
+            String cpf = request.getParameter("cpfR");
+            usuarioRequere.setCpf(cpf);
+            usuarioRequere = usuarioDAO.Pesquisar(usuarioRequere);
+            sessao.setAttribute("usuarioRequere", usuarioRequere);
+            if (usuarioRequere != null) {
+                pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";
+            } else {
+                pagina = "index.jsp?pagina=novoemprestimo&usur=indisponivel";
+            }
+        }
+        request.getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
