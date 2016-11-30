@@ -68,7 +68,6 @@ public class TituloServ extends HttpServlet {
                 
                 ti.setVolume(request.getParameter("Volume"));
                 ti.setFkItemPdc(Integer.parseInt(request.getParameter("produtora")));
-                ti.setEstadoPublicacao(request.getParameter(""));
                 ti.setEdicao(request.getParameter(""));
                 ti.setDuracao(Float.parseFloat(request.getParameter("duracao")));
                 ti.setQuantidadePaginas(Integer.parseInt(request.getParameter("numeropaginas")));

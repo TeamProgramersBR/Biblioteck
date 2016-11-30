@@ -64,8 +64,8 @@ public class Titulo {
         this.idioma = " ";
         this.traducao = " ";
         this.capa = " ";
-        this.duracao = 0;
-        this.quantidadePaginas = 0;
+        this.quantidadePaginas = 0.0f;
+        this.duracao = 0.0f;
     }
     public Titulo() {
     }

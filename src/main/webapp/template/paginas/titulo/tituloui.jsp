@@ -9,10 +9,10 @@
     if (request.getAttribute("autores") != null && request.getAttribute("prdoutoras") != null) {
         Iterator iteratorAutores = (Iterator) request.getAttribute("autores");
         Iterator iteratorProdutoraDeConteudo = (Iterator) request.getAttribute("prdoutoras");
-        if (iteratorAutores.hasNext()) {
+        while (iteratorAutores.hasNext()) {
             autores.add((Autor) iteratorAutores.next());
         }
-        if (iteratorProdutoraDeConteudo.hasNext()) {
+        while (iteratorProdutoraDeConteudo.hasNext()) {
             produtoras.add((ProdutoraConteudo) iteratorProdutoraDeConteudo.next());
         }
     }
@@ -130,9 +130,9 @@
             <% for (ProdutoraConteudo p : produtoras) {%>
             <% if (p.getIdPdc() == titulo.getFkItemPdc()) {%>
             <option value="<%=p.getIdPdc()%>" selected=""><%=p.getNomeProdutora()%></option>
-            <%}%>
+            <%}else{%>
             <option value="<%=p.getIdPdc()%>"><%=p.getNomeProdutora()%></option>
-            <% }%>
+            <% }}%>
         </select>
     </div>
     <div class="col-5 float-l">
@@ -183,7 +183,7 @@
     }
 
     function addRowExemplares() {
-        var html = "<tr><td><input type='hidden' name='exemplar' value='oi'>Pendente</td><td>Pendente</td><td><input type='checkbox' name='liberadoParaEmprestimo' value='1' > </td><td><a onclick='deletarRowExemplares(this)'><button class='botaos vermelho'>-</button></a></td></tr>";
+        var html = "<tr><td><input type='hidden' name='exemplar' value='salvar'>Pendente</td><td>Pendente</td><td><input type='checkbox' name='liberadoParaEmprestimo' value='1' > </td><td><a onclick='deletarRowExemplares(this)'><button class='botaos vermelho'>-</button></a></td></tr>";
         $('#exemplaresTB > tbody:last-child').append(html);
     }
 
