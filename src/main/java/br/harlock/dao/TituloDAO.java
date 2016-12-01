@@ -135,9 +135,10 @@ public class TituloDAO {
 
     }
 
-    public Iterator<Titulo> ConsultarTodos() throws ParseException {
-        List<Titulo> titulos = new ArrayList<Titulo>();
+    public Iterator<Titulo> ConsultarTodos() throws ParseException, Exception {
+        
         try {
+            List<Titulo> titulos = new ArrayList<Titulo>();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM titulo");
             while (rs.next()) {
@@ -155,33 +156,38 @@ public class TituloDAO {
                 titulo.setTraducao(rs.getString("Traducao"));
                 titulo.setCapa(rs.getString("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
-                titulo.getCategoriaitemacervo().setIdCat(rs.getInt("Categoria_item_acervo_ID_CAT"));
+                titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
                 titulo.setTipoDeObra(rs.getString("tipoDeObra"));
                 titulo.setDuracao(rs.getFloat("duracao"));
                 titulo.setVolume(rs.getString("volume"));
                 titulo.setQuantidadePaginas(rs.getInt("quatidadepaginas"));
                 titulos.add(titulo);
+                
             }
-        } catch (SQLException e) {
+            return titulos.iterator();
+        } catch (Exception e) {
             e.printStackTrace();
+            throw new Exception(" r"+e);
         }
-
-        return titulos.iterator();
     }
 
     public Titulo Pesquisar(Titulo titulo) throws Exception {
         try {
-            Statement statement = connection.createStatement();
+            
             String sql = "";
+            PreparedStatement ps = connection.prepareStatement(sql);
             String where="";
-            if (titulo.getIdTitu() != 0) {
-                where=titulo.getIdTitu()+"";
-                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas FROM titulo WHERE ID_TITU = "+where;
+            if (titulo.getIdTitu() != 0) {    
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas FROM titulo WHERE ID_TITU = ? ";
+                ps =connection.prepareStatement(sql);
+                ps.setInt(1, titulo.getIdTitu());
             }else if (!titulo.getIdioma().equals(null)) {
-                where=titulo.getObra();
-                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas  FROM titulo WHERE obra = "+where;
+                sql = "SELECT ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE ,tipoDeObra, duracao, volume, quatidadepaginas  FROM titulo WHERE obra = ? ";
+                ps =connection.prepareStatement(sql);
+                ps.setString(1, titulo.getObra());
             }
-            ResultSet rs = statement.executeQuery(sql);
+            
+            ResultSet rs = ps.executeQuery();
             rs.next();
            
             

@@ -64,7 +64,8 @@
                 <ul>
                     <li><a href="index.jsp">Inicio</a></li>
                         <%if (liberadoADMN) {%>
-                    <li><a href="Titulo.do?acao=tituloui">Titulos</a></li>
+           <%--      <li><a href="Titulo.do?acao=tituloui">Titulos</a></li> --%>
+                  <li><a href="Titulo.do?acao=titulos">Titulos</a></li>  
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
                     <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>
