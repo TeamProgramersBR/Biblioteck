@@ -120,7 +120,7 @@
                 <label>Status</label>
                 <select id="status" name="status" >
                     <%if(cadastrado.getStatusDoUsuario()!=""){%> <option value="<%=cadastrado.getStatusDoUsuario()%>"><%=cadastrado.getStatusDoUsuario()%></option> <%}%>
-                    <option value="Ativo">Ativo</option>
+                    <option value="liberado">liberado</option>
                     <option value="Pendente">Pendente</option>
                     <option value="Inativo">Inativo</option>
                 </select>

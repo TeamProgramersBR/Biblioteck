@@ -61,15 +61,16 @@ public class UsuarioServ extends HttpServlet {
             u.setNivelDeAcesso(request.getParameter("acesso"));
             if (Integer.parseInt(request.getParameter("ID")) != 0) {
                 u.setStatusDoUsuario(request.getParameter("status"));
+                u.setNivelDeAcesso(request.getParameter("acesso"));
                 DAO.Update(u);
-                pagina = "index.jsp?pagina=usuariosCTRL";
+                
             } else {
                 MD5 md5 = new MD5();
                 u.setSenha(md5.toMD5(u.getSenha()));
                 u.setStatusDoUsuario("Pendente");
                 DAO.Inserir(u);
-                pagina = "index.jsp?pagina=entrar";
             }
+            pagina = "Usuario.do?acao=usuarios";
         } else if (acao.equals("remover")) {
             u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
             DAO.Remover(u);
@@ -81,9 +82,10 @@ public class UsuarioServ extends HttpServlet {
             u.setIdUsu(Integer.parseInt(request.getParameter("ID")));
             request.setAttribute("usuario", DAO.Pesquisar(u));
             pagina = "index.jsp?pagina=usuarioui";
-        }
+        } 
+        
         request.getRequestDispatcher(pagina).forward(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

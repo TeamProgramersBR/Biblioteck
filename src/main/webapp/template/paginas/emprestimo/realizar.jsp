@@ -29,6 +29,10 @@
 
     <div class="col-12 float-l">
         <a onclick="voltar()" class="float-r"><button class="botaoX verde">Voltar</button></a>
+        <%if(requerinteexiste){%>
+        <a href="Emprestimo.do?acao=cancelar" class="float-r"><button class="botaoX vermelho">Cancelar</button></a>    
+        <%}%>
+        
     </div>
 </div>
 <div class="containerX">
@@ -54,7 +58,8 @@
 
                 <td>
                     <%if (requerinteexiste) {%>
-                    Data de Locação <input type="text" id="datainput" onkeypress="verificarData()" name="dataemprestimo" style="width: 140px;">
+                    Data de Locação <input type="date" id="datainput"  onkeypress="verificarData()" name="dataemprestimo" style="width: 140px;">
+                    Data prevista devoluçao <input type="date" id="DATAD" disabled="" style="width: 140px;">
                     <%} else {%>
                     Primeiro diga quem esta querendo fazer um emprestimo ou reserva
                     <%}%>
@@ -82,7 +87,6 @@
                 <td style="">Obra</td>
                 <td style="">Tipo</td>
                 <td style="">Código exemplar</td>
-                <td style="">Data Prevista devolução</td>
                 
             </tr>
             <% if (carrinho != null) {
@@ -91,7 +95,7 @@
                 <td style=""><%=ex.getTitulo().getObra()%></td>
                 <td style=""><%=ex.getTitulo().getTipoDeObra()%></td>
                 <td style=""><%=ex.getIdExe()%>-<%=ex.getTitulo().getIdTitu()%></td>
-                <td style=""><input type="text" id="DATAD" disabled=""></td>
+                <td style=""></td>
             </tr>
             <%}
             } else {%>
@@ -118,32 +122,37 @@
 </div>
 
 <script>
+    
     function voltar() {
         window.history.back();
     }
+    $('#datainput').datepicker();
+    
     function verificarData() {
-        var teste = $('#datainput').val();
-        var data = new Date(teste);
-        data.setHours(0,0,0,0);
+        var dataInput = document.getElementById("datainput").value;
+        var date = new Date( Date.parse( dataInput )); 
+        date.setHours(0,0,0,0);
         var dataAgora = new Date();
-        dataAgora.setHours(0,0,0,0);
-        if (data == dataAgora || data > dataAgora) {
-            var datadev = $('#datainput').val();
-            datadev = new Date(datadev);
-            var datadevB = "";
-                <%if(requerinte != null){%>
-//            if ("<%=requerinte.getNivelDeAcesso()%>" == "Aluno") {
-//                datadev.setDate(datadev.getDate()+5);
-//                datadevB = datadev.getDate()+"/"datadev.getMonth()+"/"+datadev.getFullYear();
-//                $('#DATAD').val(datadevB);
-//                }else{
-//                datadev.setDate(datadev.getDate()+7);
-//                datadevB = datadev.getDate()+"/"datadev.getMonth()+"/"+datadev.getFullYear();
-//                $('#DATAD').val(datadevB);    
-//                };
-//            <%}%>
-        };
+        dataAgora.setHours(0,0,0,0)
+        
+        
+          <%if(requerinte != null){%>
+            var compara = "<%=requerinte.getNivelDeAcesso()%>";
+            if (compara == "Aluno") {
+                    var dayOffset = 20;
+                    var millisecondOffset = 5 * 24 * 60 * 60 * 1000;
+                    date.setTime(date.getTime() + millisecondOffset); 
+                    $("#DATAD").value(date);
+                }else{
+                   var dayOffset = 20;
+                   var millisecondOffset = 7 * 24 * 60 * 60 * 1000;
+                   date.setTime(date.getTime() + millisecondOffset); 
+                   $("#DATAD").value(date);
+                };
+            <%}%>
+        
     };
+    
     function adicionar() {
         var correto = $('#pesquisaBara').val();
         var verifica = correto.split("-");

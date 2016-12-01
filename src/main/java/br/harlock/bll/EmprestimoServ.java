@@ -103,6 +103,12 @@ public class EmprestimoServ extends HttpServlet {
                 pagina = "index.jsp?pagina=novoemprestimo&usur=indisponivel";
             }
         }
+         if(acao.equals("cancelar")){
+            sessao.setAttribute("usuarioRequere", null);
+            sessao.setAttribute("usuarioRequere", null);
+            sessao.setAttribute("carrinho", null);
+            pagina = "index.jsp?pagina=novoemprestimo&usur=indisponivel";
+        }
         request.getRequestDispatcher(pagina).forward(request, response);
     }
 
