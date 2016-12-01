@@ -58,9 +58,8 @@ public class EmprestimoServ extends HttpServlet {
        
         if (acao.equals("pesquisaExemplar")) {
             Exemplar consultarExemplar = new Exemplar();
-            ArrayList listaDeExemplares = null;
+            ArrayList listaDeExemplares = new ArrayList();
             if (sessao == null) {
-                listaDeExemplares = new ArrayList();
                 sessao = request.getSession();
             } else {
                 if (sessao.getAttribute("carrinho") != null) {
@@ -84,9 +83,13 @@ public class EmprestimoServ extends HttpServlet {
                     e.setSituacao("Cancelado");
                     emprestimosACancelar.add(e);
                     sessao.setAttribute("cancelarEmprestimos", emprestimosACancelar);
-
+                    pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";
+                }else{
+                    listaDeExemplares.add(exemplar);
                 }
-                listaDeExemplares.add(exemplar);
+                sessao.setAttribute("carrinho", listaDeExemplares);
+                pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";
+                
             }
         }
         if (acao.equals("verificarUsuario")) {

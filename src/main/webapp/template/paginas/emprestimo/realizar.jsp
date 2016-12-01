@@ -54,7 +54,7 @@
 
                 <td>
                     <%if (requerinteexiste) {%>
-                    Data de Locação <input type="date">
+                    Data de Locação <input type="text" id="datainput" onkeypress="verificarData()" name="dataemprestimo" style="width: 140px;">
                     <%} else {%>
                     Primeiro diga quem esta querendo fazer um emprestimo ou reserva
                     <%}%>
@@ -64,7 +64,7 @@
                     <%if (requerinteexiste) {%>
                     <form method="POST" id="adicionarExemplar" action="Emprestimo.do?acao=pesquisaExemplar" class="float-r">
                         <input type="search" name="pesquisa" id="pesquisaBara" size="10" >
-                        <a onclick="adicionar()"><input type="button" class="botaoX azul" value="Adicionar"></a>
+                        <a onclick="adicionar()"><input type="button" class="botaoX azul" value="Adicionar" id="pesquisaBara"></a>
                         <input id="idT" name="idT" type="hidden">
                         <input id="idE" name="idE" type="hidden">
                     </form>
@@ -81,15 +81,16 @@
             <tr>
                 <td style="">Obra</td>
                 <td style="">Tipo</td>
-                <td style="">Data Prevista devolução</td>
                 <td style="">Código exemplar</td>
+                <td style="">Data Prevista devolução</td>
+                
             </tr>
             <% if (carrinho != null) {
                     for (Exemplar ex : carrinho) {%>
             <tr>
                 <td style=""><%=ex.getTitulo().getObra()%></td>
                 <td style=""><%=ex.getTitulo().getTipoDeObra()%></td>
-                <td style=""><input type="text" id="DATAL" disabled=""></td>
+                <td style=""><%=ex.getIdExe()%>-<%=ex.getTitulo().getIdTitu()%></td>
                 <td style=""><input type="text" id="DATAD" disabled=""></td>
             </tr>
             <%}
@@ -120,6 +121,29 @@
     function voltar() {
         window.history.back();
     }
+    function verificarData() {
+        var teste = $('#datainput').val();
+        var data = new Date(teste);
+        data.setHours(0,0,0,0);
+        var dataAgora = new Date();
+        dataAgora.setHours(0,0,0,0);
+        if (data == dataAgora || data > dataAgora) {
+            var datadev = $('#datainput').val();
+            datadev = new Date(datadev);
+            var datadevB = "";
+                <%if(requerinte != null){%>
+//            if ("<%=requerinte.getNivelDeAcesso()%>" == "Aluno") {
+//                datadev.setDate(datadev.getDate()+5);
+//                datadevB = datadev.getDate()+"/"datadev.getMonth()+"/"+datadev.getFullYear();
+//                $('#DATAD').val(datadevB);
+//                }else{
+//                datadev.setDate(datadev.getDate()+7);
+//                datadevB = datadev.getDate()+"/"datadev.getMonth()+"/"+datadev.getFullYear();
+//                $('#DATAD').val(datadevB);    
+//                };
+//            <%}%>
+        };
+    };
     function adicionar() {
         var correto = $('#pesquisaBara').val();
         var verifica = correto.split("-");
