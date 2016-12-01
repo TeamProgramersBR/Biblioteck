@@ -9,6 +9,7 @@ import br.harlock.model.Titulo;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import junit.framework.Assert;
 import static org.junit.Assert.assertEquals;
 
@@ -80,5 +81,12 @@ public class TituloDAOTest {
 //        assertEquals(expResult.getIdTitu(), result.getIdTitu());
 //        
 //    }
-    
+//    @Test
+//    public void testConsultarTodos() throws Exception{
+//        TituloDAO instance = new TituloDAO();
+//        ArrayList<Titulo> result = new ArrayList();
+//        result = (ArrayList<Titulo>) instance.ConsultarTodos();
+//        String s = null;
+//    }
+//    
 }
