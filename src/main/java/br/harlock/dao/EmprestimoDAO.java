@@ -163,7 +163,7 @@ public class EmprestimoDAO {
 
         try {
             String sql = "SELECT  "
-                    + "ti.ISBN, ti.ISSN, ti.obra , ti.Edicao, ti.Edicao,  "
+                    + "ti.ISBN, ti.ISSN, ti.obra ,ti.tipoDeObra, ti.quatidadepaginas, ti.duracao, ti.Edicao,  "
                     + "c.NomeCategoria, exe.LiberadoParaEmprestimo  "
                     + "FROM titulo ti "
                     + "INNER JOIN exemplar exe "
@@ -178,18 +178,25 @@ public class EmprestimoDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Titulo titulo = new Titulo();
-                exemplar.setIdExe(rs.getInt("ID_EXE"));
+                exemplar.setIdExe(exemplar.getIdExe());
+                titulo.setObra(rs.getString("obra"));
+                titulo.setIsbn(rs.getString("ISBN"));
+                titulo.setIssn(rs.getString("ISSN"));
+                titulo.setTipoDeObra(rs.getString("ISSN"));
+                titulo.setTipoDeObra(rs.getString("tipoDeObra"));
+                titulo.setIdTitu(exemplar.getFkTitulo());
                 exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
                 exemplar.setDuracao(rs.getString("Duracao"));
-                exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
-                exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
+                exemplar.setQuantidadePaginas(rs.getString("quatidadepaginas"));
+                exemplar.setFkTitulo(exemplar.getFkTitulo());
+                exemplar.setTitulo(titulo);
                 
                 return exemplar;
             } else {
                 return null;
             }
         } catch (Exception e) {
-            throw new Exception("Erro ao pesquisar pelo exemplar");
+            throw new Exception("Erro ao pesquisar pelo exemplar"+e);
         }
 
     }
@@ -207,8 +214,9 @@ public class EmprestimoDAO {
                         "WHERE exp.FK_exemplar_ID_EXE = ? " +
                         "ORDER  BY emp.DataEmprestimo DESC limit 1";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
             ps.setInt(1, exp.getIdExe());
+            ResultSet rs = ps.executeQuery();
+            
             if (rs.next()) {
                 emp.setDataDevolucao(rs.getString("DataDevolucao"));
                 emp.setDataPrevDevolucao(rs.getString("DataPrevDevolucao"));
