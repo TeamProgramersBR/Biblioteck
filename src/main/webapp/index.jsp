@@ -32,8 +32,11 @@
         <meta charset="utf-8">
         <title></title>
         <link rel="stylesheet" href="template/css/estilo.css" media="screen" title="no title">
+        <link rel="stylesheet" href="template/js/jquery-ui.css" media="screen" title="no title">
     </head>
     <body>
+        <!-- aqui vai css -->
+    
         <div class="container bg">
             <div  class="containerLogo">
                 <div class="containerMD">
@@ -111,10 +114,9 @@
             <%}%>
         </div>
     </div>
-
-    <!-- aqui vai css -->
-    <script src="template/js/jquery-3.1.1.min.js"></script>
+<script src="template/js/jquery-3.1.1.min.js"></script>
     <!--<script src="js/sessao.js" charset="utf-8"></script>-->
     <script src="template/js/formularios.js" charset="utf-8"></script>
+    
 </body>
 </html>

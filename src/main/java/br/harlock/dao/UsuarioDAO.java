@@ -163,15 +163,12 @@ public class UsuarioDAO {
         try {
              String sql = "";
             PreparedStatement ps = connection.prepareStatement(sql) ;
-            if(usuario.getEmail() == null){
-                String vrau = "s";
-            }
-            if ("".equals(usuario.getEmail()) || null == usuario.getEmail() && usuario.getCpf() == null) {
+            if (usuario.getIdUsu() != 0 )  {
                 String val = "";
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE ID_USU = ?";
                 ps =connection.prepareStatement(sql);
                 ps.setInt(1, usuario.getIdUsu());
-            }if(usuario.getCpf() != null){
+            }else if(usuario.getCpf() != null){
                 sql = "SELECT ID_USU, Nivel_De_Acesso, Nome, CPF, email, NumeroResidencial, NumeroCelular, NumeroComercial, MatriculaEducacional, Senha, endereco_Logadouro, endereco_CEP, endereco_Cidade, endereco_Estado, endereco_Pais, StatusDoUsuario FROM usuario WHERE CPF = ?";
                 ps=connection.prepareStatement(sql);
                 ps.setString(1, usuario.getCpf());

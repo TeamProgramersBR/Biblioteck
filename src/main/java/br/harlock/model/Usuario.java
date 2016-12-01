@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Usuario {
 
-    private int idUsu;
+    private int idUsu = 0;
 
     private String nivelDeAcesso;
 
