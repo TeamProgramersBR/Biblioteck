@@ -5,7 +5,9 @@ public class Exemplar {
     private int idExe;
 
     private int fkTitulo;
-
+    
+    private int fkEmprestimo;
+    
     private Boolean liberadoParaEmprestimo;
 
     private String duracao;
@@ -81,6 +83,14 @@ public class Exemplar {
 
     public void setStatusDeEmprestimo(String statusDeEmprestimo) {
         this.statusDeEmprestimo = statusDeEmprestimo;
+    }
+
+    public int getFkEmprestimo() {
+        return fkEmprestimo;
+    }
+
+    public void setFkEmprestimo(int fkEmprestimo) {
+        this.fkEmprestimo = fkEmprestimo;
     }
     
     

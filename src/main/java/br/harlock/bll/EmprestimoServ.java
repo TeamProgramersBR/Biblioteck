@@ -76,16 +76,21 @@ public class EmprestimoServ extends HttpServlet {
             consultarExemplar.setIdExe(Integer.parseInt(request.getParameter("idE")));
             Exemplar exemplar = emprestimoDAO.PesquisarExemplarParamprestimo(consultarExemplar);
             if (exemplar == null) {
-                pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";
+                pagina = "index.jsp?pagina=novoemprestimo&como=ExemplarNaoExiste";
             } else {
-                Emprestimo e = emprestimoDAO.exemplarLiberado(exemplar);
-                if (usuarioRequere.getNivelDeAcesso().equals("Professor") && e.getUsuarioDoSistema().getNivelDeAcesso().equals("aluno")) {
-                    e.setSituacao("Cancelado");
-                    emprestimosACancelar.add(e);
-                    sessao.setAttribute("cancelarEmprestimos", emprestimosACancelar);
+                String[] liberado = emprestimoDAO.exemplarLiberado(exemplar,usuarioRequere);
+                if (liberado[0].equals("true")) {
+                        listaDeExemplares.add(exemplar);
+                        if (liberado[1] != null) {
+                            Emprestimo emp = new Emprestimo();
+                            emp.setExemplar(exemplar);
+                            emp.setIdEmp(Integer.parseInt(liberado[1]));
+                            emp = emprestimoDAO.Pesquisar(emp);
+                            emprestimosACancelar.add(emp);
+                        }
                     pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";
                 }else{
-                    listaDeExemplares.add(exemplar);
+                    
                 }
                 sessao.setAttribute("carrinho", listaDeExemplares);
                 pagina = "index.jsp?pagina=novoemprestimo&como=indisponivel";

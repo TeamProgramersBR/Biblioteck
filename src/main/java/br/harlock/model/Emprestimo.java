@@ -30,6 +30,8 @@ public class Emprestimo {
 
     private Usuario UsuarioDoSistema;
     
+    private Exemplar exemplar;
+    
     private  boolean locado;
     public Emprestimo() {
     }
@@ -151,6 +153,14 @@ public class Emprestimo {
 
     public void setLocado(boolean locado) {
         this.locado = locado;
+    }
+
+    public Exemplar getExemplar() {
+        return exemplar;
+    }
+
+    public void setExemplar(Exemplar exemplar) {
+        this.exemplar = exemplar;
     }
 
     

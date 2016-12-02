@@ -111,6 +111,7 @@ public class EmprestimoDAO {
             ps.setInt(i++, emprestimo.getFkUsu());
             ps.setInt(i++, emprestimo.getIdEmp());
             ps.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,6 +157,7 @@ public class EmprestimoDAO {
             emprestimo.setFkUsu(rs.getInt("FK_USU"));
             lista.add(emprestimo);
         }
+        
         return lista.iterator();
     }
 
@@ -190,57 +192,116 @@ public class EmprestimoDAO {
                 exemplar.setQuantidadePaginas(rs.getString("quatidadepaginas"));
                 exemplar.setFkTitulo(exemplar.getFkTitulo());
                 exemplar.setTitulo(titulo);
-                
+
                 return exemplar;
             } else {
                 return null;
             }
         } catch (Exception e) {
-            throw new Exception("Erro ao pesquisar pelo exemplar"+e);
+            throw new Exception("Erro ao pesquisar pelo exemplar" + e);
         }
 
     }
-    public Emprestimo exemplarLiberado(Exemplar exp) throws Exception{
+
+    public String[] exemplarLiberado(Exemplar exp, Usuario usu) throws Exception {
         try {
-            Emprestimo emp = new Emprestimo();
-            boolean liberado = false;
-            String sql = "SELECT emp.DataEmprestimo, emp.DataDevolucao, emp.DataPrevDevolucao, " +
-                        "emp.Situacao, u.Nivel_De_Acesso " +
-                        "FROM emprestimo emp INNER JOIN " +
-                        "exemplar_contem_emprestimo exp " +
-                        "ON exp.FK_emprestimo_ID_EMP = ID_EMP " +
-                        "INNER JOIN usuario u  " +
-                        "ON u.ID_USU = emp.FK_USU  " +
-                        "WHERE exp.FK_exemplar_ID_EXE = ? " +
-                        "ORDER  BY emp.DataEmprestimo DESC limit 1";
+            String[] liberar = new String[2];
+            liberar[0] = "false";
+            liberar[1] = null;
+            String sql = "SELECT emp.situacao,emp.DataEmprestimo,emp.reserva, emp.DataDevolucao,  "
+                    + "ece.status_exemplar, usu.Nivel_De_Acesso,  emp.id_emp,  "
+                    + "FROM exemplar_contem_emprestimo ece "
+                    + "INNER JOIN emprestimo emp "
+                    + "ON ece.fk_emprestimo_id_emp = emp.ID_EMP "
+                    + "INNER JOIN usuario usu "
+                    + "ON usu.id_usu = emp.fk_funcionario where FK_exemplar_ID_EXE = ?  "
+                    + "ORDER BY emp.DataEmprestimo Limit 1";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, exp.getIdExe());
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
-                emp.setDataDevolucao(rs.getString("DataDevolucao"));
-                emp.setDataPrevDevolucao(rs.getString("DataPrevDevolucao"));
-                emp.setDataEmprestimo(rs.getString("DataEmprestimo"));
-                emp.setSituacao(rs.getString("Situacao"));
-                Usuario u = new Usuario();
-                emp.setUsuarioDoSistema(u);
-                emp.getUsuarioDoSistema().setNivelDeAcesso(rs.getString("Nivel_De_Acesso"));
-                if (emp.getDataDevolucao() != null ) {
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                    LocalDate localDate = LocalDate.now();
-                    java.util.Date date = java.sql.Date.valueOf(localDate);
-                    if (emp.getDataDevolucao().before(date)) {
-                        emp.setLocado(true);
-                    }else{
-                       emp.setLocado(false);
-                    }
+                String situacao = rs.getString("situacao");
+                Date dataEmprestimo = rs.getDate("DataEmprestimo");
+                Date dataDevolucao = rs.getDate("DataDevolucao");
+                String statusExemplar = rs.getString("status_exemplar");
+                String nivelDeAcesso = rs.getString("Nivel_De_Acesso");
+                int idEmprestimo = rs.getInt("id_emp");
+                int reserva = rs.getInt("reserva");
+                if (statusExemplar.equals("Devolvido")) {
+                    liberar[0] = "true";
+                } else if (usu.getNivelDeAcesso().equals("Professor") && nivelDeAcesso.equals("Aluno") && situacao.equals("Reserva") && statusExemplar.equals("Em Reserva")) {
+                    liberar[0] = "true";
+                    liberar[1] = String.valueOf(idEmprestimo);
                 }
-            }else{
-                emp.setLocado(false);   
+            } else {
+                liberar[0] = "true";
             }
-            return emp;
-        } catch (SQLException | ParseException e) {
-            throw new Exception("Erro ao pesquisar pelo exemplar"+e);
+            return liberar;
+        } catch (SQLException e) {
+            throw new Exception("Erro ao pesquisar pelo exemplar" + e);
+        }
+    }
+
+    public Iterator<Exemplar> listaExemplaresEmprestimo(Emprestimo p) throws Exception {
+        try {
+            ArrayList<Exemplar> exemplares = new ArrayList();
+            String sql = "SELECT FK_exemplar_ID_EXE as eceIDEXE, FK_emprestimo_ID_EMP as aceIDEMP, status_exemplar, ID_TITU, ISBN, ISSN, obra, Descricao, DataDePublicacao, CidadePublicacao, EstadoPublicacao, Edicao, Idioma, Traducao, Capa, FK_ITEM_PDC, FK_CAT_ARCE, tipoDeObra, duracao, volume, quatidadepaginas "
+                    + "FROM exemplar_contem_emprestimo  ece "
+                    + "INNER JOIN titulo ti ON "
+                    + "ti.ID_TITU = ece.FK_exemplar_ID_EXE "
+                    + "where FK_emprestimo_ID_EMP = ? AND FK_exemplar_ID_EXE  = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Titulo titulo = new Titulo();
+                titulo.setIdTitu(rs.getInt("ID_TITU"));
+                titulo.setIsbn(rs.getString("ISBN"));
+                titulo.setIssn(rs.getString("ISSN"));
+                titulo.setObra(rs.getString("obra"));
+                titulo.setDescricao(rs.getString("Descricao"));
+                titulo.setDataDePublicacao(rs.getString("DataDePublicacao"));
+                titulo.setCidadePublicacao(rs.getString("CidadePublicacao"));
+                titulo.setEstadoPublicacao(rs.getString("EstadoPublicacao"));
+                titulo.setEdicao(rs.getString("Edicao"));
+                titulo.setIdioma(rs.getString("Idioma"));
+                titulo.setTraducao(rs.getString("Traducao"));
+                titulo.setCapa(rs.getString("Capa"));
+                titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
+                titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
+                titulo.setTipoDeObra(rs.getString("tipoDeObra"));
+                titulo.setDuracao(rs.getFloat("duracao"));
+                titulo.setVolume(rs.getString("volume"));
+                titulo.setQuantidadePaginas(rs.getInt("quatidadepaginas"));
+                Exemplar exemplar = new Exemplar();
+                exemplar.setFkEmprestimo(rs.getInt(sql));
+                exemplar.setIdExe(rs.getInt(sql));
+                exemplar.setStatusDeEmprestimo(rs.getString("status_exemplar"));
+                exemplar.setTitulo(titulo);
+                exemplares.add(exemplar);
+            }
+            return exemplares.iterator();
+        } catch (SQLException e) {
+            throw new Exception("Erro ao fazer update no statys de exemplar" + e);
+        }
+    }
+
+    public void updateStatusExemplares(ArrayList<Exemplar> exemplar) throws Exception {
+        try {
+            String sql = "UPDATE exemplar_contem_emprestimo  "
+                    + "SET status_exemplar= ?  "
+                    + "WHERE FK_exemplar_ID_EXE = ? and FK_emprestimo_ID_EMP = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            for (Exemplar ex : exemplar) {
+                ps.setString(1, ex.getStatusDeEmprestimo());
+                ps.setInt(2, ex.getIdExe());
+                ps.setInt(3, ex.getFkEmprestimo());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+
+        } catch (SQLException e) {
+            throw new Exception("Erro ao fazer update no statys de exemplar" + e);
         }
     }
 }
