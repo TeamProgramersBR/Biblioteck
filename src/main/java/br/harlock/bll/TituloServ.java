@@ -18,6 +18,7 @@ import br.harlock.model.ProdutoraConteudo;
 import br.harlock.model.Titulo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -30,6 +31,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
 
 /**
  *
@@ -60,10 +62,10 @@ public class TituloServ extends HttpServlet {
             throws ServletException, IOException, SQLException, ParseException, Exception {
         String pagina = "index.jsp";
         acao = request.getParameter("acao");
-        
+
         Titulo ti = new Titulo(" ");
         ProdutoraConteudo produtoraConteudo = new ProdutoraConteudo();
-        
+
         if (acao.equals("tituloui")) {
             Iterator iteratorAutores = autorDAO.ConsultarTodos();
             Iterator iteratorProdutoraDeConteudo = produtoraDAO.ConsultarTodos();
@@ -75,8 +77,6 @@ public class TituloServ extends HttpServlet {
         }
         if (acao.equals("salvar")) {
 
-            
-            
             produtoraConteudo.setIdPdc(Integer.parseInt(request.getParameter("produtora")));
             ti.setProdutoraConteudo(produtoraConteudo);
             ti.setObra(request.getParameter("obra"));
@@ -84,8 +84,10 @@ public class TituloServ extends HttpServlet {
             ti.setIsbn(request.getParameter("ISBN"));
             ti.setTipoDeObra(request.getParameter("tipoObra"));
             ti.setIdioma(request.getParameter("idiomaObra"));
+            String DAOact = "insert";
             if (request.getParameter("idTitulo") != null) {
                 ti.setIdTitu(Integer.parseInt(request.getParameter("idTitulo")));
+                DAOact = "update";
             }
 
             ti.setVolume(request.getParameter("Volume"));
@@ -110,9 +112,15 @@ public class TituloServ extends HttpServlet {
             Categoriaitemacervo categoriaitemacervo = new Categoriaitemacervo();
             categoriaitemacervo.setIdCat(Integer.parseInt(request.getParameter("categoria")));
             ti.setFkItemAcervo(categoriaitemacervo.getIdCat());
-            ti.setCapa(request.getParameter("base64img"));
+            String stt = request.getParameter("base64img");
+            Blob blob = new SerialBlob(stt.getBytes());
+            ti.setCapa(blob);
             ti.setTraducao(request.getParameter("traducao"));
-            tituloDAO.Inserir(ti);
+            if (DAOact.equalsIgnoreCase("insert")) {
+                tituloDAO.Inserir(ti);
+            }else if(DAOact.equalsIgnoreCase("update")){
+                tituloDAO.Update(ti);
+            }
             ti = tituloDAO.Pesquisar(ti);
             String[] autres = request.getParameterValues("autores");
             String[] idAutores = request.getParameterValues("idAutor");
@@ -120,26 +128,38 @@ public class TituloServ extends HttpServlet {
             String[] liberadoEmp = request.getParameterValues("liberadoParaEmprestimo");
             String nul = null;
             String sql = "";
-            sql = "INSERT INTO titulo_tem_autor (Titulo_idTitulo, Autor_idAutor, TipoDeAutor) VALUES ( ? , ? , ? )";
+            if(DAOact.equalsIgnoreCase("update")){
+                sql = "UPDATE titulo_tem_autor SET Titulo_idTitulo  = ?,Autor_idAutor = ?,TipoDeAutor = ? WHERE Titulo_idTitulo = ? AND Autor_idAutor = ?";
+            }else if(DAOact.equalsIgnoreCase("insert")){
+                sql = "INSERT INTO titulo_tem_autor (Titulo_idTitulo, Autor_idAutor, TipoDeAutor) VALUES ( ? , ? , ? )";
+            }
             PreparedStatement ps = connection.prepareStatement(sql);
             for (int i = 0; i < autres.length; i++) {
 
                 ps.setInt(1, ti.getIdTitu());
                 ps.setInt(2, Integer.parseInt(idAutores[i]));
                 ps.setString(3, autres[i]);
+                if(DAOact.equals("update")){
+                ps.setInt(4, ti.getIdTitu());
+                ps.setInt(5, Integer.parseInt(idAutores[i]));
+                }
                 ps.addBatch();
                 if (i == autres.length - 1) {
                     ps.executeBatch();
                 }
 
-
             }
 
             int liberado = exemplares.length - liberadoEmp.length;
             int nliberado = liberadoEmp.length;
-            String sql1;
-            sql1 = "INSERT INTO exemplar(LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
+            String sql1="";
+//            if(DAOact.equals("update")){
+//                sql1 = "UPDATE exemplar SET ID_EXE  = ?, LiberadoParaEmprestimo = ?, Duracao = ?, QuantidadePaginas = ?, FK_TITULO = ? WHERE ID_EXE = ?";
+//            }else 
+                if(DAOact.equals("insert")){
+                sql1 = "INSERT INTO exemplar(LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
                     + " VALUES (?,?,?,?)";
+            }
             ps = connection.prepareStatement(sql1);
             for (int i = 0; i < liberado; i++) {
                 exemplarMod = new Exemplar(0, ti.getIdTitu(), Boolean.TRUE, String.valueOf(ti.getDuracao()), String.valueOf(ti.getQuantidadePaginas()));
@@ -164,48 +184,19 @@ public class TituloServ extends HttpServlet {
                 }
             }
 
-        }else if(acao.equals("update")){
-            produtoraConteudo.setIdPdc(Integer.parseInt(request.getParameter("produtora")));
-            ti.setProdutoraConteudo(produtoraConteudo);
-            ti.setObra(request.getParameter("obra"));
-            ti.setIssn(request.getParameter("ISSN"));
-            ti.setIsbn(request.getParameter("ISBN"));
-            ti.setTipoDeObra(request.getParameter("tipoObra"));
-            ti.setIdioma(request.getParameter("idiomaObra"));
-            if (request.getParameter("idTitulo") != null) {
-                ti.setIdTitu(Integer.parseInt(request.getParameter("idTitulo")));
-            }
+        } else if (acao.equals("update")) {
+            Iterator iteratorAutores = autorDAO.ConsultarTodos();
+            Iterator iteratorProdutoraDeConteudo = produtoraDAO.ConsultarTodos();
+            Iterator iteratorCategoria = categoriaDAO.ConsultarTodos();
+            request.setAttribute("autores", iteratorAutores);
+            request.setAttribute("prdoutoras", iteratorProdutoraDeConteudo);
+            request.setAttribute("categorias", iteratorCategoria);
+            ti.setIdTitu(Integer.parseInt(request.getParameter("ID")));
+            request.setAttribute("titulo",tituloDAO.Pesquisar(ti));
+            pagina = "index.jsp?pagina=tituloui"; 
+            //nao exibe tudo na tela,olhar o titulo retornado e o preenchemento da mesma
 
-            ti.setVolume(request.getParameter("Volume"));
-            ti.setFkItemPdc(Integer.parseInt(request.getParameter("produtora")));
-//                ti.setEdicao(request.getParameter(""));
-            String f = request.getParameter("duracao");
-            if (f == null) {
-                ti.setDuracao(0);
-            } else {
-                ti.setDuracao(Float.parseFloat(request.getParameter("duracao")));
-            }
-            String PG = request.getParameter("numeropaginas");
-            if (PG == null) {
-                ti.setQuantidadePaginas(0);
-            } else {
-                ti.setQuantidadePaginas(Float.parseFloat(request.getParameter("numeropaginas")));
-            }
-            ti.setDescricao(request.getParameter("descricao"));
-            ti.setDataDePublicacao(request.getParameter("datapublicacao"));
-            ti.setEstadoPublicacao(request.getParameter("estado"));
-            ti.setCidadePublicacao(request.getParameter("cidade"));
-            Categoriaitemacervo categoriaitemacervo = new Categoriaitemacervo();
-            categoriaitemacervo.setIdCat(Integer.parseInt(request.getParameter("categoria")));
-            ti.setFkItemAcervo(categoriaitemacervo.getIdCat());
-            ti.setCapa(request.getParameter("base64img"));
-            ti.setTraducao(request.getParameter("traducao"));
-            tituloDAO.Update(ti);
-            
-            
-            
-            
-        }else if(acao.equals("titulos")){
+        } else if (acao.equals("titulos")) {
             Iterator titulos = tituloDAO.ConsultarTodos();
             request.setAttribute("titulos", titulos);
             Iterator categorias = categoriaDAO.ConsultarTodos();

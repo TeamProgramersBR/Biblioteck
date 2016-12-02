@@ -48,10 +48,13 @@ if (request.getAttribute("categorias") != null) {
         <th class="texto-centro">Ação</th>
     </tr>
      <%for (Titulo titulo: titulos) {%>
+     
+     
     <tr>
         <td><%=titulo.getObra()%></td>
         <td><%=titulo.getTipoDeObra()%></td>
         <%  int ct =titulo.getFkItemAcervo();
+            
             for (Categoriaitemacervo categoria: categorias) {
             String s ="";
             if (ct == categoria.getIdCat()) {
@@ -61,10 +64,13 @@ if (request.getAttribute("categorias") != null) {
         
        
         <%}%>
-         
+    
+         <% int ID = titulo.getIdTitu(); %>
+    <input type="hidden" id="asd" name="asd" value="<%=ID%>">
+ <% String ref1 ="Titulo.do?acao=exemplar&ID="+ID; String ref ="Titulo.do?acao=update&ID="+ID;%>
         <td class="float-r">
-            <a href="Titulo.do?acao=update&ID="<%=titulo.getIdTitu()%>><button class="botaoX azul">Editar</button></a>
-            <a href="Titulo.do?acao=exemplar&ID="<%=titulo.getIdTitu()%>><button class="botaoX verde">Exemplares</button></a>
+            <a href="<%=ref%>"><button class="botaoX azul">Editar</button></a>
+            <a href="<%=ref1%>"><button class="botaoX verde">Exemplares</button></a>
         </td>
     </tr>
 <%}%>

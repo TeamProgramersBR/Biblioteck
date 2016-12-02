@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="br.harlock.model.Categoriaitemacervo"%>
 <%@page import="br.harlock.model.Titulo"%>
 <%@page import="br.harlock.model.Autor"%>
@@ -34,16 +35,20 @@
 
     <div class="col-12">
         <label>Nome da obra</label>
-        <input type="text" name="obra" >
-        <input type="hidden" id="idTitulo" value="<%=titulo.getIdTitu()%>"
+        <input type="text" name="obra" value="<%=titulo.getObra()%>" >
+        <input type="hidden" id="idTitulo" name="idtitulo" value="<%=titulo.getIdTitu()%>"
 
                <div class="col-10 float-l">
             <label>tipo de obra</label>
             <select onclick="tipoDeTitulo()" id="tipoobra" name="tipoObra">
-                <option>Selecione</option>
+                <%
+                    String sel = "Selecione";
+                
+                %>
+                <option><%=sel%></option>
                 <%
                     for (String tipo : tipoDeTitulo) {
-                        if (tipo == titulo.getTipoDeObra()) {
+                        if (tipo.equals(titulo.getTipoDeObra())) {
                 %>
                 <option value="<%=tipo%>" selected=""><%=tipo%></option>
                 <% } else {%>
@@ -62,7 +67,12 @@
         </div>
         <div class="col-5 float-l">
             <label>Descrição</label>
-            <textarea id="descricao" name="descricao" value="<%=titulo.getDescricao()%>"></textarea>
+            
+            <textarea id="descricao" name="descricao" value="<%=titulo.getDescricao()%>"><%=titulo.getDescricao()%></textarea>
+            
+            
+                
+            
         </div>
         <div class="col-5 float-l">
             <label>Imagem</label>
@@ -105,7 +115,7 @@
         </div>
         <div class="col-5 float-l">
             <label>Volume</label>
-            <input type="text" id="Volume" name="Volume" value="<%=titulo.getEdicao()%>"
+            <input type="text" id="Volume" name="Volume" value="<%=titulo.getVolume()%>"
         </div>
     </div>
 
@@ -119,7 +129,16 @@
     </div>
     <div class="col-4 float-l">
         <label>Data de publicação</label>
-        <input type="date" name="datapublicacao"  value="<%=titulo.getDataDePublicacao()%>">
+        <%
+        if(titulo.getDataDePublicacao() != null){
+            String dta = titulo.getDataDePublicacao().toString();
+            %>
+        <input type="date" name="datapublicacao"  value="<%=dta%>">
+        <%
+        }else{
+        %>
+        <input type="date" name="datapublicacao"  value="">
+        <%}%>
     </div>
     <div class="col-10 float-l">
         <label>Estado de Publicacao</label>
@@ -275,7 +294,7 @@
         document.getElementById("inp").addEventListener("change", readFile, false);
     }
 
-
+    
 </script>
 
 
