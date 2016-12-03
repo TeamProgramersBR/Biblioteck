@@ -8,6 +8,7 @@ package br.harlock.dao;
 import br.harlock.model.Titulo;
 import br.harlock.conn.Conexao;
 import br.harlock.model.dataParseToSQL;
+import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -50,7 +51,7 @@ public class TituloDAO {
             ps.setString(8, titulo.getEdicao());
             ps.setString(9, titulo.getIdioma());
             ps.setString(10, titulo.getTraducao());
-            ps.setBlob(11, titulo.getCapa());
+            ps.setBinaryStream(11, new ByteArrayInputStream(titulo.getCapa()),titulo.getCapa().length);
             ps.setInt(12, titulo.getFkItemPdc());
             ps.setInt(13, titulo.getFkItemAcervo());
             ps.setFloat(14, titulo.getDuracao());
@@ -116,7 +117,7 @@ public class TituloDAO {
             ps.setString(9, titulo.getEdicao());
             ps.setString(10, titulo.getIdioma());
             ps.setString(11, titulo.getTraducao());
-            ps.setBlob(12, titulo.getCapa());
+            ps.setBinaryStream(12, new ByteArrayInputStream(titulo.getCapa()),titulo.getCapa().length);
             ps.setInt(13, titulo.getFkItemPdc());
             ps.setInt(14, titulo.getFkItemAcervo());
             ps.setInt(15, titulo.getIdTitu());
@@ -154,7 +155,7 @@ public class TituloDAO {
                 titulo.setEdicao(rs.getString("Edicao"));
                 titulo.setIdioma(rs.getString("Idioma"));
                 titulo.setTraducao(rs.getString("Traducao"));
-                titulo.setCapa(rs.getBlob("Capa"));
+                //titulo.setCapa(rs.getBlob("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
                 titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
                 titulo.setTipoDeObra(rs.getString("tipoDeObra"));
@@ -202,7 +203,7 @@ public class TituloDAO {
                 titulo.setEdicao(rs.getString("Edicao"));
                 titulo.setIdioma(rs.getString("Idioma"));
                 titulo.setTraducao(rs.getString("Traducao"));
-                titulo.setCapa(rs.getBlob("Capa"));
+                //titulo.setCapa(rs.getBlob("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
                 titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
                 titulo.setTipoDeObra(rs.getString("tipoDeObra"));

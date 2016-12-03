@@ -23,16 +23,17 @@ public class dtFtoHTMLTest {
     /**
      * Test of dtF method, of class dtFtoHTML.
      */
-    @Test
-    public void testDtF() throws Exception {
-        System.out.println("dtF");
-        Date d1 = null;
-        dtFtoHTML instance = new dtFtoHTML();
-        TituloDAO dao = new TituloDAO();
-        Titulo titulo = new Titulo(1, 1, 1, null, null, null, null, null, null, null, null, null, null, null);
-        Titulo t = dao.Pesquisar(titulo);
-        String result = instance.dtF(t.getDataDePublicacao());
-        String r = result;
-    }
-    
+//    @Test
+//    public void testDtF() throws Exception {
+//        System.out.println("dtF");
+//        Date d1 = null;
+//        dtFtoHTML instance = new dtFtoHTML();
+//        TituloDAO dao = new TituloDAO();
+//        Titulo titulo = new Titulo(1, 1, 1, null, null, null, null, null, null, null, null, null, null, null);
+//        Titulo t = dao.Pesquisar(titulo);
+//        Date date = t.getDataDePublicacao();
+//        String result = instance.dtF(date);
+//        String r = result;
+//    }
+//    
 }

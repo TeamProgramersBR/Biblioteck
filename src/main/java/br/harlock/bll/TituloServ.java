@@ -16,6 +16,10 @@ import br.harlock.model.Categoriaitemacervo;
 import br.harlock.model.Exemplar;
 import br.harlock.model.ProdutoraConteudo;
 import br.harlock.model.Titulo;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Blob;
@@ -23,15 +27,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
+
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
+import sun.misc.BASE64Decoder;
 
 /**
  *
@@ -113,12 +120,28 @@ public class TituloServ extends HttpServlet {
             categoriaitemacervo.setIdCat(Integer.parseInt(request.getParameter("categoria")));
             ti.setFkItemAcervo(categoriaitemacervo.getIdCat());
             String stt = request.getParameter("base64img");
-            Blob blob = new SerialBlob(stt.getBytes());
-            ti.setCapa(blob);
+            try{
+                String parts[] = stt.split(",");
+                String imgPart = parts[1];
+            BufferedImage image = null;
+            byte[] imageByte;
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imgPart);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+            // write the image to a file
+            File outputfile = new File("image.png");
+            ImageIO.write(image, "png", outputfile);
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            ti.setCapa(Base64ToBytes(stt));
             ti.setTraducao(request.getParameter("traducao"));
             if (DAOact.equalsIgnoreCase("insert")) {
                 tituloDAO.Inserir(ti);
-            }else if(DAOact.equalsIgnoreCase("update")){
+            } else if (DAOact.equalsIgnoreCase("update")) {
                 tituloDAO.Update(ti);
             }
             ti = tituloDAO.Pesquisar(ti);
@@ -128,9 +151,9 @@ public class TituloServ extends HttpServlet {
             String[] liberadoEmp = request.getParameterValues("liberadoParaEmprestimo");
             String nul = null;
             String sql = "";
-            if(DAOact.equalsIgnoreCase("update")){
+            if (DAOact.equalsIgnoreCase("update")) {
                 sql = "UPDATE titulo_tem_autor SET Titulo_idTitulo  = ?,Autor_idAutor = ?,TipoDeAutor = ? WHERE Titulo_idTitulo = ? AND Autor_idAutor = ?";
-            }else if(DAOact.equalsIgnoreCase("insert")){
+            } else if (DAOact.equalsIgnoreCase("insert")) {
                 sql = "INSERT INTO titulo_tem_autor (Titulo_idTitulo, Autor_idAutor, TipoDeAutor) VALUES ( ? , ? , ? )";
             }
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -139,9 +162,9 @@ public class TituloServ extends HttpServlet {
                 ps.setInt(1, ti.getIdTitu());
                 ps.setInt(2, Integer.parseInt(idAutores[i]));
                 ps.setString(3, autres[i]);
-                if(DAOact.equals("update")){
-                ps.setInt(4, ti.getIdTitu());
-                ps.setInt(5, Integer.parseInt(idAutores[i]));
+                if (DAOact.equals("update")) {
+                    ps.setInt(4, ti.getIdTitu());
+                    ps.setInt(5, Integer.parseInt(idAutores[i]));
                 }
                 ps.addBatch();
                 if (i == autres.length - 1) {
@@ -152,13 +175,13 @@ public class TituloServ extends HttpServlet {
 
             int liberado = exemplares.length - liberadoEmp.length;
             int nliberado = liberadoEmp.length;
-            String sql1="";
+            String sql1 = "";
 //            if(DAOact.equals("update")){
 //                sql1 = "UPDATE exemplar SET ID_EXE  = ?, LiberadoParaEmprestimo = ?, Duracao = ?, QuantidadePaginas = ?, FK_TITULO = ? WHERE ID_EXE = ?";
 //            }else 
-                if(DAOact.equals("insert")){
+            if (DAOact.equals("insert")) {
                 sql1 = "INSERT INTO exemplar(LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO)"
-                    + " VALUES (?,?,?,?)";
+                        + " VALUES (?,?,?,?)";
             }
             ps = connection.prepareStatement(sql1);
             for (int i = 0; i < liberado; i++) {
@@ -192,8 +215,8 @@ public class TituloServ extends HttpServlet {
             request.setAttribute("prdoutoras", iteratorProdutoraDeConteudo);
             request.setAttribute("categorias", iteratorCategoria);
             ti.setIdTitu(Integer.parseInt(request.getParameter("ID")));
-            request.setAttribute("titulo",tituloDAO.Pesquisar(ti));
-            pagina = "index.jsp?pagina=tituloui"; 
+            request.setAttribute("titulo", tituloDAO.Pesquisar(ti));
+            pagina = "index.jsp?pagina=tituloui";
             //nao exibe tudo na tela,olhar o titulo retornado e o preenchemento da mesma
 
         } else if (acao.equals("titulos")) {
@@ -261,4 +284,9 @@ public class TituloServ extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public byte[] Base64ToBytes(String imageString) throws IOException {
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] decodedBytes = decoder.decodeBuffer(imageString);
+        return decodedBytes;
+    }
 }

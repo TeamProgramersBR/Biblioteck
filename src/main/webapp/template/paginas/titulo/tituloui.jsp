@@ -1,3 +1,4 @@
+<%@page import="br.harlock.model.dtFtoHTML"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="br.harlock.model.Categoriaitemacervo"%>
 <%@page import="br.harlock.model.Titulo"%>
@@ -77,8 +78,9 @@
         <div class="col-5 float-l">
             <label>Imagem</label>
             <input type="file" name="inp" id="inp" accept="image/*">
-            <img id="img" width="140" height="170">
+            <img src="paginas/titulo/imagem.jsp?IDIMG=<%=titulo.getIdTitu()%>" id="img" width="140" height="170">
             <input type="hidden" name="base64img" id="base64img" value="<%=titulo.getCapa()%>">
+            
         </div>
         <div class="col-10">
             <label >ISBN</label>
@@ -131,9 +133,10 @@
         <label>Data de publicação</label>
         <%
         if(titulo.getDataDePublicacao() != null){
-            String dta = titulo.getDataDePublicacao().toString();
+            dtFtoHTML dt = new dtFtoHTML();
+            String dts = dt.dtF(titulo.getDataDePublicacao());
             %>
-        <input type="date" name="datapublicacao"  value="<%=dta%>">
+        <input type="date" name="datapublicacao"  value="<%=dts%>">
         <%
         }else{
         %>
@@ -283,7 +286,7 @@
             if (this.files && this.files[0]) {
                 var FR = new FileReader();
                 FR.onload = function (e) {
-                    document.getElementById("img").src = e.target.result;
+                    document.getElementById("base64img").src = e.target.result;
                     console.log(e.target.result);
 //                    document.getElementById("b64").innerHTML = e.target.result;
                 };
