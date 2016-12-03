@@ -3,13 +3,11 @@
 <%@page import="java.util.ArrayList"%>
 <%
 
-    ArrayList<Emprestimo> emprestimos = new ArrayList();
-
+    boolean mostrar = false;
+     Iterator iterator = null;
     if (request.getAttribute("emprestimos") != null) {
-        Iterator<Emprestimo> iterator = (Iterator) request.getAttribute("emprestimos");
-        while (iterator.hasNext()) {
-            emprestimos.add(iterator.next());
-        }
+        mostrar = true;
+        iterator = (Iterator) request.getAttribute("emprestimos");
     }
 
 %>
@@ -18,7 +16,7 @@
         <a href="index.jsp?pagina=novoemprestimo"><button class="botaoX verde texto-branco">+ novo emprestimo</button></a>
     </div>
 </div>
-<% if (emprestimos.isEmpty()) { %>
+<% if (mostrar) { %>
 <h2>Não há emprestimos cadastrados.</h2>
 <%} else {%>
 <table>
@@ -28,7 +26,9 @@
         <th class="texto-centro">Data de devolução</th>
         <th class="texto-centro">Ação</th>
     </tr>
-    <%for (Emprestimo emp : emprestimos) {%>
+    <% while (iterator.hasNext()) {
+        Emprestimo emp = (Emprestimo) iterator.next();
+    %>
     <tr>
         <td><%=emp.getUsuarioDoSistema().getNome()%></td>
         <td><%=emp.getSituacao()%></td>

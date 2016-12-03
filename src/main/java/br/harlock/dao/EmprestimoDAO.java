@@ -209,7 +209,7 @@ public class EmprestimoDAO {
             liberar[0] = "false";
             liberar[1] = null;
             String sql = "SELECT emp.situacao,emp.DataEmprestimo,emp.reserva, emp.DataDevolucao,  "
-                    + "ece.status_exemplar, usu.Nivel_De_Acesso,  emp.id_emp,  "
+                    + "ece.status_exemplar, usu.Nivel_De_Acesso,  emp.id_emp  "
                     + "FROM exemplar_contem_emprestimo ece "
                     + "INNER JOIN emprestimo emp "
                     + "ON ece.fk_emprestimo_id_emp = emp.ID_EMP "

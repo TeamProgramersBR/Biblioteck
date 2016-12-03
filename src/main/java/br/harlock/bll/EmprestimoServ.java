@@ -51,8 +51,7 @@ public class EmprestimoServ extends HttpServlet {
          ArrayList emprestimosACancelar = new ArrayList();
         
         if (acao.equals("emprestimos")) {
-            Iterator lista = emprestimoDAO.ConsultarTodos();
-            request.setAttribute("autor", lista);
+            request.setAttribute("emprestimos", emprestimoDAO.ConsultarTodos());
             pagina = "index.jsp?pagina=emprestimosCTRL";
         }
        
