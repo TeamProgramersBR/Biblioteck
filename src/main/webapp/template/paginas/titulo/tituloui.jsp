@@ -1,3 +1,4 @@
+<%@page import="br.harlock.model.TTA"%>
 <%@page import="br.harlock.model.dtFtoHTML"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="br.harlock.model.Categoriaitemacervo"%>
@@ -10,10 +11,12 @@
     ArrayList<Autor> autores = new ArrayList();
     ArrayList<ProdutoraConteudo> produtoras = new ArrayList();
     ArrayList<Categoriaitemacervo> categorias = new ArrayList();
+    ArrayList<TTA> ttaas = new ArrayList();
     if (request.getAttribute("autores") != null && request.getAttribute("prdoutoras") != null) {
         Iterator iteratorAutores = (Iterator) request.getAttribute("autores");
         Iterator iteratorProdutoraDeConteudo = (Iterator) request.getAttribute("prdoutoras");
         Iterator iteratorCategoria = (Iterator) request.getAttribute("categorias");
+        Iterator IteratorTTA = (Iterator) request.getAttribute("ttas");
         while (iteratorAutores.hasNext()) {
             autores.add((Autor) iteratorAutores.next());
         }
@@ -24,6 +27,11 @@
                 categorias.add((Categoriaitemacervo) iteratorCategoria.next());
                 
             }
+        if(IteratorTTA != null){
+        while(IteratorTTA.hasNext()){
+            ttaas.add((TTA) IteratorTTA.next());
+            
+        }}
     }
     Titulo titulo = new Titulo(" ");
     if (request.getAttribute("titulo") != null) {
@@ -37,8 +45,7 @@
     <div class="col-12">
         <label>Nome da obra</label>
         <input type="text" name="obra" value="<%=titulo.getObra()%>" >
-        <input type="hidden" id="idTitulo" name="idtitulo" value="<%=titulo.getIdTitu()%>"
-
+        <input type="hidden" name="idTitulo" id="idTitulo" value="<%=titulo.getIdTitu()%>" >
                <div class="col-10 float-l">
             <label>tipo de obra</label>
             <select onclick="tipoDeTitulo()" id="tipoobra" name="tipoObra">
@@ -50,12 +57,17 @@
                 <%
                     for (String tipo : tipoDeTitulo) {
                         if (tipo.equals(titulo.getTipoDeObra())) {
+                            String value = "";
+                    if(tipo.equals("Livro")) value = "1";
+                    if(tipo.equals("Vídeo")) value = "2";
+                    if(tipo.equals("Artigo")) value = "3";
+                    if(tipo.equals("Revista")) value = "4";
                 %>
-                <option value="<%=tipo%>" selected=""><%=tipo%></option>
+                <option value="<%=value%>" selected=""><%=tipo%></option>
                 <% } else {%>
                 <%   String value = "";
                     if(tipo.equals("Livro")) value = "1";
-                    if(tipo.equals("Video")) value = "2";
+                    if(tipo.equals("Vídeo")) value = "2";
                     if(tipo.equals("Artigo")) value = "3";
                     if(tipo.equals("Revista")) value = "4";
                 %>
@@ -78,7 +90,7 @@
         <div class="col-5 float-l">
             <label>Imagem</label>
             <input type="file" name="inp" id="inp" accept="image/*">
-            <img src="paginas/titulo/imagem.jsp?IDIMG=<%=titulo.getIdTitu()%>" id="img" width="140" height="170">
+            <img src="paginas/titulo/imagem.jsp?IDIMG=<%=titulo.getIdTitu()%>" id="img" name="img" width="140" height="170">
             <input type="hidden" name="base64img" id="base64img" value="<%=titulo.getCapa()%>">
             
         </div>
@@ -93,7 +105,7 @@
             <label>ISSN</label>
             <input type="text" name="ISSN" id="ISSN"  value="<%=titulo.getIssn()%>">
         </div>
-        <div class="col-5 float-l">
+        <%--<div class="col-5 float-l">
             <label>Editor</label>
             <select id="editor">
                 <option>
@@ -102,17 +114,21 @@
                 <%for (Autor a : autores) {%>
                 <option value="<%=a.getIdAutor()%>"><%=a.getNome()%></option>
                 <%}%>
-            </select>
-        </div>
+            </select> 
+        </div>--%>
         <div class="col-5 float-l">
             <label>Categoria</label>
             <select id="categoria" name="categoria">
                 <option>
                     Selecione uma categoria
                 </option>
-                <%for (Categoriaitemacervo c : categorias) {%>
+                <%for (Categoriaitemacervo c : categorias) {
+                if(titulo.getFkItemAcervo() == c.getIdCat()){ %>
+                <option value="<%=c.getIdCat()%>" selected=""><%=c.getNomeCategoria()%></option>
+                <% }else{ %>
+                
                 <option value="<%=c.getIdCat()%>"><%=c.getNomeCategoria()%></option>
-                <%}%>
+                <%}}%>
             </select>
         </div>
         <div class="col-5 float-l">
@@ -190,6 +206,44 @@
                     <th class="texto-centro">Nome autor </th>
                     <th><a onclick="addRowAutores()"><input type='button' value='+' class='botaoS verde'></a></th>
                 </tr>
+                    <%
+                    if(ttaas.isEmpty()!= true){
+                        
+                        for(TTA t : ttaas){
+                            if(t.getTipo().equals("Autor")){%>
+                            <tr><td><select id='tipoDeAutor' name='autores'><option value='Autor' selected="">Autor</option><option value='Co-autor'>Co-autor</option></select></td><td><select name='idAutor' id='autorObra'><%
+                                for (Autor a : autores) {
+                                    if(a.getIdAutor() == t.getIdA()){%>
+                                    <option value='<%=a.getIdAutor()%>' selected=""><%=a.getNome()%></option>
+                                    <%}
+                            
+                            %>
+                                <option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option>
+                                <%}%>
+                                </select></td>
+                                <td><a onclick='deletarRowAutores(this);'>
+                                <button class='botaos vermelho'>-</button></a> 
+                                </td></tr>
+
+                            <%}else if(t.getTipo().equals("Co-autor")){%>
+                            <tr><td><select id='tipoDeAutor' name='autores'><option value='Autor'>Autor</option><option value='Co-autor'selected="">Co-autor</option></select></td><td><select name='idAutor' id='autorObra'><%
+                                for (Autor a : autores) {
+                                    if(a.getIdAutor() == t.getIdA()){%>
+                                    <option value='<%=a.getIdAutor()%>' selected=""><%=a.getNome()%></option>
+                                    <%}
+                            
+                            %>
+                                <option value='<%=a.getIdAutor()%>'><%=a.getNome()%></option>
+                                <%}%>
+                                </select></td>
+                                <td><a onclick='deletarRowAutores(this);'>
+                                <button class='botaos vermelho'>-</button></a> 
+                                </td></tr>
+                            <%}
+                        }
+                    }                    
+                    %>
+                
             </tbody>
 
         </table>
@@ -204,6 +258,9 @@
                     <th class="texto-centro">Apenas consulta<th>
                     <th><a onclick="addRowExemplares()"><input type='button' value='+' class='botaoS verde'></a></th>
                 </tr>
+                <%
+                
+                %>
             </tbody>
 
         </table>
@@ -286,7 +343,7 @@
             if (this.files && this.files[0]) {
                 var FR = new FileReader();
                 FR.onload = function (e) {
-                    document.getElementById("base64img").src = e.target.result;
+                    document.getElementById("img").src = e.target.result;
                     console.log(e.target.result);
 //                    document.getElementById("b64").innerHTML = e.target.result;
                 };

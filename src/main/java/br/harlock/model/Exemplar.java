@@ -27,6 +27,16 @@ public class Exemplar {
         this.quantidadePaginas = quantidadePaginas;
     }
 
+    public Exemplar(String emp) {
+        
+        this.idExe = 0;
+        this.fkTitulo = 0;
+        this.liberadoParaEmprestimo = true;
+        setDuracao("0.0");
+        this.quantidadePaginas = "0.0";
+    }
+    
+
     
 
     public int getIdExe() {

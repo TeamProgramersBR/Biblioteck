@@ -51,7 +51,7 @@ public class TituloDAO {
             ps.setString(8, titulo.getEdicao());
             ps.setString(9, titulo.getIdioma());
             ps.setString(10, titulo.getTraducao());
-            ps.setBinaryStream(11, new ByteArrayInputStream(titulo.getCapa()),titulo.getCapa().length);
+            ps.setString(11, titulo.getCapa());
             ps.setInt(12, titulo.getFkItemPdc());
             ps.setInt(13, titulo.getFkItemAcervo());
             ps.setFloat(14, titulo.getDuracao());
@@ -80,6 +80,7 @@ public class TituloDAO {
     }
 
     public void Update(Titulo titulo) {
+        dataParseToSQL parse = new dataParseToSQL();
         try {
             PreparedStatement ps = connection
                     .prepareStatement("UPDATE"
@@ -98,10 +99,10 @@ public class TituloDAO {
                             + "  Traducao = ?,"
                             + "  Capa = ?,"
                             + "  FK_ITEM_PDC = ?,"
-                            + "  FK_CAT_ARCE = ?"
-                            + "  tipoDeObra = ?"
-                            + "  duracao = ?"
-                            + "  volume = ?"
+                            + "  FK_CAT_ARCE = ?,"
+                            + "  tipoDeObra = ?,"
+                            + "  duracao = ?,"
+                            + "  volume = ?,"
                             + "  quatidadepaginas = ?"
                             + " WHERE"
                             + "   ID_TITU = ?");
@@ -111,20 +112,20 @@ public class TituloDAO {
             ps.setString(3, titulo.getIssn());
             ps.setString(4, titulo.getObra());
             ps.setString(5, titulo.getDescricao());
-            ps.setDate(6, (Date) titulo.getDataDePublicacao());
+            ps.setDate(6, parse.convertJavaDateToSqlDate(titulo.getDataDePublicacao()));
             ps.setString(7, titulo.getCidadePublicacao());
             ps.setString(8, titulo.getEstadoPublicacao());
             ps.setString(9, titulo.getEdicao());
             ps.setString(10, titulo.getIdioma());
             ps.setString(11, titulo.getTraducao());
-            ps.setBinaryStream(12, new ByteArrayInputStream(titulo.getCapa()),titulo.getCapa().length);
+            ps.setString(12, titulo.getCapa());
             ps.setInt(13, titulo.getFkItemPdc());
             ps.setInt(14, titulo.getFkItemAcervo());
-            ps.setInt(15, titulo.getIdTitu());
-            ps.setInt(16, Integer.parseInt(titulo.getTipoDeObra()));
-            ps.setFloat(17, titulo.getDuracao());
-            ps.setString(18, titulo.getVolume());
-            ps.setInt(19, (int) titulo.getQuantidadePaginas());
+            ps.setInt(15, Integer.parseInt(titulo.getTipoDeObra()));
+            ps.setFloat(16, titulo.getDuracao());
+            ps.setString(17, titulo.getVolume());
+            ps.setInt(18, (int) titulo.getQuantidadePaginas());
+            ps.setInt(19, titulo.getIdTitu());
             ps.executeUpdate();
 //            titulo.getTipoDeObra()
 //            titulo.getDuracao()
