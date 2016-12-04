@@ -6,6 +6,7 @@
 package br.harlock.bll;
 
 import br.harlock.dao.ExemplarDAO;
+import br.harlock.model.Exemplar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -22,12 +23,41 @@ import javax.servlet.http.HttpServletResponse;
 public class ExemplarServ extends HttpServlet {
     private ExemplarDAO exemplarDAO;
     private String acao = "";
-    private ExemplarServ() throws Exception{
+    public ExemplarServ() throws Exception{
         exemplarDAO = new ExemplarDAO();
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String pagina = "listarExemplares";
+        String idadd = request.getParameter("IDt");
+        Exemplar exemplar = new Exemplar(" ");
+        acao = request.getParameter("acao");
+        if(acao.equals("delete")){
+        if(request.getParameter("ID") != null){
+            String idel = request.getParameter("ID");
+            exemplar.setIdExe(Integer.parseInt(idel));
+            exemplarDAO.Remover(exemplar);
+            pagina = "Titulo.do?acao=exemplar&ID="+idadd;
+        }}else if(acao.equals("insert")){
+        if(request.getParameter("Disp") != null){
             
+            String Dispo = request.getParameter("Disp");
+            if(Dispo.equals("s")){
+                //1
+                exemplar.setFkTitulo(Integer.parseInt(idadd));
+                exemplar.setLiberadoParaEmprestimo(Boolean.TRUE);
+                exemplarDAO.Inserir(exemplar);
+            }else if(Dispo.equals("n")){
+                //0
+                exemplar.setFkTitulo(Integer.parseInt(idadd));
+                exemplar.setLiberadoParaEmprestimo(Boolean.FALSE);
+                exemplarDAO.Inserir(exemplar);
+            }}
+            pagina = "Titulo.do?acao=exemplar&ID="+idadd;
+        }
+        
+        
+        request.getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

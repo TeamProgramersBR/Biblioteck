@@ -1,6 +1,6 @@
 package br.harlock.model;
 
-import java.sql.Blob;
+ 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +34,7 @@ public class Titulo {
 
     private String traducao;
 
-    private Blob capa;
+    private String  capa;
     private String volume;
     private String tipoDeObra;
     private float  duracao ;
@@ -64,7 +64,7 @@ public class Titulo {
         this.edicao = " ";
         this.idioma = " ";
         this.traducao = " ";
-        this.capa = null;
+        this.capa = " ";
         this.quantidadePaginas = 0;
         this.duracao = 0;
         setVolume(" ");
@@ -73,7 +73,7 @@ public class Titulo {
     public Titulo() {
     }
 
-    public Titulo(int idTitu, int fkItemAcervo, int fkItemPdc, String isbn, String issn, String obra, String descricao, Date dataDePublicacao, String cidadePublicacao, String estadoPublicacao, String edicao, String idioma, String traducao, Blob capa) {
+    public Titulo(int idTitu, int fkItemAcervo, int fkItemPdc, String isbn, String issn, String obra, String descricao, Date dataDePublicacao, String cidadePublicacao, String estadoPublicacao, String edicao, String idioma, String traducao, String  capa) {
         this.idTitu = idTitu;
         this.fkItemAcervo = fkItemAcervo;
         this.fkItemPdc = fkItemPdc;
@@ -201,11 +201,11 @@ public class Titulo {
         this.traducao = traducao;
     }
 
-    public Blob getCapa() {
+    public String  getCapa() {
         return capa;
     }
 
-    public void setCapa(Blob capa) {
+    public void setCapa(String  capa) {
         this.capa = capa;
     }
 

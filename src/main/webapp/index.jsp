@@ -90,7 +90,9 @@
             <%} else if (pagina.equals("tituloui")) {%>
             <jsp:include page = "template/paginas/titulo/tituloui.jsp" />
             <%} else if (pagina.equals("autoresCTRL")) {%>
-            <jsp:include page = "template/paginas/autor/listar.jsp" />
+            <jsp:include page = "template\paginas\autor\listar.jsp" />
+            <%} else if (pagina.equals("exemplaresCTRL")) {%>
+            <jsp:include page = "template/paginas/exemplar/listarExemplares.jsp" />
             <%} else if (pagina.equals("autorui")) {%>
             <jsp:include page = "template/paginas/autor/cadastroautor.jsp" />
             <%} else if (pagina.equals("produtoresCTRL")) {%>

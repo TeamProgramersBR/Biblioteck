@@ -18,22 +18,10 @@ public class dtFtoHTML {
 
     
     
-    public String dtF(Date d1){
-        String dateStr=d1.toString();
-        DateFormat readFormat = new SimpleDateFormat( "EEE MMM dd HH:mm:ss zzzz yyyy");
+    public String dtF(Date d1) throws ParseException{
 
-    DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd");
-    Date date = null;
-    try {
-       date = readFormat.parse( dateStr );
-    } catch ( ParseException e ) {
-        e.printStackTrace();
-    }
-
-    String formattedDate = "";
-    if( date != null ) {
-    formattedDate = writeFormat.format( date );
-    }
-        return formattedDate;
+        SimpleDateFormat out = new SimpleDateFormat("yyyy-MM-dd");
+        String data = out.format(d1);
+        return data;
     }
 }
