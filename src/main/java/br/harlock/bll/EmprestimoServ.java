@@ -14,7 +14,9 @@ import br.harlock.model.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -167,6 +169,34 @@ public class EmprestimoServ extends HttpServlet {
             request.setAttribute("emprestimo", detalhes);
             request.setAttribute("exemplares", exemplarDAO.listarExemplaresEmprestimo(detalhes));
             pagina = "index.jsp?pagina=empdetalhes";
+        }
+        if (acao.equals("mudarStatusEmprestimo")) {
+            Emprestimo emprestimo = new Emprestimo();
+            int idEmprestimo = Integer.valueOf(request.getParameter("IDEMP"));
+            emprestimo.setIdEmp(idEmprestimo);
+            emprestimo = emprestimoDAO.Pesquisar(emprestimo);
+            String statusGeral =  request.getParameter("status");
+            emprestimo.setSituacao(statusGeral);
+            String[] exemplares = request.getParameterValues("statusExemplar");
+            if (statusGeral.equals("6") || statusGeral.equals("2")) {
+                    Date date = new Date();
+                    String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+                    emprestimo.setDataDevolucao(modifiedDate);
+                    emprestimoDAO.Update(emprestimo, null);
+                    
+            }else{
+            ArrayList<Exemplar> exemps = new ArrayList();
+            for (String exemplarUP: exemplares) {
+                Exemplar exp = new Exemplar();
+                String[] temp = exemplarUP.split("#");
+                exp.setStatusDeEmprestimo(temp[0]);
+                exp.setIdExe(Integer.parseInt(temp[1]));
+                exp.setFkEmprestimo(idEmprestimo);
+                
+            }
+            emprestimoDAO.Update(emprestimo, exemps.iterator());
+          }
+            
         }
         request.getRequestDispatcher(pagina).forward(request, response);
     }

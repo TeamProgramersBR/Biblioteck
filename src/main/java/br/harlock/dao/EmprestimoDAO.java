@@ -107,9 +107,9 @@ public class EmprestimoDAO {
         ps.executeUpdate();
     }
 
-    public void Update(Emprestimo emprestimo) throws SQLException {
+    public void Update(Emprestimo emprestimo, Iterator exemplares) throws SQLException {
         try {
-
+            
             String sql;
             sql = "UPDATE"
                     + "  emprestimo"
@@ -128,9 +128,13 @@ public class EmprestimoDAO {
             PreparedStatement ps = connection.prepareStatement(sql);
             int i = 1;
             ps.setInt(i++, emprestimo.getIdEmp());
-            ps.setDate(i++, (Date) emprestimo.getDataEmprestimo());
-            ps.setDate(i++, (Date) emprestimo.getDataPrevDevolucao());
-            ps.setDate(i++, (Date) emprestimo.getDataDevolucao());
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataEmprestimo()));
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataPrevDevolucao()));
+            if(emprestimo.getDataDevolucao() != null){
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataDevolucao()));
+            }else {
+            ps.setDate(i++, null);    
+            }
             ps.setFloat(i++, emprestimo.getValorMulta());
             ps.setString(i++, emprestimo.getSituacao());
             ps.setBoolean(i++, emprestimo.getReserva());
@@ -138,7 +142,29 @@ public class EmprestimoDAO {
             ps.setInt(i++, emprestimo.getFkUsu());
             ps.setInt(i++, emprestimo.getIdEmp());
             ps.executeUpdate();
-
+            
+            if (emprestimo.getSituacao().equals("2") || emprestimo.getSituacao().equals("6")) {
+                sql = "UPDATE exemplar_contem_emprestimo SET status_exemplar='1' where  FK_emprestimo_ID_EMP = ?";
+                ps = connection.prepareStatement(sql); 
+                ps.setInt(1, emprestimo.getIdEmp());
+                ps.execute();
+                ps.close();
+            }
+            if (exemplares != null) {
+                sql = "UPDATE exemplar_contem_emprestimo  " +
+                          "SET status_exemplar= ? " +
+                          "where  FK_emprestimo_ID_EMP = ? AND FK_exemplar_ID_EXE = ?";
+                ps = connection.prepareStatement(sql); 
+                while (exemplares.hasNext()) {
+                    Exemplar next = (Exemplar) exemplares.next();
+                    ps.setString(1, next.getStatusDeEmprestimo());
+                    ps.setInt(2, emprestimo.getIdEmp());
+                    ps.setInt(3, next.getIdExe());
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

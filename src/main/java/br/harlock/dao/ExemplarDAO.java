@@ -37,7 +37,6 @@ public class ExemplarDAO {
                     + " VALUES (?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
 
-
             ps.setBoolean(1, exemplar.getLiberadoParaEmprestimo());
             ps.setString(2, exemplar.getDuracao());
             ps.setString(3, exemplar.getQuantidadePaginas());
@@ -82,64 +81,66 @@ public class ExemplarDAO {
         }
 
     }
-    
-    public Iterator<Exemplar> ConsultarTodos() throws Exception {
-		
-		try {
-                        List<Exemplar> exemplars = new ArrayList<Exemplar>();
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("select * from exemplar");
-			while (rs.next()) {
-				Exemplar exemplar = new Exemplar();
-				exemplar.setIdExe(rs.getInt("ID_EXE"));
-                                exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
-                                exemplar.setDuracao(rs.getString("Duracao"));
-                                exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
-                                exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
-				exemplars.add(exemplar);
-			}
-                        return exemplars.iterator();
-		} catch (SQLException e) {
-			 throw new Exception("Erro ao consultar todos os exemplares"+e);
-		}
 
-		
-	}
-    
-    public Exemplar Pesquisar(Exemplar exemplar) throws Exception{
-        
+    public Iterator<Exemplar> ConsultarTodos() throws Exception {
+
         try {
-            String sql ="SELECT ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ID_EXE = ?";
+            List<Exemplar> exemplars = new ArrayList<Exemplar>();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from exemplar");
+            while (rs.next()) {
+                Exemplar exemplar = new Exemplar();
+                exemplar.setIdExe(rs.getInt("ID_EXE"));
+                exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
+                exemplar.setDuracao(rs.getString("Duracao"));
+                exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
+                exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
+                exemplars.add(exemplar);
+            }
+            return exemplars.iterator();
+        } catch (SQLException e) {
+            throw new Exception("Erro ao consultar todos os exemplares" + e);
+        }
+
+    }
+
+    public Exemplar Pesquisar(Exemplar exemplar) throws Exception {
+
+        try {
+            String sql = "SELECT ID_EXE, LiberadoParaEmprestimo, Duracao, QuantidadePaginas, FK_TITULO FROM exemplar WHERE ID_EXE = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, exemplar.getIdExe());
-	    ResultSet rs = ps.executeQuery();
-                                
-                                rs.next();
-				exemplar.setIdExe(rs.getInt("ID_EXE"));
-                                exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
-                                exemplar.setDuracao(rs.getString("Duracao"));
-                                exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
-                                exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
-                                return exemplar;
-                                
-                    
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+            exemplar.setIdExe(rs.getInt("ID_EXE"));
+            exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
+            exemplar.setDuracao(rs.getString("Duracao"));
+            exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
+            exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
+            return exemplar;
+
         } catch (SQLException e) {
             throw new Exception("Erro ao pesquisar pelo exemplar");
         }
-        
+
     }
-    public Iterator listarExemplaresEmprestimo(Emprestimo emprestimo) throws Exception{
+
+    public Iterator listarExemplaresEmprestimo(Emprestimo emprestimo) throws Exception {
         try {
             ArrayList<Exemplar> listar = new ArrayList();
-            String sql =    "SELECT * FROM exemplar_contem_emprestimo ece  " +
-                            "INNER JOIN emprestimo emp ON emp.ID_EMP = ece.FK_emprestimo_ID_EMP  " +
-                            "INNER JOIN exemplar ex ON ex.FK_TITULO = ece.FK_exemplar_ID_EXE " +
-                            "INNER JOIN titulo titu ON titu.ID_TITU = ex.FK_TITULO " +
-                            "where ece.FK_emprestimo_ID_EMP = ?";
+            String sql = "SELECT * FROM exemplar_contem_emprestimo ece   "
+                    + "INNER JOIN emprestimo emp "
+                    + "ON emp.ID_EMP = ece.FK_emprestimo_ID_EMP   "
+                    + "INNER JOIN exemplar ex  "
+                    + "ON ex.ID_EXE = ece.FK_exemplar_ID_EXE  "
+                    + "INNER JOIN titulo titu  "
+                    + "ON titu.ID_TITU = ex.FK_TITULO  "
+                    + "where ece.FK_emprestimo_ID_EMP = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, emprestimo.getIdEmp());
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 Exemplar exemplar = new Exemplar();
                 exemplar.setIdExe(rs.getInt("ID_EXE"));
                 exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
