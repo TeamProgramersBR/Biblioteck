@@ -17,8 +17,7 @@
     </div>
 </div>
 <% if (mostrar) { %>
-<h2>Não há emprestimos cadastrados.</h2>
-<%} else {%>
+
 <table>
     <tr>
         <th class="texto-centro">Destinado </th>
@@ -34,10 +33,11 @@
         <td><%=emp.getSituacao()%></td>
         <td><%=emp.getDataPrevDevolucao()%></td>
         <td class="float-r">
-            <a href="Emprestimo.do?acao=editar&ID=<%=emp.getIdEmp()%>"><button class="botaoX azul">Editar</button></a>
             <a href="Emprestimo.do?acao=detalhes&ID=<%=emp.getIdEmp()%>"><button class="botaoX verde">Detalhes</button></a>
         </td>
     </tr>
     <%}%>
 </table>
+<%}else{%>
+<h2>Não há emprestimos cadastrados.</h2>
 <%}%>

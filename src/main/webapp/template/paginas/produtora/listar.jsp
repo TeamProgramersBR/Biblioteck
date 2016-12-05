@@ -5,13 +5,11 @@
 
 <%
     boolean mostrar = false;
-    ArrayList<ProdutoraConteudo> produtoras = new ArrayList();
+    Iterator iterator = null;
+    
     if (request.getAttribute("produtoras") != null) {
             mostrar = true;
-            Iterator iterator = (Iterator) request.getAttribute("produtoras");
-            while (iterator.hasNext()) {                    
-                    produtoras.add((ProdutoraConteudo)iterator.next());
-                }
+            iterator = (Iterator) request.getAttribute("produtoras");
         }
 %>
 <div class="containerX">
@@ -25,7 +23,9 @@
         <th class="texto-centro">CPNJ</th>
         <th class="texto-centro">Ação</th>
     </tr>
-    <%for(ProdutoraConteudo p: produtoras){%>
+    <%while(iterator.hasNext()){
+        ProdutoraConteudo p = (ProdutoraConteudo) iterator.next();
+    %>
     <tr>
         
         <td><%=p.getNomeProdutora()%></td>

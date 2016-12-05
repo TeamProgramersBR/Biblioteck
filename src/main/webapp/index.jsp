@@ -111,6 +111,8 @@
             <jsp:include page = "template/paginas/emprestimo/listar.jsp" />
             <%} else if (pagina.equals("novoemprestimo")) {%>
             <jsp:include page = "template/paginas/emprestimo/realizar.jsp" />
+            <%} else if (pagina.equals("empdetalhes")) {%>
+            <jsp:include page = "template/paginas/emprestimo/detalhes.jsp" />
             <%} else {%>
             <jsp:include page = "template/paginas/home.html" />
             <%}%>

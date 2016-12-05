@@ -20,11 +20,11 @@ public class Emprestimo {
 
     private Date dataDevolucao;
 
-    private Long valorMulta;
+    private float valorMulta = 0;
 
     private String situacao;
 
-    private Boolean reserva;
+    private Boolean reserva = false;
 
     private Usuario Funcionario;
 
@@ -107,11 +107,11 @@ public class Emprestimo {
         }
     }
 
-    public Long getValorMulta() {
+    public float getValorMulta() {
         return valorMulta;
     }
 
-    public void setValorMulta(Long valorMulta) {
+    public void setValorMulta(float valorMulta) {
         this.valorMulta = valorMulta;
     }
 

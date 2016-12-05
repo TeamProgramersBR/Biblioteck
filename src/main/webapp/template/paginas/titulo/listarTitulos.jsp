@@ -5,30 +5,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     boolean mostrar = false;
-    ArrayList<Titulo> titulos = new ArrayList();
-     ArrayList<Categoriaitemacervo> categorias = new ArrayList();
+    Iterator iteratorTitulos = null; 
+    Iterator iteratorCategorias = null;
 if (request.getAttribute("titulos") != null) {
-        Iterator iterator = (Iterator) request.getAttribute("titulos");
+         iteratorTitulos = (Iterator) request.getAttribute("titulos");
         mostrar = true;
-
-        if (iterator.hasNext()) {
-
-            while (iterator.hasNext()) {
-                titulos.add((Titulo) iterator.next());
-            }
-        }
     }
 
+
 if (request.getAttribute("categorias") != null) {
-        Iterator iterator2 = (Iterator) request.getAttribute("categorias");
-        
-
-        if (iterator2.hasNext()){
-
-            while (iterator2.hasNext()) {
-                categorias.add((Categoriaitemacervo) iterator2.next());
-            }
-        }
+        iteratorCategorias = (Iterator) request.getAttribute("categorias");
     }
    
 %>
@@ -47,7 +33,9 @@ if (request.getAttribute("categorias") != null) {
         <th class="texto-centro">Categoria</th>
         <th class="texto-centro">Ação</th>
     </tr>
-     <%for (Titulo titulo: titulos) {%>
+     <%while (iteratorTitulos.hasNext()) {
+            Titulo titulo = (Titulo) iteratorTitulos.next();
+     %>
      
      
     <tr>
@@ -55,7 +43,8 @@ if (request.getAttribute("categorias") != null) {
         <td><%=titulo.getTipoDeObra()%></td>
         <%  int ct =titulo.getFkItemAcervo();
             
-            for (Categoriaitemacervo categoria: categorias) {
+            while (iteratorCategorias.hasNext()) {
+                Categoriaitemacervo categoria = (Categoriaitemacervo) iteratorCategorias.next();
             String s ="";
             if (ct == categoria.getIdCat()) {
                     s=categoria.getNomeCategoria();

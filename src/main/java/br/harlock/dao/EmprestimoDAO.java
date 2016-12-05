@@ -11,10 +11,12 @@ import br.harlock.model.Emprestimo;
 import br.harlock.model.Exemplar;
 import br.harlock.model.Titulo;
 import br.harlock.model.Usuario;
+import br.harlock.model.dataParseToSQL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.ZoneId;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -24,16 +26,17 @@ import java.util.Iterator;
 import java.util.List;
 
 public class EmprestimoDAO {
-
+    private dataParseToSQL datapase;
     private Connection connection = null;
 
     public EmprestimoDAO() throws Exception {
         connection = Conexao.getConexao();
+        datapase = new dataParseToSQL();
     }
 
-    public void Inserir(Emprestimo emprestimo) throws SQLException {
+    public void Inserir(Emprestimo emprestimo, ArrayList<Exemplar> exemplares) throws SQLException {
         try {
-
+            String insertKey = null;
             String sql;
             sql = "INSERT INTO emprestimo"
                     + "("
@@ -55,18 +58,42 @@ public class EmprestimoDAO {
                     + "?,"
                     + "?,"
                     + "?)";
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql ,Statement.RETURN_GENERATED_KEYS);
             int i = 1;
-            ps.setDate(i++, (Date) emprestimo.getDataEmprestimo());
-            ps.setDate(i++, (Date) emprestimo.getDataPrevDevolucao());
-            ps.setDate(i++, (Date) emprestimo.getDataDevolucao());
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataEmprestimo()));
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataPrevDevolucao()));
+            if(emprestimo.getDataDevolucao() != null){
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataDevolucao()));
+            }else{
+            ps.setDate(i++, null);    
+            }
             ps.setFloat(i++, emprestimo.getValorMulta());
             ps.setString(i++, emprestimo.getSituacao());
             ps.setBoolean(i++, emprestimo.getReserva());
             ps.setInt(i++, emprestimo.getfKFuncionario());
             ps.setInt(i++, emprestimo.getFkUsu());
             ps.executeUpdate();
-        } catch (Exception e) {
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                insertKey = rs.getString(1);
+            }
+            sql = "INSERT INTO exemplar_contem_emprestimo" +
+            "(FK_exemplar_ID_EXE, FK_emprestimo_ID_EMP, status_exemplar)" +
+            "VALUES (?, ?, ?)";
+            
+            ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            boolean inserir = false;
+            for (Exemplar exemplare : exemplares) {
+                ps.setInt(1, exemplare.getIdExe());
+                ps.setInt(2, Integer.valueOf(insertKey));
+                ps.setString(3, exemplare.getStatusDeEmprestimo());
+                ps.addBatch();
+                inserir = true;
+            }
+            if (inserir) {
+                ps.executeBatch();
+            }
+        } catch (NumberFormatException | SQLException e) {
             e.printStackTrace();
         }
 
@@ -80,9 +107,9 @@ public class EmprestimoDAO {
         ps.executeUpdate();
     }
 
-    public void Update(Emprestimo emprestimo) throws SQLException {
+    public void Update(Emprestimo emprestimo, Iterator exemplares) throws SQLException {
         try {
-
+            
             String sql;
             sql = "UPDATE"
                     + "  emprestimo"
@@ -101,9 +128,13 @@ public class EmprestimoDAO {
             PreparedStatement ps = connection.prepareStatement(sql);
             int i = 1;
             ps.setInt(i++, emprestimo.getIdEmp());
-            ps.setDate(i++, (Date) emprestimo.getDataEmprestimo());
-            ps.setDate(i++, (Date) emprestimo.getDataPrevDevolucao());
-            ps.setDate(i++, (Date) emprestimo.getDataDevolucao());
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataEmprestimo()));
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataPrevDevolucao()));
+            if(emprestimo.getDataDevolucao() != null){
+            ps.setDate(i++, datapase.convertJavaDateToSqlDate(emprestimo.getDataDevolucao()));
+            }else {
+            ps.setDate(i++, null);    
+            }
             ps.setFloat(i++, emprestimo.getValorMulta());
             ps.setString(i++, emprestimo.getSituacao());
             ps.setBoolean(i++, emprestimo.getReserva());
@@ -111,7 +142,29 @@ public class EmprestimoDAO {
             ps.setInt(i++, emprestimo.getFkUsu());
             ps.setInt(i++, emprestimo.getIdEmp());
             ps.executeUpdate();
-
+            
+            if (emprestimo.getSituacao().equals("2") || emprestimo.getSituacao().equals("6")) {
+                sql = "UPDATE exemplar_contem_emprestimo SET status_exemplar='1' where  FK_emprestimo_ID_EMP = ?";
+                ps = connection.prepareStatement(sql); 
+                ps.setInt(1, emprestimo.getIdEmp());
+                ps.execute();
+                ps.close();
+            }
+            if (exemplares.hasNext()) {
+                sql = "UPDATE exemplar_contem_emprestimo  " +
+                          "SET status_exemplar= ? " +
+                          "where  FK_emprestimo_ID_EMP = ? AND FK_exemplar_ID_EXE = ?";
+                ps = connection.prepareStatement(sql); 
+                while (exemplares.hasNext()) {
+                    Exemplar next = (Exemplar) exemplares.next();
+                    ps.setString(1, next.getStatusDeEmprestimo());
+                    ps.setInt(2, emprestimo.getIdEmp());
+                    ps.setInt(3, next.getIdExe());
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,11 +195,12 @@ public class EmprestimoDAO {
         List lista = new ArrayList();
 
         String sql;
-        sql = "SELECT * FROM emprestimo";
+        sql = "SELECT * FROM emprestimo emp INNER JOIN usuario usu ON emp.FK_USU = usu.ID_USU";
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Emprestimo emprestimo = new Emprestimo();
+            emprestimo.setIdEmp(rs.getInt("ID_EMP"));
             emprestimo.setDataEmprestimo(rs.getString("DataEmprestimo"));
             emprestimo.setDataPrevDevolucao(rs.getString("DataPrevDevolucao"));
             emprestimo.setDataDevolucao(rs.getString("DataDevolucao"));
@@ -155,6 +209,24 @@ public class EmprestimoDAO {
             emprestimo.setReserva(rs.getBoolean("Reserva"));
             emprestimo.setfKFuncionario(rs.getInt("FK_Funcionario"));
             emprestimo.setFkUsu(rs.getInt("FK_USU"));
+            Usuario usuario = new Usuario();
+            usuario.setIdUsu(rs.getInt("ID_USU"));
+                usuario.setNivelDeAcesso(rs.getString("Nivel_De_Acesso"));
+                usuario.setNome(rs.getString("Nome"));
+                usuario.setCpf(rs.getString("CPF"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setNumeroResidencial(rs.getString("NumeroResidencial"));
+                usuario.setNumeroCelular(rs.getString("NumeroCelular"));
+                usuario.setNumeroComercial(rs.getString("NumeroComercial"));
+                usuario.setMatriculaEducacional(rs.getString("MatriculaEducacional"));
+                usuario.setSenha(rs.getString("Senha"));
+                usuario.setEnderecoLogadouro(rs.getString("endereco_Logadouro"));
+                usuario.setEnderecoCEP(rs.getString("endereco_CEP"));
+                usuario.setEnderecoCidade(rs.getString("endereco_Cidade"));
+                usuario.setEnderecoEstado(rs.getString("endereco_Estado"));
+                usuario.setEnderecoPais(rs.getString("endereco_Pais"));
+                usuario.setStatusDoUsuario(rs.getString("StatusDoUsuario"));
+            emprestimo.setUsuarioDoSistema(usuario);
             lista.add(emprestimo);
         }
         
@@ -203,7 +275,7 @@ public class EmprestimoDAO {
 
     }
 
-    public String[] exemplarLiberado(Exemplar exp, Usuario usu) throws Exception {
+    public String[] exemplarLiberado(Exemplar exp, Usuario usu,String tipoDeEmprestimo) throws Exception {
         try {
             String[] liberar = new String[2];
             liberar[0] = "false";
@@ -230,7 +302,7 @@ public class EmprestimoDAO {
                 int reserva = rs.getInt("reserva");
                 if (statusExemplar.equals("Devolvido")) {
                     liberar[0] = "true";
-                } else if (usu.getNivelDeAcesso().equals("Professor") && nivelDeAcesso.equals("Aluno") && situacao.equals("Reserva") && statusExemplar.equals("Em Reserva")) {
+                } else if (usu.getNivelDeAcesso().equals("Professor") && nivelDeAcesso.equals("Aluno") && situacao.equals("Reserva") && statusExemplar.equals("Em Reserva") && tipoDeEmprestimo.equals("Reserva")) {
                     liberar[0] = "true";
                     liberar[1] = String.valueOf(idEmprestimo);
                 }
@@ -286,16 +358,16 @@ public class EmprestimoDAO {
         }
     }
 
-    public void updateStatusExemplares(ArrayList<Exemplar> exemplar) throws Exception {
+    public void updateStatusExemplares(ArrayList<Emprestimo> exemplar) throws Exception {
         try {
             String sql = "UPDATE exemplar_contem_emprestimo  "
                     + "SET status_exemplar= ?  "
                     + "WHERE FK_exemplar_ID_EXE = ? and FK_emprestimo_ID_EMP = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            for (Exemplar ex : exemplar) {
-                ps.setString(1, ex.getStatusDeEmprestimo());
-                ps.setInt(2, ex.getIdExe());
-                ps.setInt(3, ex.getFkEmprestimo());
+            for (Emprestimo emp : exemplar) {
+                ps.setString(1, emp.getExemplar().getStatusDeEmprestimo());
+                ps.setInt(2, emp.getExemplar().getIdExe());
+                ps.setInt(3, emp.getExemplar().getFkEmprestimo());
                 ps.addBatch();
             }
             ps.executeBatch();
