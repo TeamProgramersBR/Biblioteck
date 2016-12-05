@@ -158,6 +158,11 @@ public class TituloDAO {
                 titulo.setTraducao(rs.getString("Traducao"));
                 //titulo.setCapa(rs.getBlob("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
+                
+                titulo.setCategoriaitemacervo(new CategoriaDAO().Pesquisar(rs.getInt("FK_CAT_ARCE")));
+                
+                
+                
                 titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
                 titulo.setTipoDeObra(rs.getString("tipoDeObra"));
                 titulo.setDuracao(rs.getFloat("duracao"));

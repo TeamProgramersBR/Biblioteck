@@ -88,7 +88,24 @@ public class CategoriaDAO {
             throw new Exception("java.sql.SQLException");
         }
     }
+ public Categoriaitemacervo Pesquisar(int idcategoria) throws SQLException, Exception {
 
+     Categoriaitemacervo categoria = new Categoriaitemacervo();
+        try {
+            String sql;
+            sql = "SELECT ID_CAT, NomeCategoria,Descricao "
+                    + "FROM categoria_item_acervo WHERE ID_CAT = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idcategoria);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            categoria.setNomeCategoria(rs.getString("NomeCategoria"));
+            categoria.setDescricao(rs.getString("Descricao"));
+            return categoria;
+        } catch (Exception e) {
+            throw new Exception("java.sql.SQLException");
+        }
+    }
     public Iterator<Categoriaitemacervo> ConsultarTodos() throws SQLException, Exception {
         try{
         List lista = new ArrayList();

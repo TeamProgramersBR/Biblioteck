@@ -137,7 +137,7 @@ public class TituloServ extends HttpServlet {
 ////            s2=request.getParameter("base64img");
 //            s3=request.getParameter("inp");
             Image im = new Image();
-            ti.setCapa(im.FixImg(request.getParameter("base64img")));
+            ti.setCapa("/template/imgs/bibliotek.png");
             ti.setTraducao(request.getParameter("traducao"));
             if (DAOact.equalsIgnoreCase("insert")) {
                 tituloDAO.Inserir(ti);
@@ -218,7 +218,7 @@ public class TituloServ extends HttpServlet {
             request.setAttribute("titulo", tituloDAO.Pesquisar(ti));
             request.setAttribute("ttas",tilotemautor(ti.getIdTitu()));
             pagina = "index.jsp?pagina=tituloui";
-            //nao exibe tudo na tela,olhar o titulo retornado e o preenchemento da mesma
+            
 
         } else if (acao.equals("titulos")) {
             Iterator titulos = tituloDAO.ConsultarTodos();

@@ -28,7 +28,9 @@
 <% if (mostrar) { %>
 <table>
     <tr>
-        <th class="texto-centro">Liberado</th>
+         <th class="texto-centro">ID </th>
+        <th class="texto-centro">Status</th>
+       
             <%--  <th class="texto-centro">Duração</th>
               <th class="texto-centro">Paginas</th> --%>
         <th class="texto-centro">Ação</th>
@@ -39,8 +41,9 @@
     <%
         if (exemplar.getFkTitulo() == tid.getIdTitu()) {
     %>
-
+    
     <tr>
+        <td class="texto-centro"><%=exemplar.getIdExe()%>-<%=IDt%></td>
         <%
             if (exemplar.getLiberadoParaEmprestimo() == true) {
                 liberacao = "Disponivel";
@@ -48,7 +51,8 @@
                 liberacao = "Amostra";
             }
         %>
-        <td><%=liberacao%></td>
+        
+        <td class="texto-centro"><%=liberacao%></td>
         <%--  <td><%=exemplar.getDuracao()%></td>
           <td><%=exemplar.getQuantidadePaginas()%></td>
         --%>

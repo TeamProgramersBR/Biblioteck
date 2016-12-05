@@ -7,6 +7,7 @@
     boolean mostrar = false;
     Iterator iteratorTitulos = null; 
     Iterator iteratorCategorias = null;
+    Iterator iteratorCategorias2 = null;
 if (request.getAttribute("titulos") != null) {
          iteratorTitulos = (Iterator) request.getAttribute("titulos");
         mostrar = true;
@@ -30,29 +31,22 @@ if (request.getAttribute("categorias") != null) {
     <tr>
         <th class="texto-centro">Obra</th>
         <th class="texto-centro">Tipo</th>
+        <th> </th>
         <th class="texto-centro">Categoria</th>
         <th class="texto-centro">Ação</th>
     </tr>
      <%while (iteratorTitulos.hasNext()) {
             Titulo titulo = (Titulo) iteratorTitulos.next();
+            String s = titulo.getCategoriaitemacervo().getNomeCategoria();
      %>
      
      
     <tr>
         <td><%=titulo.getObra()%></td>
-        <td><%=titulo.getTipoDeObra()%></td>
-        <%  int ct =titulo.getFkItemAcervo();
-            
-            while (iteratorCategorias.hasNext()) {
-                Categoriaitemacervo categoria = (Categoriaitemacervo) iteratorCategorias.next();
-            String s ="";
-            if (ct == categoria.getIdCat()) {
-                    s=categoria.getNomeCategoria();
-                    %><td><%=s%></td>
-                         <%}%>
-        
        
-        <%}%>
+        <td><%=titulo.getTipoDeObra()%><td/>
+           <td><%=s%></td>
+    
     
          <% int ID = titulo.getIdTitu(); %>
     <input type="hidden" id="asd" name="asd" value="<%=ID%>">
