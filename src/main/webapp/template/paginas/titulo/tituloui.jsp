@@ -345,13 +345,14 @@
                 FR.onload = function (e) {
                     document.getElementById("img").src = e.target.result;
                     console.log(e.target.result);
-//                    document.getElementById("b64").innerHTML = e.target.result;
+                    document.getElementById("base64img").value=e.target.result;
                 };
                 FR.readAsDataURL(this.files[0]);
             }
         }
 
         document.getElementById("inp").addEventListener("change", readFile, false);
+        
     }
 
     

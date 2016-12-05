@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.harlock.bll;
+package br.harlock.model;
 
+import br.harlock.bll.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import javax.imageio.ImageIO;
+import org.junit.Test;
 import sun.misc.BASE64Decoder;
 
 /**
@@ -32,20 +34,20 @@ public class TesteImagem {
 //            image = ImageIO.read(bis);
 //            bis.close();
 //            // write the image to a file
-//            File outputfile = new File("image2.png");
+//            int numero = 482793874;
+//            File outputfile = new File("image3"+numero+".png");
 //            ImageIO.write(image, "png", outputfile);
 //
 //            }catch(Exception e){
 //                e.printStackTrace();
 //            }
 //    
-//    }
+    }
 
-//    
-//
-//    public static void main(String[] args) {
-//        new TesteImagem();
-//    }
-//    
-}
+    @Test
+
+    public void main() {
+        new TesteImagem();
+    }
+    
 }

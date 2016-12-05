@@ -14,6 +14,7 @@ import br.harlock.dao.TituloDAO;
 import br.harlock.model.Autor;
 import br.harlock.model.Categoriaitemacervo;
 import br.harlock.model.Exemplar;
+import br.harlock.model.Image;
 import br.harlock.model.ProdutoraConteudo;
 import br.harlock.model.TTA;
 import br.harlock.model.Titulo;
@@ -33,6 +34,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import java.util.Iterator;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -87,7 +89,7 @@ public class TituloServ extends HttpServlet {
             pagina = "index.jsp?pagina=tituloui";
         }
         if (acao.equals("salvar")) {
-
+            
             produtoraConteudo.setIdPdc(Integer.parseInt(request.getParameter("produtora")));
             ti.setProdutoraConteudo(produtoraConteudo);
             ti.setObra(request.getParameter("obra"));
@@ -124,33 +126,18 @@ public class TituloServ extends HttpServlet {
             Categoriaitemacervo categoriaitemacervo = new Categoriaitemacervo();
             categoriaitemacervo.setIdCat(Integer.parseInt(request.getParameter("categoria")));
             ti.setFkItemAcervo(categoriaitemacervo.getIdCat());
-            String stt = request.getParameter("inp");
-//            String stt = request.getParameter("base64img");
-//            try{
-//                String parts[] = stt.split(",");
-//                String imgPart = parts[1];
-//            BufferedImage image = null;
-//            byte[] imageByte;
-//            BASE64Decoder decoder = new BASE64Decoder();
-//            imageByte = decoder.decodeBuffer(imgPart);
-//            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
-//            image = ImageIO.read(bis);
-//            bis.close();
-//            // write the image to a file
-//            File outputfile = new File("image.png");
-//            ImageIO.write(image, "png", outputfile);
-//
-//            }catch(Exception e){
-//                e.printStackTrace();
-//            }
+            
+
+            
+                
 //            String s1=" ";
 //            String s2=" ";
-//            String s3=" ";
+//            String s3=" ";    
 ////            s1=request.getParameter("img");
 ////            s2=request.getParameter("base64img");
 //            s3=request.getParameter("inp");
-            
-            ti.setCapa(stt);
+            Image im = new Image();
+            ti.setCapa(im.FixImg(request.getParameter("base64img")));
             ti.setTraducao(request.getParameter("traducao"));
             if (DAOact.equalsIgnoreCase("insert")) {
                 tituloDAO.Inserir(ti);
