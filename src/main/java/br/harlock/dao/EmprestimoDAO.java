@@ -150,7 +150,7 @@ public class EmprestimoDAO {
                 ps.execute();
                 ps.close();
             }
-            if (exemplares != null) {
+            if (exemplares.hasNext()) {
                 sql = "UPDATE exemplar_contem_emprestimo  " +
                           "SET status_exemplar= ? " +
                           "where  FK_emprestimo_ID_EMP = ? AND FK_exemplar_ID_EXE = ?";

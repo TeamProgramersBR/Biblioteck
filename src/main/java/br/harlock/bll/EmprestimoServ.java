@@ -192,6 +192,7 @@ public class EmprestimoServ extends HttpServlet {
                 exp.setStatusDeEmprestimo(temp[0]);
                 exp.setIdExe(Integer.parseInt(temp[1]));
                 exp.setFkEmprestimo(idEmprestimo);
+                exemps.add(exp);
                 
             }
             emprestimoDAO.Update(emprestimo, exemps.iterator());

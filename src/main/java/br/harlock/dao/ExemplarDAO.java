@@ -160,7 +160,7 @@ public class ExemplarDAO {
                 titulo.setEdicao(rs.getString("Edicao"));
                 titulo.setIdioma(rs.getString("Idioma"));
                 titulo.setTraducao(rs.getString("Traducao"));
-                titulo.setCapa(rs.getBlob("Capa"));
+                titulo.setCapa(rs.getString("Capa"));
                 titulo.setFkItemPdc(rs.getInt("FK_ITEM_PDC"));
                 titulo.setFkItemAcervo(rs.getInt("FK_CAT_ARCE"));
                 titulo.setTipoDeObra(rs.getString("tipoDeObra"));
