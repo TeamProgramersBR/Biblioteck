@@ -35,6 +35,9 @@
         <link rel="stylesheet" href="template/js/jquery-ui.css" media="screen" title="no title">
     </head>
     <body>
+    <script src="template/js/jquery-3.1.1.min.js"></script>
+    
+    <script src="template/js/formularios.js" charset="utf-8"></script>
         <!-- aqui vai css -->
     
         <div class="container bg">
@@ -114,13 +117,11 @@
             <%} else if (pagina.equals("empdetalhes")) {%>
             <jsp:include page = "template/paginas/emprestimo/detalhes.jsp" />
             <%} else {%>
-            <jsp:include page = "template/paginas/home.html" />
+            <jsp:include page = "template/paginas/home.jsp" />
             <%}%>
         </div>
     </div>
-<script src="template/js/jquery-3.1.1.min.js"></script>
-    <!--<script src="js/sessao.js" charset="utf-8"></script>-->
-    <script src="template/js/formularios.js" charset="utf-8"></script>
+
     
 </body>
 </html>
