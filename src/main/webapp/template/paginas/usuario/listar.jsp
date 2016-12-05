@@ -3,13 +3,10 @@
 <%@page import="br.harlock.model.Usuario"%>
 <%
     boolean mostrar = false;
-    ArrayList<Usuario> usuarios = new ArrayList();
+    Iterator iterator = null;
     if (request.getAttribute("usuarios") != null) {
             mostrar = true;
-            Iterator iterator = (Iterator) request.getAttribute("usuarios");
-            while (iterator.hasNext()) {                    
-                    usuarios.add((Usuario)iterator.next());
-                }
+            iterator = (Iterator) request.getAttribute("usuarios");
         }
 %>
 <div class="containerX">
@@ -23,7 +20,9 @@
         <th class="texto-centro">Matricula</th>
         <th class="texto-centro">Ação</th>
     </tr>
-    <%for(Usuario p: usuarios){%>
+    <%while(iterator.hasNext()){
+        Usuario p = (Usuario) iterator.next();
+    %>
     <tr>
         
         <td><%=p.getNome()%></td>

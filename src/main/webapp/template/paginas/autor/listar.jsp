@@ -5,19 +5,10 @@
 
 <%
     boolean mostrar = false;
-    ArrayList<Autor> autores = new ArrayList();
+    Iterator iterator = null;
     if (request.getAttribute("autores") != null) {
-        Iterator iterator = (Iterator) request.getAttribute("autores");
+        iterator = (Iterator) request.getAttribute("autores");
         mostrar = true;
-
-        if (iterator.hasNext()) {
-
-            while (iterator.hasNext()) {
-                autores.add((Autor) iterator.next());
-
-                
-            }
-        }
     }
 
 %>
@@ -34,7 +25,9 @@
         <th class="texto-centro">Nacionalidade</th>
         <th class="texto-centro">Ação</th>
     </tr>
-    <%for (Autor autor: autores) {%>
+    <%while(iterator.hasNext()) {
+        Autor autor = (Autor) iterator.next();
+    %>
     <tr>
         <td><%=autor.getNome()%></td>
         <td><%=autor.getNomeFantasia()%></td>

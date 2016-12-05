@@ -5,17 +5,10 @@
 
 <%
     boolean mostrar = false;
-    ArrayList<Categoriaitemacervo> categorias = new ArrayList();
+    Iterator iterator  = null;
     if (request.getAttribute("categorias") != null) {
-        Iterator iterator = (Iterator) request.getAttribute("categorias");
+        iterator = (Iterator) request.getAttribute("categorias");
         mostrar = true;
-
-        if (iterator.hasNext()) {
-
-            while (iterator.hasNext()) {
-                categorias.add((Categoriaitemacervo) iterator.next());
-            }
-        }
     }
 
 
@@ -31,7 +24,9 @@
         <th class="texto-centro">Descrição</th>
         <th class="texto-centro">Ação</th>
     </tr>
-    <%for (Categoriaitemacervo cat: categorias) {%>
+    <%while (iterator.hasNext()) {
+        Categoriaitemacervo cat = (Categoriaitemacervo) iterator.next();
+    %>
     <tr>   
         <td><%=cat.getNomeCategoria()%></td>
         <td><%=cat.getDescricao()%></td>
