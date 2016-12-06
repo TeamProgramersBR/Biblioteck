@@ -30,11 +30,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Biblioteck</title>
         <link rel="stylesheet" href="template/css/estilo.css" media="screen" title="no title">
         <link rel="stylesheet" href="template/js/jquery-ui.css" media="screen" title="no title">
+        
     </head>
-    <title>Biblioteck</title>
+    
     <body>
     <script src="template/js/jquery-3.1.1.min.js"></script>
     
@@ -75,9 +76,9 @@
                   <li><a href="Titulo.do?acao=titulos">Titulos</a></li>  
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
-                    <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>
+                    <li><a href="Categoria.do?acao=categorias">Categorias de conteï¿½do</a></li>
                     <li><a href="Emprestimo.do?acao=emprestimos">Emprestimos</a></li>
-                    <li><a href="Usuario.do?acao=usuarios">Usuários</a></li>
+                    <li><a href="Usuario.do?acao=usuarios">Usuï¿½rios</a></li>
                         <%}%>
                 </ul>
             </nav>
