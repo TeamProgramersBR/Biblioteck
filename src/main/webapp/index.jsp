@@ -81,9 +81,9 @@
                   <li><a href="Titulo.do?acao=titulos">Titulos</a></li>  
                     <li><a href="Autor.do?acao=autores">Autores</a></li>
                     <li><a href="Produtora.do?acao=produtoras">Produtores de conteudo</a></li>
-                    <li><a href="Categoria.do?acao=categorias">Categorias de conteï¿½do</a></li>
+                    <li><a href="Categoria.do?acao=categorias">Categorias de conteúdo</a></li>
                     <li><a href="Emprestimo.do?acao=emprestimos">Emprestimos</a></li>
-                    <li><a href="Usuario.do?acao=usuarios">Usuï¿½rios</a></li>
+                    <li><a href="Usuario.do?acao=usuarios">Usuários</a></li>
                         <%}else if(liberadoAP){%> <li><a href="Emprestimo.do?acao=emprestimos">Emprestimos</a></li> <%}%>
                 </ul>
             </nav>

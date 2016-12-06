@@ -65,7 +65,7 @@
                 <input type="text" name="nome" class="campo-form" value="<%=cadastrado.getNome()%>" size="30"> </div>
             <div class="float-l">
                 <label>CPF</label>
-                <input type="text" name="CPF" class="campo-form" value="<%=cadastrado.getCpf()%>" size="30"> </div>
+                <input type="text" name="CPF" id="cpf" class="campo-form" value="<%=cadastrado.getCpf()%>" size="30"> </div>
             <div class="float-l">
                 <label>Email</label>
                 <input type="text" name="email" class="campo-form" value="<%=cadastrado.getEmail()%>" size="30"> </div>

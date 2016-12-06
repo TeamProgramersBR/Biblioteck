@@ -10,5 +10,5 @@ package br.harlock.model;
  * @author kai
  */
 public class Sistema {
-    public String url="http://localhost:8381/bibliotek/";
+    public String url="http://localhost:8080/bibliotek/";
 }
