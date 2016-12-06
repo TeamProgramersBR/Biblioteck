@@ -34,6 +34,7 @@
         <link rel="stylesheet" href="template/css/estilo.css" media="screen" title="no title">
         <link rel="stylesheet" href="template/js/jquery-ui.css" media="screen" title="no title">
     </head>
+    <title>Biblioteck</title>
     <body>
     <script src="template/js/jquery-3.1.1.min.js"></script>
     
@@ -116,6 +117,8 @@
             <jsp:include page = "template/paginas/emprestimo/realizar.jsp" />
             <%} else if (pagina.equals("empdetalhes")) {%>
             <jsp:include page = "template/paginas/emprestimo/detalhes.jsp" />
+            <%} else if (pagina.equals("resultadoTitulo")) {%>
+            <jsp:include page = "template/paginas/exemplar/listarExemplarPesquisa.jsp"/>
             <%} else {%>
             <jsp:include page = "template/paginas/home.jsp" />
             <%}%>

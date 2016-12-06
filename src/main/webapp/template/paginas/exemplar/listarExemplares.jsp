@@ -62,7 +62,7 @@
 
     <input type="hidden" id="asd" name="asd" value="<%=ID%>">
     <td class="float-r">
-
+        
         <a href="Exemplar.do?acao=delete&ID=<%=ID%>&IDt=<%=IDt%>"><button class="botaoX vermelho">Deletar</button></a>
     </td>
 </tr>

@@ -161,13 +161,13 @@
     </div>
     <div class="col-10 float-l">
         <label>Estado de Publicacao</label>
-        <select id="estado" name="estado"  value="<%=titulo.getEstadoPublicacao()%>">
+        <select id="estados" name="estado"  value="<%=titulo.getEstadoPublicacao()%>">
             <option value="goias">Goias</option>
         </select>
     </div>
     <div class="col-5 float-l">
         <label>Cidade de publicação</label>
-        <select id="cidade" name="cidade"  value="<%=titulo.getCidadePublicacao()%>">
+        <select id="cidades" name="cidade"  value="<%=titulo.getCidadePublicacao()%>">
             <option value="gyn">Goiania</option>
         </select>
     </div>
@@ -176,14 +176,18 @@
     <div class="col-5 float-l">
         <label>Idioma Original</label>
         <select id="idiomaObra" name="idiomaObra"  value="<%=titulo.getIdioma()%>">
-            <option value="gyn">Goiania</option>
+            <option value="Português">Português</option>
+            <option value="Inglês">Inglês</option>
+            <option value="Espanhol">Espanhol</option>
         </select>
     </div>
 
     <div class="col-5 float-l">
         <label>Idioma da tradução</label>
         <select id="traducao" name="traducao"  value="<%=titulo.getTraducao()%>">
-            <option value="gyn">Goiania</option>
+            <option value="Português">Português</option>
+            <option value="Inglês">Inglês</option>
+            <option value="Espanhol">Espanhol</option>
         </select>
     </div>
     <div class="col-10 float-l">
@@ -274,7 +278,43 @@
 
 
 </form>
-
+<script type="text/javascript">	
+		
+		$(document).ready(function () {
+		
+			$.getJSON('estados_cidades.json', function (data) {
+				var items = [];
+				var options = '<option value="">escolha um estado</option>';	
+				$.each(data, function (key, val) {
+					options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+				});					
+				$("#estados").html(options);				
+				
+				$("#estados").change(function () {				
+				
+					var options_cidades = '';
+					var str = "";					
+					
+					$("#estados option:selected").each(function () {
+						str += $(this).text();
+					});
+					
+					$.each(data, function (key, val) {
+						if(val.nome == str) {							
+							$.each(val.cidades, function (key_city, val_city) {
+								options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+							});							
+						}
+					});
+					$("#cidades").html(options_cidades);
+					
+				}).change();		
+			
+			});
+		
+		});
+		
+	</script>	
 
 <script>
 

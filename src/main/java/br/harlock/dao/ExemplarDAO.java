@@ -125,6 +125,28 @@ public class ExemplarDAO {
         }
 
     }
+    
+    public Iterator listarDeTitulo(Titulo titulo) throws Exception{
+        try {
+            ArrayList listar = new ArrayList();
+            String sql = "select * from exemplar where FK_TITULO = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, titulo.getIdTitu());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Exemplar exemplar = new Exemplar();
+                exemplar.setIdExe(rs.getInt("ID_EXE"));
+                exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
+                exemplar.setDuracao(rs.getString("Duracao"));
+                exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
+                exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
+                listar.add(exemplar);
+            }
+            return listar.iterator();
+        } catch (Exception e) {
+             throw new Exception("Erro ao pesquisar pelo exemplar"+e);
+        }
+    }
 
     public Iterator listarExemplaresEmprestimo(Emprestimo emprestimo) throws Exception {
         try {

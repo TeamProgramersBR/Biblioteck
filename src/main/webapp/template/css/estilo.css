@@ -5,6 +5,13 @@ body{
 h2 {
     font-family: sans-serif;
 }
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+    color:blue;
+}
 /*Colunas*/
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}

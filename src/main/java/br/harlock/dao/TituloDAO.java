@@ -140,12 +140,11 @@ public class TituloDAO {
     public Iterator<Titulo> consutlarporTitulo(String termo) throws Exception{
         try {
             ArrayList lista = new ArrayList();
-            String sql = "SELECT * from titulo where obra REGEXP '?'";
+            String sql = "SELECT * from titulo where obra REGEXP ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, termo);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                boolean next = rs.next();
                 Titulo titulo = new Titulo();
                 titulo.setIdTitu(rs.getInt("ID_TITU"));
                 titulo.setIsbn(rs.getString("ISBN"));
