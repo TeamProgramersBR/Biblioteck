@@ -104,7 +104,7 @@
                 <label>Tipo de conta:</label>
                 <select class="" name="acesso" id="acesso">
                     <option value="option">Tipo de conta</option>
-                    <%if(cadastrado.getNivelDeAcesso()!="")%> <option value="<%=cadastrado.getNivelDeAcesso()%>"><%=cadastrado.getNivelDeAcesso()%></option> <%;%>
+                    <%if(cadastrado.getNivelDeAcesso()!="")%> <option value="<%=cadastrado.getNivelDeAcesso()%>" selected=""><%=cadastrado.getNivelDeAcesso()%></option> <%;%>
                     <option value="4">Aluno</option>
                     <option value="3">Professor</option>
                     <% if(u.getNivelDeAcesso().equals("Adminstrador") || u.getNivelDeAcesso().equals("Funcionario")){%>
@@ -119,8 +119,8 @@
                 <% if(u.getNivelDeAcesso().equals("Adminstrador") || u.getNivelDeAcesso().equals("Funcionario")){%>
                 <label>Status</label>
                 <select id="status" name="status" >
-                    <%if(cadastrado.getStatusDoUsuario()!=""){%> <option value="<%=cadastrado.getStatusDoUsuario()%>"><%=cadastrado.getStatusDoUsuario()%></option> <%}%>
-                    <option value="liberado">liberado</option>
+                    <%if(cadastrado.getStatusDoUsuario()!=""){%> <option value="<%=cadastrado.getStatusDoUsuario()%>" selected=""><%=cadastrado.getStatusDoUsuario()%></option> <%}%>
+                    <option value="liberado" >liberado</option>
                     <option value="Pendente">Pendente</option>
                     <option value="Inativo">Inativo</option>
                 </select>

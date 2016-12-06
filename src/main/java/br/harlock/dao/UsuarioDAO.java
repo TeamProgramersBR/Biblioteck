@@ -89,7 +89,7 @@ public class UsuarioDAO {
                             + "  NumeroCelular = ?,"
                             + "  NumeroComercial = ?,"
                             + "  MatriculaEducacional = ?,"
-                            + "  Senha = ?,"
+                            //+ "  Senha = ?,"
                             + "  endereco_Logadouro = ?,"
                             + "  endereco_CEP = ?,"
                             + "  endereco_Cidade = ?,"
@@ -108,14 +108,14 @@ public class UsuarioDAO {
             preparedStatement.setString(7, usuario.getNumeroCelular());
             preparedStatement.setString(8, usuario.getNumeroComercial());
             preparedStatement.setString(9, usuario.getMatriculaEducacional());
-            preparedStatement.setString(10, usuario.getSenha());
-            preparedStatement.setString(11, usuario.getEnderecoLogadouro());
-            preparedStatement.setString(12, usuario.getEnderecoCEP());
-            preparedStatement.setString(13, usuario.getEnderecoCidade());
-            preparedStatement.setString(14, usuario.getEnderecoEstado());
-            preparedStatement.setString(15, usuario.getEnderecoPais());
-            preparedStatement.setString(16, usuario.getStatusDoUsuario());
-            preparedStatement.setInt(17, usuario.getIdUsu());
+            //preparedStatement.setString(10, usuario.getSenha());
+            preparedStatement.setString(10, usuario.getEnderecoLogadouro());
+            preparedStatement.setString(11, usuario.getEnderecoCEP());
+            preparedStatement.setString(12, usuario.getEnderecoCidade());
+            preparedStatement.setString(13, usuario.getEnderecoEstado());
+            preparedStatement.setString(14, usuario.getEnderecoPais());
+            preparedStatement.setString(15, usuario.getStatusDoUsuario());
+            preparedStatement.setInt(16, usuario.getIdUsu());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

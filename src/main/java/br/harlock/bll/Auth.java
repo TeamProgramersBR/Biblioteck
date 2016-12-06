@@ -46,6 +46,8 @@ public class Auth extends HttpServlet {
             // Aplica MD5
             br.harlock.model.MD5 md5 = new br.harlock.model.MD5();
             usuario.setEmail(request.getParameter("email"));
+            String s = request.getParameter("senha");
+            String i =md5.toMD5(request.getParameter("senha"));
             usuario.setSenha(md5.toMD5(request.getParameter("senha")));
             usuario = usuDAO.Pesquisar(usuario);
             if (usuario != null) {
