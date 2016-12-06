@@ -12,10 +12,15 @@
 
 <%
     Boolean liberadoADMN = false;
+    Boolean liberadoAP = false;
     Usuario u = null;
     if (session.getAttribute("login") != null) {
         u = (Usuario) session.getAttribute("login");
         if (u.getNivelDeAcesso().equals("Adminstrador")) {
+            liberadoADMN = true;
+        }else if(u.getNivelDeAcesso().equals("Aluno") || u.getNivelDeAcesso().equals("Professor")){
+            liberadoAP= true;
+        }else if(u.getNivelDeAcesso().equals("Funcionario")){
             liberadoADMN = true;
         }
     }
@@ -79,7 +84,7 @@
                     <li><a href="Categoria.do?acao=categorias">Categorias de conte�do</a></li>
                     <li><a href="Emprestimo.do?acao=emprestimos">Emprestimos</a></li>
                     <li><a href="Usuario.do?acao=usuarios">Usu�rios</a></li>
-                        <%}%>
+                        <%}else if(liberadoAP){%> <li><a href="Emprestimo.do?acao=emprestimos">Emprestimos</a></li> <%}%>
                 </ul>
             </nav>
         </div>
