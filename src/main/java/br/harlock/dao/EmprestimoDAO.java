@@ -306,8 +306,15 @@ public class EmprestimoDAO {
                     liberar[0] = "true";
                     liberar[1] = String.valueOf(idEmprestimo);
                 }
-            } else {
-                liberar[0] = "true";
+            } else  {
+                ExemplarDAO exDao = new ExemplarDAO();
+                Exemplar eex = exDao.Pesquisar(exp);
+                if (eex != null) {
+                    liberar[0] = "true";
+                }else{
+                    liberar[0] = "false";
+                }
+                
             }
             return liberar;
         } catch (SQLException e) {

@@ -112,13 +112,17 @@ public class ExemplarDAO {
             ps.setInt(1, exemplar.getIdExe());
             ResultSet rs = ps.executeQuery();
 
-            rs.next();
+            if(rs.next()){
             exemplar.setIdExe(rs.getInt("ID_EXE"));
             exemplar.setLiberadoParaEmprestimo(rs.getBoolean("LiberadoParaEmprestimo"));
             exemplar.setDuracao(rs.getString("Duracao"));
             exemplar.setQuantidadePaginas(rs.getString("QuantidadePaginas"));
             exemplar.setFkTitulo(rs.getInt("FK_TITULO"));
             return exemplar;
+            }else{
+                return null;
+            }
+            
 
         } catch (SQLException e) {
             throw new Exception("Erro ao pesquisar pelo exemplar");

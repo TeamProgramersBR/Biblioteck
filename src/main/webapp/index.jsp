@@ -44,7 +44,7 @@
     <body>
     <script src="template/js/jquery-3.1.1.min.js"></script>
     
-    <script src="template/js/formularios.js" charset="utf-8"></script>
+    
         <!-- aqui vai css -->
     
         <div class="container bg">
@@ -130,7 +130,7 @@
             <%}%>
         </div>
     </div>
-
-    
+<script src="template/js/formularios.js" charset="utf-8"></script>
+<script src="template/js/jquery-barcode.min.js" charset="utf-8"></script>
 </body>
 </html>

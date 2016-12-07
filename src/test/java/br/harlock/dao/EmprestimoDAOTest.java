@@ -6,6 +6,8 @@
 package br.harlock.dao;
 
 import br.harlock.model.Emprestimo;
+import br.harlock.model.Exemplar;
+import br.harlock.model.Usuario;
 
 import java.util.Date;
 import java.text.DateFormat;
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -96,6 +99,82 @@ public class EmprestimoDAOTest {
 //        
 //    }
 //
+        @Test
+        public void testLiberadoParaEmrpestimo() throws Exception{
+            System.out.println("Teste liberado para emprestimo");
+            Exemplar exemplar = new Exemplar();
+            Usuario usuario = new Usuario();
+            String tipoDeEmprestimo = "Emprestimo";
+            EmprestimoDAO instance = new EmprestimoDAO();
+            String[] resultadoEsperado = new String[2];
+            resultadoEsperado[0] = "true";
+            resultadoEsperado[1] = null;
+            exemplar.setIdExe(1);
+            usuario.setNivelDeAcesso("Aluno");
+            String[] resultadoObtido = instance.exemplarLiberado(exemplar, usuario, tipoDeEmprestimo);
+            Assert.assertArrayEquals(resultadoEsperado, resultadoObtido);
+        }
+         @Test
+        public void testNAOLiberadoParaEmrpestimo() throws Exception{
+            System.out.println("Teste Nao liberado para emprestimo");
+            Exemplar exemplar = new Exemplar();
+            Usuario usuario = new Usuario();
+            String tipoDeEmprestimo = "Emprestimo";
+            EmprestimoDAO instance = new EmprestimoDAO();
+            String[] resultadoEsperado = new String[2];
+            resultadoEsperado[0] = "true";
+            resultadoEsperado[1] = null;
+            exemplar.setIdExe(1);
+            usuario.setNivelDeAcesso("Aluno");
+            String[] resultadoObtido = instance.exemplarLiberado(exemplar, usuario, tipoDeEmprestimo);
+            Assert.assertArrayEquals(resultadoEsperado, resultadoObtido);
+        }
+        @Test
+        public void testFaltandoExemplarLiberadoParaEmrpestimo() throws Exception{
+            System.out.println("Teste sem exemplar liberado para emprestimo");
+            Exemplar exemplar = new Exemplar();
+            Usuario usuario = new Usuario();
+            String tipoDeEmprestimo = "Emprestimo";
+            EmprestimoDAO instance = new EmprestimoDAO();
+            String[] resultadoEsperado = new String[2];
+            resultadoEsperado[0] = "true";
+            resultadoEsperado[1] = null;
+            exemplar.setIdExe(1);
+            usuario.setNivelDeAcesso("Aluno");
+            String[] resultadoObtido = instance.exemplarLiberado(exemplar, usuario, tipoDeEmprestimo);
+            Assert.assertArrayEquals(resultadoEsperado, resultadoObtido);
+        }
+        @Test
+        public void LiberarCasoSejaProfessorELivroEstejaEmReserva() throws Exception{
+            System.out.println("Teste liberado caso quem requisita seja professor para emprestimo");
+            Exemplar exemplar = new Exemplar();
+            Usuario usuario = new Usuario();
+            String tipoDeEmprestimo = "Emprestimo";
+            EmprestimoDAO instance = new EmprestimoDAO();
+            String[] resultadoEsperado = new String[2];
+            resultadoEsperado[0] = "true";
+            resultadoEsperado[1] = null;
+            exemplar.setIdExe(1);
+            usuario.setNivelDeAcesso("Professor");
+            String[] resultadoObtido = instance.exemplarLiberado(exemplar, usuario, tipoDeEmprestimo);
+            Assert.assertArrayEquals(resultadoEsperado, resultadoObtido);
+        }
+           @Test
+        public void LiberarCasoSejaExemplarNaoExistaELivroEstejaEmReserva() throws Exception{
+            System.out.println("Teste liberado para emprestimo");
+            Exemplar exemplar = new Exemplar();
+            Usuario usuario = new Usuario();
+            String tipoDeEmprestimo = "Emprestimo";
+            EmprestimoDAO instance = new EmprestimoDAO();
+            String[] resultadoEsperado = new String[2];
+            resultadoEsperado[0] = "false";
+            resultadoEsperado[1] = null;
+            exemplar.setIdExe(111);
+            usuario.setNivelDeAcesso("Aluno");
+            String[] resultadoObtido = instance.exemplarLiberado(exemplar, usuario, tipoDeEmprestimo);
+            Assert.assertArrayEquals(resultadoEsperado, resultadoObtido);
+        }
+
 
 }
 

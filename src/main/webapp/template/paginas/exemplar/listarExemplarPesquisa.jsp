@@ -1,3 +1,4 @@
+<script src="template/js/jquery-barcode.min.js" charset="utf-8"></script>
 <%@page import="br.harlock.model.Usuario"%>
 <%@page import="br.harlock.model.Exemplar"%>
 <%@page import="br.harlock.dao.ExemplarDAO"%>
@@ -48,7 +49,13 @@
             %>
 
             <tr>
-                <td class="texto-centro"><%=exemplar.getIdExe()%>-<%=exemplar.getFkTitulo()%></td>
+                <td class="texto-centro"><div id="<%=exemplar.getIdExe()%>-<%=exemplar.getFkTitulo()%>"></div>
+                  <%=exemplar.getIdExe()%>-<%=exemplar.getFkTitulo()%></td>
+                
+            <script>
+                var texto = '<%=exemplar.getIdExe()%>-<%=exemplar.getFkTitulo()%>';
+                $("#<%=exemplar.getIdExe()%>-<%=exemplar.getFkTitulo()%>").barcode("<%=exemplar.getIdExe()%>-<%=exemplar.getFkTitulo()%>", "code39",{barWidth:2, barHeight:30});     
+            </script>
                 <% String liberacao = "";
                     if (exemplar.getLiberadoParaEmprestimo() == true) {
                         liberacao = "Disponivel";
