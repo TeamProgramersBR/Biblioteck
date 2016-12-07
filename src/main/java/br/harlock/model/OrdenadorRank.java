@@ -5,18 +5,29 @@
  */
 package br.harlock.model;
 
+import java.util.Iterator;
+
 /**
  *
  * @author kai
  */
 public class OrdenadorRank  extends OrdenadorTemplate{
 
-    @Override
-    public boolean isPrimeiro(TelaRank rank1, TelaRank rank2) {
-      if ((rank1.getQnt() > rank2.getQnt())){
-            return true;
-        }
-        return false;
+    public OrdenadorRank(Iterator lista) {
+        super(lista);
+        
     }
+
+    @Override
+    public boolean isPrimeiro(Titulo rank1, Titulo rank2) {
+      if (rank1.getObra().compareToIgnoreCase(rank2.getObra()) <= 0){
+            return true;
+        }else{
+          return false;
+      }
+        
+    }
+
+    
     
 }

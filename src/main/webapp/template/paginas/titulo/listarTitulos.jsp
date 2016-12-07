@@ -6,17 +6,14 @@
 <%
     boolean mostrar = false;
     Iterator iteratorTitulos = null; 
-    Iterator iteratorCategorias = null;
-    Iterator iteratorCategorias2 = null;
+    
 if (request.getAttribute("titulos") != null) {
          iteratorTitulos = (Iterator) request.getAttribute("titulos");
         mostrar = true;
     }
 
 
-if (request.getAttribute("categorias") != null) {
-        iteratorCategorias = (Iterator) request.getAttribute("categorias");
-    }
+
    
 %>
 

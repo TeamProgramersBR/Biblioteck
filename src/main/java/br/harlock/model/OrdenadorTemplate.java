@@ -7,30 +7,38 @@ package br.harlock.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.function.Consumer;
 
 /**
  *
  * @author kai
  */
 public abstract class OrdenadorTemplate {
-     public abstract boolean isPrimeiro(TelaRank rank1, TelaRank rank2);
+    private Iterator listaI;
+
+    public OrdenadorTemplate(Iterator lista) {
+        listaI = lista;
+    }
+    
+     public abstract boolean isPrimeiro(Titulo rank1, Titulo rank2);
  
-    public Iterator ordenarTela(ArrayList<TelaRank> lista) {
-        ArrayList<TelaRank> novaLista = new ArrayList<TelaRank>();
-        for (TelaRank rank : lista) {
-            novaLista.add(rank);
-        }
+    public Iterator ordenarTela() {
+        ArrayList<Titulo> novaLista = new ArrayList<Titulo>();
+        
+        while (listaI.hasNext()) {
+             novaLista.add((Titulo) listaI.next());
+         }
  
         for (int i = 0; i < novaLista.size(); i++) {
             for (int j = i; j < novaLista.size(); j++) {
                 if (!isPrimeiro(novaLista.get(i), novaLista.get(j))) {
-                    TelaRank temp = novaLista.get(j);
+                    Titulo temp = novaLista.get(j);
                     novaLista.set(j, novaLista.get(i));
                     novaLista.set(i, temp);
                 }
             }
         }
- 
+        ArrayList<Titulo> verif = novaLista;
         return novaLista.iterator();
     }
 }

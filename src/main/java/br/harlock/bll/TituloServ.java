@@ -15,6 +15,7 @@ import br.harlock.model.Autor;
 import br.harlock.model.Categoriaitemacervo;
 import br.harlock.model.Exemplar;
 import br.harlock.model.Image;
+import br.harlock.model.OrdenadorRank;
 import br.harlock.model.ProdutoraConteudo;
 import br.harlock.model.TTA;
 import br.harlock.model.Titulo;
@@ -62,12 +63,13 @@ public class TituloServ extends HttpServlet {
     private CategoriaDAO categoriaDAO;
     private ExemplarDAO exemplarDAO;
     private Exemplar exemplarMod;
-
+    private OrdenadorRank ord;
     public TituloServ() throws Exception {
         categoriaDAO = new CategoriaDAO();
         tituloDAO = new TituloDAO();
         produtoraDAO = new ProdutoraDAO();
         autorDAO = new AutorDAO();
+        
         connection = Conexao.getConexao();
     }
 
@@ -221,7 +223,9 @@ public class TituloServ extends HttpServlet {
             
 
         } else if (acao.equals("titulos")) {
-            Iterator titulos = tituloDAO.ConsultarTodos();
+            
+            ord = new OrdenadorRank(tituloDAO.ConsultarTodos());
+            Iterator titulos = ord.ordenarTela();
             request.setAttribute("titulos", titulos);
             Iterator categorias = categoriaDAO.ConsultarTodos();
             request.setAttribute("categorias", categorias);
