@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 21/11/2016, 20:08:09
-    Author     : Harlock
+    Author     : Harlock,Kai
 --%>
 <%@ page import="br.harlock.model.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -132,5 +132,6 @@
     </div>
 <script src="template/js/formularios.js" charset="utf-8"></script>
 <script src="template/js/jquery-barcode.min.js" charset="utf-8"></script>
+<br/>
 </body>
 </html>
